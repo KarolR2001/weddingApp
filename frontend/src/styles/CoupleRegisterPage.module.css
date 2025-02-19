@@ -1,0 +1,146 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background: #FBF8F1;
+    flex-direction: row;
+
+  }
+  
+  .leftSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 43px;
+    box-sizing: border-box;
+  }
+  
+  .logoContainer {
+    height: 151px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 19px;
+    padding-inline: 253px;
+  }
+  
+  .logo {
+    position: relative;
+    width: 260px;
+    height: 113px;
+  }
+  
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    padding-left: 83px;  /* Padding z lewej */
+    padding-right: 83px; /* Padding z prawej */
+    box-sizing: border-box;  /* Zapewnia, że padding jest wliczany do szerokości */
+  }
+  
+  
+  .heading {
+    text-align: center;
+    color: #C3937C;
+    font-size: 48px;
+    font-family: 'Cormorant', serif;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .nameContainer {
+    width: 100%;
+    display: flex;
+    gap: 20px; /* Odstęp między polami */
+}
+  .inputWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .separator {
+    display: flex; /* Używamy flexboxa, aby linie i tekst układały się w jednej linii */
+    align-items: center; /* Wyśrodkowanie elementów w pionie */
+    gap: 10px; /* Odstęp między liniami a tekstem */
+    width: 100%; /* Separator zajmuje całą szerokość */
+    color: #232323ac;
+  }
+  
+  .line {
+    flex-grow: 1; /* Linie rozciągają się maksymalnie */
+    height: 1px; /* Wysokość linii */
+    background-color: #232323; /* Kolor linii */
+  }
+  
+  
+ 
+  .socialAndRegisterWrapper {
+    display: flex;
+    justify-content: center;  /* Place buttons side by side */
+    gap: 20px;  /* Space between buttons */
+    width: 100%; /* Full width of form */
+  }
+  
+  /* Responsive section */
+  .rightSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Background image */
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(4.5px);
+  }
+  
+  /* Responsive styles for mobile */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .leftSection {
+        padding-top: 0px;
+    }
+  .heading {
+    font-size: 40px;
+  }
+    .rightSection {
+      display: none;  /* Hide right section on mobile */
+    }
+  
+    .formContainer {
+      padding: 0 20px;
+    }
+
+    .leftSection {
+        padding-top: 0px;
+    }
+    .logoContainer {
+        padding-bottom: 1px;    
+    }
+    .socialAndRegisterWrapper {
+      flex-wrap: wrap-reverse;
+    }
+  }
+  .successMessage {
+    text-align: center;
+    color: #C3937C;
+    font-size: 18px;
+    font-family: 'Cormorant', serif;
+    text-transform: uppercase;
+    font-weight: 700;
+  }

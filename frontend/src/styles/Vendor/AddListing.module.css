@@ -1,0 +1,297 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 380px;
+    padding: 10px 30px;
+    gap: 20px;
+    box-sizing: border-box;
+}
+.title {
+    margin: 0px;
+    width: 100%;
+    color: #C3937C;
+    font-size: 24px;
+    font-family: Cormorant;
+    font-weight: 700;
+    text-transform: uppercase;
+    word-wrap: break-word;
+}
+.dropdown {
+    width: 40%;
+    margin-bottom: 29px;
+}
+
+.addPhotoContainer, .addVideoContainer, .addTextContainer, .addFiltersContainer, .addLinkContainer, .addLocationContainer, .addAdditionalInformation {
+    width: 100%; 
+    height: auto; 
+    background: #FBF8F1; 
+    border-radius: 15px; 
+    overflow: hidden; 
+    border: 1px #C3937C solid; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    gap: 10px; 
+    display: inline-flex;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+.filterContainer {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+gap: 10px;
+padding: 10px 42px;
+}
+
+.photoHeader, .videoHeader, .textHeader, .filtersHeader, .linkHeader, .locationHeader, .additionalHeader {
+    width: 100%; 
+    height: 100%; 
+    justify-content: flex-start; 
+    align-items: center; 
+    gap: 10px; 
+    display: inline-flex;
+    padding: 10px 25px;
+    border-bottom: 1px solid #EAD9C9;
+    display: flex;
+    align-items: center;
+    color: #C3937C;
+    font-size: 20px;
+    font-family: 'Cormorant', serif;
+    text-transform: uppercase;
+  }
+  
+  .photoInstructions, .videoInstructions {
+    padding: 10px 25px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #3E3E3E;
+    line-height: 25px;
+  }
+  
+  .photoGallery, .videoGallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 25px;
+    overflow-x: auto;
+    height: auto;
+    box-sizing: border-box;
+  }
+  
+  .photoWrapper, .videoWrapper {
+    position: relative;
+    width: 170px;
+    height: 170px;
+  }
+  
+  .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  .removeButton {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(90, 82, 82, 0.79);
+    color: #FBF8F1;
+    border: none;
+    padding: 8px;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;;
+  }
+
+  .removeButton:hover {
+    background: rgba(131, 123, 123, 0.79);
+  }
+  
+  .uploadSection {
+    width: 100%; 
+    height: 100%; 
+    padding-top: 25px; 
+    padding-bottom: 10px; 
+    padding-left: 10px; 
+    padding-right: 10px; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+    display: inline-flex;
+  }
+  .fileInput {
+    display: none;
+  }
+  .inputy {
+    width: 100%; 
+    height: 100%;  
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: end; 
+    gap: 10px; 
+    display: inline-flex;
+  }
+  .uploadLabel {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    color: #3E3E3E;
+    font-size: 16px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word;
+    gap: 10px;
+  }
+  
+  .uploadButton {
+    margin-top: 10px;
+    color: #C3937C;
+    border: 1px solid #C3937C;
+    cursor: pointer;
+    padding: 16px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .icon {
+    width: 24px; /* Dostosuj rozmiar */
+    height: 24px;
+  }
+
+
+
+  /* SEKCJA FILMY */
+
+  
+
+  
+  .videoThumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid #C3937C;
+  }
+  
+  .videoInput {
+    width: 40%;
+    height: 50px;
+    background: none;
+    padding: 15px;
+    border: 1px solid #C3937C;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  
+  .errorMessage {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(201, 0, 0);
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 42px;
+    gap: 57px;
+    box-sizing: border-box;
+  }
+
+  .linkRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 25px;
+    padding: 10px 42px;
+    box-sizing: border-box;
+  }
+  .linkContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 27px;
+  }
+
+  .sliderContener {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .additionalContent {
+    display: flex;
+    width: 100%;
+    padding: 10px 42px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+.buttonSection {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: end;
+    gap: 10px;
+    margin-top: 30px;
+}
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.successMessage svg {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.successMessage p {
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #3E3E3E;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+    }
+    .videoInput {
+        width: 60%;
+    }
+    .container {
+        padding: 10px 10px;
+    }
+    .inputContainer {
+        padding: 10px 15px;   
+      }
+    .filterContainer {
+        padding: 10px 15px;
+    }
+    .linkRow {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+    }
+    .photoGallery, .videoGallery {
+        padding: 10px 5px;
+      }
+}

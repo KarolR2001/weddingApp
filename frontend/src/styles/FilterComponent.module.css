@@ -1,0 +1,188 @@
+.filterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    padding-inline: 70px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #EAD9C9;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 26px;
+    
+  }
+  
+.offersWithTravel,
+.filterButton,
+.sortOptions {
+    flex: 1 1 200px; /* Minimalna szerokość elementu 200px, dopasowanie do reszty */
+    max-width: 310px; /* Maksymalna szerokość elementów */
+}
+
+/* Media queries dla ekranów o mniejszych rozdzielczościach */
+@media (max-width: 1200px) {
+    .filterContainer {
+        padding-inline: 40px; /* Zmniejszenie paddingu na mniejszych ekranach */
+    }
+
+    .dropdownWithLabel,
+    .offersWithTravel,
+    .filterButton,
+    .sortOptions {
+        flex: 1 1 100%; /* Elementy zajmują całą szerokość w rzędach */
+        max-width: 100%; /* Elementy będą miały pełną szerokość kontenera */
+    }
+}
+
+@media (max-width: 768px) {
+    .filterContainer {
+        padding-inline: 20px; /* Jeszcze mniejszy padding na bardzo małych ekranach */
+    }
+}
+  
+  /* Category Section */
+  .categoryContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .dropdownWithLabel {
+    display: flex;
+    flex-direction: column;  
+    align-items: flex-start; 
+    gap: 2px;  
+    
+  }
+  .categoryHeader {
+    display: flex;
+    background: rgba(234, 217, 201, 0.44);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
+    border-bottom: 1px solid #C3937C;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .categoryTitle {
+    text-align: center;
+    color: #C3937C;
+    font-size: 40px;
+    font-family: Cormorant, serif;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  
+  .categoryDescription {
+    color: #787878;
+    font-size: 12px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    line-height: 25px;
+    text-wrap: nowrap;
+  }
+  @media (max-width: 768px) {
+    .categoryDescription {
+      text-wrap: wrap;
+    }
+}
+
+  
+  /* Dropdown Icon */
+  .dropdownIcon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+  }
+  
+  .iconArrow {
+    width: 14px;
+    height: 7px;
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    border: 2px solid #C3937C;
+    transform: rotate(180deg);
+  }
+  
+  /* Show offers with travel */
+  .offersWithTravel {
+    width: 276px;
+    padding-left: 29px;
+    padding-right: 6px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    display: flex;
+  }
+  
+  .offersBorder {
+    width: 276px;
+    height: 31px;
+    border: 1px solid #C3937C;
+  }
+  
+  .offersText {
+    text-align: center;
+    color: #C3937C;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  
+  /* Filter Button */
+  .filterButton {
+    width: 87px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #EAD9C9;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    display: flex;
+  }
+  
+  .filterBorder {
+    width: 87px;
+    height: 31px;
+    border: 1px solid #C3937C;
+  }
+  
+  .filterText {
+    text-align: center;
+    color: #C3937C;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  
+  /* Sort Options */
+  .sortOptions {
+    width: 112px;
+    padding-left: 19px;
+    padding-right: 6px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    display: flex;
+  }
+  
+  .sortBorder {
+    width: 112px;
+    height: 31px;
+    border: 1px solid #C3937C;
+  }
+  
+  .sortText {
+    text-align: center;
+    color: #C3937C;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  

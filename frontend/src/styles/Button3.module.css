@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 1px solid #C3937C;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .container:hover {
+    background-color: #EAD9C9;
+  }
+  
+  .label {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    color: #C3937C;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .icon {
+    margin-right: 8px;  /* Odstęp między ikoną a tekstem */
+    display: flex;
+    align-items: center;
+  }
+  

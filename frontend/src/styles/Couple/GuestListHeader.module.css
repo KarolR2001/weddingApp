@@ -1,0 +1,199 @@
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #ead9c9;
+    padding:  10px 0px;
+    box-sizing: border-box;
+  }
+  
+  .title {
+    color: #c3937c;
+    margin: 0px;
+    font-size: 36px;
+    font-family: Cormorant, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .actionContainer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .searchBox {
+    background: #FBF8F1;
+    border: 1px solid #ead9c9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    min-width: 223px;
+  }
+  
+  .searchInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    color: #787878;
+    width: 100%;
+  }
+  
+  .exportButton,
+  .importButton {
+    background: #ead9c9;
+    border: 1px solid #c3937c;
+    padding: 10px 20px;
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+  .modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    min-height: 300px; /* Zapewnia stałą wysokość modala */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    
+  }
+  
+  .titleModal {
+    color: #C3937C;
+    font-size: 26px;
+    font-family: Cormorant;
+    font-weight: 700;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    margin: 0px;
+  }
+  
+  .instructions ol {
+    list-style: decimal;
+    padding-left: 20px;
+    counter-reset: step-counter;
+    text-align: left; /* Ustawia tekst z lewej dla czytelności */
+    color: #787878;
+    font-size: 15px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+}
+  .hed {
+    color: #787878;
+font-size: 15px;
+font-family: Montserrat;
+font-weight: 700;
+line-height: 25px;
+  }
+  .instructions li {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #333; /* Efekt migającego kursora */
+    width: 100%; /* Zajmuje całą szerokość kontenera */
+    opacity: 0; /* Ukrywa element początkowo */
+    animation: typing 2s steps(40, end), fadeInText 1s ease-in-out forwards;
+  }
+  
+  .instructions li:nth-child(1) {
+    animation-delay: 0s, 0s;
+  }
+  
+  .instructions li:nth-child(2) {
+    animation-delay: 2.5s, 2.5s;
+  }
+  
+  .instructions li:nth-child(3) {
+    animation-delay: 5s, 5s;
+  }
+  
+  .instructions li:nth-child(4) {
+    animation-delay: 7.5s, 7.5s;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes fadeInText {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      border-right: 0; /* Usunięcie kursora */
+    }
+  }
+  
+  .typing {
+    animation: none; /* Upewnij się, że inne efekty są wyłączone */
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .buttonContainer > div {
+    flex: 1;
+    max-width: 50%;
+    text-align: center;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .closeButton:hover {
+    color: #c3937c;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }

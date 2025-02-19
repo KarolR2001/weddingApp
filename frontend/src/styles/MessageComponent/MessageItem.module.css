@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  width: 100%;
+  gap: 5px;
+  justify-content: start;
+}
+.messageItem {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+    margin-bottom: 10px;
+    width: 100%;
+
+
+  }
+  .iconContainer {
+    padding: 10px 0;
+  }
+  .sender {
+    align-self: flex-end;
+    background: rgba(120.06, 120.06, 120.06, 0.10); 
+    border-radius: 15px; 
+    overflow: hidden;
+  }
+  
+  .receiver {
+    align-self: flex-start;
+    background-color: #eaeaea;
+    color: #333333;
+  }
+  
+  .messageContent {
+    color: #3E3E3E;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    margin-bottom: 5px;
+  }
+
+  .date {
+    font-size: 12px;
+    color: #999999;
+    text-align: right;
+  }
+  

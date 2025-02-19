@@ -1,0 +1,350 @@
+/* ReviewsSection.module.css */
+
+.containerReview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  .sectionHeaderNav {
+    display: flex;
+    width: 100%; 
+    gap: 10px;
+    align-items: center;
+    padding-bottom: 40px; 
+}
+
+.sectionHeaderNav > div:first-child {
+    color: #787878;
+    font-size: 24px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word
+}
+.line {
+  flex: 1;
+  height: 1.5px;
+  background-color: #EAD9C9;
+}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+  
+  .averageRatingText {
+    
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word
+  }
+  
+  .starRatingSummary {
+    width: 100%;
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+  }
+  @media (max-width: 455px) {
+
+    .starRatingSummary {
+      justify-content: center;
+      gap: 25px;
+    }
+  }
+  .overallRatingBox {
+    width: 138px;
+    height: 121px;
+    border: 1.5px solid #EAD9C9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .averageRating {
+    color: #787878;
+    font-size: 24px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    line-height: 25px;
+  }
+  
+  .stars {
+    display: flex;
+    flex-wrap: nowrap;
+    text-wrap: nowrap;
+    gap: 3px;
+  }
+  
+  .categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  
+  .category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .categoryLabel {
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    width: 170px;
+    text-align: left;
+    text-wrap: nowrap;
+  }
+  
+  .starFull, .starHalf, .starEmpty {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .starFull {
+    color: #FFD700;
+  }
+  
+  .starHalf {
+    color: #FFD700;
+    position: relative;
+    width: 10px;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .starEmpty {
+    color: #E0E0E0;
+  }
+
+  
+
+
+
+
+
+.reviewsList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .reviewContainer {
+    width: 100%;
+    padding: 25px 0;
+    border-bottom: 0.5px solid #EAD9C9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  
+  .avatarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 59px;
+    height: 59px;
+    background: #EAD9C9;
+    border-radius: 50%;
+  }
+  
+  .avatar {
+    font-size: 32px;
+    font-weight: 500;
+    color: #787878;
+    font-size: 32px;
+    font-family: Montserrat;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: 2px;
+    word-wrap: break-word;
+    text-align: center;
+  }
+  
+  .reviewerInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 9px;
+  }
+  
+  .reviewerName {
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    display: flex;
+    
+    align-items: flex-start;
+    gap: 15px;
+    flex-wrap: nowrap;
+    text-wrap: nowrap;
+  }
+  .nameStars {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  @media (max-width: 455px) {
+
+    .nameStars {
+      flex-direction: column;
+      gap: 1px;
+      
+    }
+    .locationInfo {
+      
+      margin-left: 49px;
+    
+      justify-content: flex-start
+    }
+  }
+
+  
+  .weddingDate {
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word
+  }
+  
+  .locationInfo {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word
+  }
+  
+  .mapPinIcon {
+    width: 24px;
+    height: 24px;
+    
+  }
+  
+  .reviewDate {
+    font-size: 14px;
+    font-weight: 400;
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word
+  }
+  
+  .reviewText {
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+
+  .expandButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0px 5px;
+  }
+  
+  .angleIcon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .expanded .angleIcon {
+    transform: rotate(180deg);
+  }
+  .categoryRatings {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    padding-left: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-sizing: border-box;
+  }
+  
+  .categoryRatings.expanded {
+    width: 100%;
+    max-height: 155px;
+    opacity: 1;
+    padding-block: 20px;
+    padding-left: 80px;
+    
+  }
+  @media (max-width: 455px) {
+
+    .categoryRatings {
+      padding-left: 30px;
+      
+    }
+    .categoryRatings.expanded {
+      padding-left: 30px;
+    }
+  }
+
+  .sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #787878;
+    font-size: 24px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word
+  }

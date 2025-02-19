@@ -1,0 +1,157 @@
+.controlPanel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #ead9c9;
+    padding:  10px 0px;
+    box-sizing: border-box;
+  }
+.title {
+    color: #c3937c;
+    margin: 0px;
+    font-size: 36px;
+    font-family: Cormorant, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .actionContainer {
+    display: flex;
+    gap: 10px;
+  }
+
+  .exportButton,
+  .addButton {
+    background: #ead9c9;
+    border: 1px solid #c3937c;
+    padding: 10px 20px;
+    color: #787878;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+
+  .modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    width: 600px;
+    height: 60%;
+    background: #fbf8f1;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ead9c9;
+    padding-bottom: 10px;
+  }
+  
+  .modalTitle {
+    color: #C3937C;
+    font-size: 36px;
+    font-family: Cormorant;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .tablePreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    background: transparent;
+  }
+
+.warningTitle {
+  color: #c70000;
+font-size: 20px;
+font-family: Montserrat;
+font-weight: 700;
+line-height: 25px;
+text-align: center;
+}
+.warningMessage {
+  color: #787878;
+font-size: 16px;
+font-family: Montserrat;
+font-weight: 400;
+line-height: 25px;
+}
+
+.warningActions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: end;
+  padding-right: 30px;
+}
+.confirmButton {
+  background: #ead9c9;
+  border: 1px solid #c3937c;
+  padding: 10px 20px;
+  color: #787878;
+  font-size: 14px;
+  font-family: Montserrat;
+  font-weight: 400;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  cursor: pointer;
+  transition:  background 0.3s ease;
+}
+.cancelButton {
+  background: transparent;
+  border: 1px solid #c3937c;
+  padding: 10px 20px;
+  color: #787878;
+  font-size: 14px;
+  font-family: Montserrat;
+  font-weight: 400;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  cursor: pointer;
+  transition:  background 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #c3937c21;
+}
+.confirmButton:hover {
+  background-color: #c3937c75;
+}

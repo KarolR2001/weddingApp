@@ -1,0 +1,53 @@
+/* LandingPage.module.css */
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 77px;
+  background-color: #FBF8F1;
+  height: 100vh; /* Kontener zajmuje pełną wysokość widoku */
+  flex-wrap: wrap; /* Pozwala sekcjom zawijać się na mniejszych ekranach */
+}
+
+.leftDiv, .rightDiv {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightDiv {
+  display: flex;
+  justify-content: flex-start; /* Przyciągnij obraz do prawej strony */
+  overflow: hidden; /* Ukryj część obrazu, która wychodzi poza kontener */
+}
+
+/* Styl dla obrazka w prawej sekcji */
+.rightImage {
+  height: 100%; /* Obraz zajmuje pełną wysokość kontenera */
+  width: auto; /* Szerokość automatyczna, aby zachować proporcje */
+  object-fit: cover; /* Obraz zachowuje proporcje i wypełnia kontener */
+  transform: translateX(0); /* Zapewnia przyciągnięcie do prawej strony */
+}
+
+/* Media queries dla małych ekranów (max-width: 768px) */
+@media (max-width: 1291px) {
+  .container {
+    flex-direction: column; /* Ustawienie sekcji jedna pod drugą */
+    padding-left: 20px; /* Mniejszy padding na mniejszych ekranach */
+    padding-right: 20px;
+    height: auto; /* Dostosowanie wysokości */
+  }
+
+  .leftDiv, .rightDiv {
+    flex: none;
+    width: 100%; /* Obie sekcje zajmują 100% szerokości */
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .rightImage {
+    height: auto; /* Obraz nie jest przycięty na małych ekranach */
+    width: 100%; /* Obraz zajmuje pełną szerokość na małych ekranach */
+  }
+}

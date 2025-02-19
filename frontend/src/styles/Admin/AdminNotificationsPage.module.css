@@ -1,0 +1,18 @@
+.notificationsPage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 0px 30px;
+   justify-content: space-between;
+  box-sizing: border-box;
+  }
+  .contentWrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.paginationWrapper {
+  flex-shrink: 0;
+  margin-top: auto;
+}

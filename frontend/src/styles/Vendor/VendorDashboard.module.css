@@ -1,0 +1,49 @@
+.dashboardContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; /* Cała wysokość ekranu */
+    width: 100%; /* Cała szerokość ekranu */
+}
+
+.sidemenu {
+    width: 250px; /* Szerokość menu bocznego */
+    transition: width 0.3s ease;
+    position: fixed; /* Przyciągnięcie do lewej krawędzi */
+    height: 100%; /* Pełna wysokość ekranu */
+    overflow-y: auto; /* Scroll w przypadku długiego menu */
+    box-sizing: border-box;
+}
+
+.collapsed {
+    width: 80px; /* Zmniejszona szerokość dla zwiniętego menu */
+}
+
+.mainContent {
+    flex-grow: 1;
+    margin-left: 250px; /* Ustawienie dla szerokości rozwiniętego menu */
+    transition: margin-left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainContentCollapsed {
+    margin-left: 80px; /* Dostosowanie szerokości dla zwiniętego menu */
+}
+
+.topMenu {
+    width: 100%;
+    position: sticky;
+    border-bottom: 1px solid #EAD9C9;
+    top: 0; /* Przyciągnięcie do górnej krawędzi */
+    z-index: 10; /* Aby topMenu było nad zawartością */
+    box-sizing: border-box;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px 0px;
+    background-color: #FFF; /* Kolor tła dla treści */
+    overflow-y: auto; 
+    background: #FBF8F1;
+    box-sizing: border-box;
+}

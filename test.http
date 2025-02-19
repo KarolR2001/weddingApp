@@ -1,0 +1,490 @@
+### Logowanie i pobieranie tokenu
+# @name login
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email": "karolrembiasz@couple.pl",
+  "password": "Brzezna85#"
+}
+
+
+### Zapamiętanie tokenu JWT
+@token = {{login.response.body.token}}
+
+### Wyśweirlanie statystyk ogłoszenia oraz zdjęcie
+GET http://localhost:5000/api/listings/stats/47
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY1LCJ1c2VyVHlwZSI6InZlbmRvciIsImlhdCI6MTczMjUyNjY0NCwiZXhwIjoxNzMyNTY5ODQ0fQ.w1xK1Tepig4Zumf263tfz7rh9GKyWTSoiKokAwz_ID4
+### Wyświetlenie tokenu
+GET http://localhost:5000/echo
+Authorization: Bearer {{token}}
+### Rejetracja
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+  "email": "karolrembiasz@o2.pl",
+  "password": "password123",
+  "phoneNumber": "999999999",
+  "userType": "couple",
+  "partner1Name": "Anna",
+  "partner2Name": "Jan"
+}
+
+
+
+
+### Żądanie chronione, które wymaga tokenu
+GET http://localhost:5000/api/users
+Authorization: Bearer {{token}}
+
+
+### Wyświetlanie wszystkich kategorii (NAZWY)
+
+GET http://localhost:5000/api/categories/names
+
+
+###
+GET http://localhost:5000/api/categories/details
+
+
+### Wyświetlanie wszystkich ogłoszeń z danej kategorii
+GET http://localhost:5000/api/listings/category/1
+
+
+###
+GET http://localhost:5000/api/filters/1
+
+### Dodawanie oferty wraz z mediami oraz filtrami.
+POST http://localhost:5000/api/listings/add
+Content-Type: application/json
+
+{
+  "vendorId": 65,
+  "categoryId": 3,
+  "titleOffer": "Moje nowe ogłoszenie",
+  "shortDescription": "Moje nowe ogłoszenie jest najładniejsze.",
+  "longDescription": "Moje nowe ogłoszenie jest najładniejsze i najlepsze. Lubię je oglądać.",
+  "priceMin": 300,
+  "priceMax": 500,
+  "rangeInKm": 100,
+  "offersNationwideService": true,
+  "contactPhone": "444444444",
+  "email": "ksfvsfv@o2.pl",
+  "city": "Kraków",
+  "filterOptions": [34, 35, 36],
+  "media": [
+    {
+      "mediaType": "image",
+      "mediaUrl": "https://example.com/image1.jpg"
+    },
+    {
+      "mediaType": "video",
+      "mediaUrl": "https://example.com/video1.mp4"
+    }
+  ],
+  "links": {
+    "websiteUrl": "https://mohitolike.pl",
+    "facebookUrl": "https://facebook.com",
+    "youtubeUrl": "https://youtube.com",
+    "instagramUrl": "https://instagram.com",
+    "tiktokUrl": "https://tiktok.com",
+    "spotifyUrl": "https://spotify.com",
+    "soundcloudUrl": "https://soundcloud.com",
+    "pinterestUrl": "https://pinterest.com"
+  }
+}
+
+
+###
+GET http://localhost:5000/api/listings/listing/47
+Content-Type: application/json
+
+
+###Wyświetlanie ogłoszeń dla danego użytkownika
+GET http://localhost:5000/api/listings/user/1
+Content-Type: application/json
+
+
+### Wysyłanie emaila
+POST http://localhost:5000/api/auth/send-email
+Content-Type: application/json
+
+{
+  "eventDate": "2023-12-31",
+  "location": "Warszawa",
+  "name": "Jan Kowalski",
+  "email": "user@example.com",
+  "phone": "123456789",
+  "message": "Testowa wiadomość... ",
+  "consent": true,
+  "recipientEmail": "karolrembiasz@o2.pl"
+}
+
+
+
+### DODAWANIE OPINII
+POST http://localhost:5000/api/reviews/add
+Content-Type: application/json
+
+{
+  "listingId": 14,
+  "userId": 3,
+  "ratingQuality": 5,
+  "ratingCommunication": 4,
+  "ratingCreativity": 5,
+  "ratingServiceAgreement": 4,
+  "ratingAesthetics": 5,
+  "reviewText": "Bardzo dobra usługa!",
+  "weddingDate": "2023-10-10",
+  "location": "Warszawa",
+  "reviewerName": "Jan Kowalski",
+  "reviewerPhone": "123456789"
+}
+
+### Usuwanie Oferty
+DELETE http://localhost:5000/api/listings/12
+
+
+### Wyśweirlanie statystyk ogłoszenia oraz zdjęcie
+GET http://localhost:5000/api/listings/stats/1
+Content-Type: application/json
+
+###
+http://localhost:5000/api/listings/time-spent
+Content-Type: application/json
+
+{
+  "listingId": 47,
+  "timeSpent": 120
+}
+
+
+### Bookowaie daty
+POST http://localhost:5000/api/calendar/modify
+Authorization: Bearer <TOKEN>>
+Content-Type: application/json
+
+{
+  "action": "add",
+  "listingId": 47,
+  "date": "2024-11-20",
+  "availabilityStatus": "booked" // lub 'reserved
+}
+
+### Modyfikacja numeru telefonu użytkownika
+PUT http://localhost:5000/api/users/update
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "phoneNumber": "123416789"
+}
+
+
+### Zmiana hsła
+PUT http://localhost:5000/api/users/update
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "password": "Brzezna85#"
+}
+### Zmiana adresu email
+PUT http://localhost:5000/api/users/update
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "email": "karolrembiasz@vendor.pl"
+}
+
+
+### Zmiana daty ślubu
+PUT http://localhost:5000/api/users/update
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "weddingDate": "2025-06-15"
+}
+
+### Wyświetlanie szczególow użytkownika i ustawień
+GET http://localhost:5000/api/users/65/details
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY1LCJ1c2VyVHlwZSI6InZlbmRvciIsImlhdCI6MTczMjUyNjY0NCwiZXhwIjoxNzMyNTY5ODQ0fQ.w1xK1Tepig4Zumf263tfz7rh9GKyWTSoiKokAwz_ID4
+
+
+### Modyfikacja ustawień powiadomień
+PUT http://localhost:5000/api/users/update-setting
+Content-Type: application/json
+
+{
+  "userId": 65,
+  "notificationType": "email",
+  "eventType": "payment_reminder",
+  "isEnabled": false
+}
+
+
+
+### Wyświetlanie ulubionych ogłoszeń użytkownika:
+GET http://localhost:5000/api/favorites/67
+
+
+
+### Zmiana statusu konta użytkownika:
+PUT http://localhost:5000/api/users/status
+Content-Type: application/json
+
+{
+  "userId": 67,
+  "status": "active"
+}
+
+
+###Pobranie listy gości
+GET http://localhost:5000/api/guests/67
+Content-Type: application/json
+
+
+### Dodanie nowego gościa
+POST http://localhost:5000/api/guests/add
+Content-Type: application/json
+
+{
+  "coupleId": 67,
+  "guestName": "Justyna Kowalska",
+  "guestStatus": "invited",
+  "groupId": 5,
+  "notes": "Ważny gość"
+}
+### Aktualizacja danych gościa
+PUT http://localhost:5000/api/guests/4
+Content-Type: application/json
+
+{
+  "guestName": "Anna Nowak",
+  "guestStatus": "confirmed",
+  "groupId": 1,
+  "notes": "Preferencje wegetariańskie"
+}
+
+### Usunięcie gościa
+DELETE http://localhost:5000/api/guests/13
+Content-Type: application/json
+
+### Dodanie nowej grupy
+POST http://localhost:5000/api/guests/group/add
+Content-Type: application/json
+
+{
+  "coupleId": 67,
+  "groupName": "Znajomi"
+}
+
+###  Usunięcie grupy
+DELETE http://localhost:5000/api/guests/group/2
+Content-Type: application/json
+
+### Wyświetlenie wszystkich grup dla użytkownika
+GET http://localhost:5000/api/guests/groups/67
+Content-Type: application/json
+
+###
+POST http://localhost:5000/api/guests/import
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="guest.csv"
+Content-Type: text/csv
+
+< C:\Users\Karol\Desktop\guest.csv
+
+--boundary
+Content-Disposition: form-data; name="coupleId"
+
+67
+--boundary--
+
+
+### Pobranie szablonu EXCEL
+GET http://localhost:5000/api/guests/template
+
+
+
+
+
+### Dodanie nowego stołu:
+POST http://localhost:5000/api/tables/add
+Authorization: Bearer <YOUR_TOKEN>
+Content-Type: application/json
+
+{
+  "coupleId": 1,
+  "tableName": "Stół 1",
+  "tableShape": "round",
+  "maxGuests": 8
+}
+
+### Pobranie listy stołów z przypisanymi gośćmi
+GET http://localhost:5000/api/tables/67
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY3LCJ1c2VyVHlwZSI6ImNvdXBsZSIsImlhdCI6MTczMzIyMDI3OSwiZXhwIjoxNzMzMjYzNDc5fQ.2-21JDIyTijISgVbOS75sSnQx2sHWcuwZnm-aq_3d5c
+
+
+
+###  Edycja stołu:
+PUT http://localhost:5000/api/tables/5
+Authorization: Bearer <YOUR_TOKEN>
+Content-Type: application/json
+
+{
+  "tableName": "Nowa nazwa stołu",
+  "tableShape": "rectangular",
+  "maxGuests": 10
+}
+
+### Usunięcie stołu:
+DELETE http://localhost:5000/api/tables/5
+Authorization: Bearer <YOUR_TOKEN>
+
+
+### Przypisanie gościa do stołu:
+POST http://localhost:5000/api/tables/assign
+Authorization: Bearer <YOUR_TOKEN>
+Content-Type: application/json
+
+{
+  "tableId": 1,
+  "guestId": 2
+}
+
+### Usunięcie przypisania gościa do stołu:
+POST http://localhost:5000/api/tables/remove-assignment
+Authorization: Bearer <YOUR_TOKEN>
+Content-Type: application/json
+
+{
+  "tableId": 1,
+  "guestId": 2
+}
+
+
+### Pobranie listy gości bez przypisania:
+GET http://localhost:5000/api/tables/guests/67/without-table
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY3LCJ1c2VyVHlwZSI6ImNvdXBsZSIsImlhdCI6MTczMzIyMDI3OSwiZXhwIjoxNzMzMjYzNDc5fQ.2-21JDIyTijISgVbOS75sSnQx2sHWcuwZnm-aq_3d5c
+
+
+
+### Pobranie wszystkich kont użytkowników:
+GET http://localhost:5000/api/users?page=1&limit=40
+
+
+### Pobieranie wszystkich konwersacji dla danego uzytkonika:
+GET http://localhost:5000/api/conversations/65
+
+### Pobranie wszystkich wiadomości dla danej konwersacji:
+GET http://localhost:5000/api/conversations/5/messages
+Content-Type: application/json
+
+### Odczytanie wiadomości przez zalogowanego użytkonika:
+PUT http://localhost:5000/api/conversations/5/read
+Content-Type: application/json
+
+{
+  "userId": 65
+}
+
+
+### Tworzenie nowej konwersacji oraz wysyłanie wiadomości do istniejącej konwersacji:
+POST http://localhost:5000/api/conversations/message
+Content-Type: application/json
+
+{
+  "senderId": 67,        
+  "receiverId": 65,      
+  "listingId": 47,       
+  "messageContent": "Czy grają Panowie piosenki z lat 80.?"
+}
+
+
+### Pobranie wszystkich powiadomień dla użytkonika:
+GET http://localhost:5000/api/notifications/65
+
+
+### Oznaczene powiadomienia jako przeczytane:
+POST http://localhost:5000/api/notifications/mark-as-read
+Content-Type: application/json
+
+{
+  "userId": 65,
+  "notificationId": 3
+}
+
+
+
+
+
+### Pobierz wszystkie powiadomienia
+GET http://localhost:5000/api/admin/notifications?page=1&limit=10&search=&sortBy=sentAt&order=DESC
+Content-Type: application/json
+
+
+
+#### Pobierz szczegóły powiadomienia
+GET http://localhost:5000/api/admin/notifications/1
+Content-Type: application/json
+
+
+### Dodaj nowe powiadomienie
+POST http://localhost:5000/api/admin/notifications
+Content-Type: application/json
+
+{
+  "title": "New Notification",
+  "message": "This is a test notification.",
+  "notificationType": "app",
+  "recipientsGroup": "Wszyscy",
+  "recipientIds": [65, 67, 63]
+}
+
+
+### Usuń powiadomienie
+DELETE http://localhost:5000/api/admin/notifications/47
+Content-Type: application/json
+
+
+### Wyślij powiadomienie ponownie
+POST http://localhost:5000/api/admin/notifications/resend/48
+Content-Type: application/json
+
+
+
+### Pobieranie użytkowników z kategorią 1:
+GET http://localhost:5000/api/admin/ids?categoryId=1
+Content-Type: application/json
+
+
+### Pobieranie użytkowników typu vendor i kategorii 2:
+GET http://localhost:5000/api/admin/ids?userType=vendor&categoryId=1
+Content-Type: application/json
+
+### Pobieranie użytkowników typu couple z aktywnym statusem:
+GET http://localhost:5000/api/admin/ids?userType=couple&status=deleted
+Content-Type: application/json
+
+
+### Pobranie wszystki statystyk dla systemu:
+GET http://localhost:5000/api/system-stats
+Content-Type: application/json
+
+### Pobieranie wszystkich raportów z paginacją i filtrowaniem
+GET http://localhost:5000/api/reports?page=1&limit=5&reportType=&search=
+Content-Type: application/json
+
+### Generowanie nowego raportu
+POST http://localhost:5000/api/reports/generated-reports
+Content-Type: application/json
+
+{
+  "reportType": "monthly"
+}

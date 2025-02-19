@@ -1,0 +1,29 @@
+.container {
+    width: auto;
+    height: 31px;
+    padding-inline: 15px;
+    justify-content: center; 
+    align-items: center; 
+    display: flex;
+    position: relative;
+    flex-direction: row; 
+    border: 1px solid #C3937C;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    
+  }
+
+  
+.container:hover {
+    background-color: #EAD9C9;
+}
+
+  .label {
+    color: #C3937C;
+    font-size: 14px;
+    font-family: Montserrat;
+    font-weight: 400;
+    text-transform: uppercase;
+    word-wrap: break-word
+  }
+  

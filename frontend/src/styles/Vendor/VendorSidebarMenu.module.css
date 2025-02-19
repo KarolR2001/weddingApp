@@ -1,0 +1,85 @@
+.sidebarContainer {
+    width: 250px;
+    height: 100%;
+    padding: 10px;
+    background: #FBF8F1;
+    border-right: 1px solid #EAD9C9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .hamburgerWrapper {
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .logoSection {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .navButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-top: 75px;
+    width: 100%;
+  }
+  
+  .navButton {
+    width: 100%;
+    height: 48px;
+    padding: 10px 16px;
+    border: 1px solid #C3937C;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    color: #C3937C;
+    cursor: pointer;
+    transition: background 0.1s ease;
+  }
+  
+  .navButton:hover {
+    background: #f0e6dd;
+  }
+  
+  .activeButton {
+    background: #EAD9C9;
+    color: #363636;
+    border-color: #363636;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    stroke: #C3937C;
+    transition: stroke 0.1s ease;
+  }
+  
+  .activeIcon {
+    stroke: #363636;
+  }
+
+  
+  .collapsed {
+    width: 80px;
+  }

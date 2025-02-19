@@ -1,0 +1,17 @@
+/* Spinner.module.css */
+.spinner {
+    border: 10px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #C3937C;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

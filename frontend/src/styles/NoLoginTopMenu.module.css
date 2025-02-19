@@ -1,0 +1,155 @@
+/* Podstawowy układ dla dużych ekranów */
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  padding: 10px 20px;
+  background-color: #FBF8F1;
+  padding-inline: 155px;
+}
+
+.logo {
+  flex-grow: 1;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+}
+.nav a {
+  text-decoration: none; /* Usuwa podkreślenie tekstu w linkach */
+  color: #C3937C; /* Dodaj kolor dla tekstu */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+}
+
+.nav a:hover {
+  text-decoration: underline; /* Podkreślenie tekstu podczas najechania myszką */
+}
+
+/* Ukrywanie hamburgera na większych ekranach */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+/* Menu rozwijane na małych ekranach */
+.showMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FBF8F1;
+  z-index: 1000; /* Ustawienie na najwyższej warstwie */
+  justify-content: center;
+  padding: 30px;
+}
+
+/* Styl dla małych ekranów (telefonów) */
+@media (max-width: 868px) {
+  /* Menu mobilne */
+  .menu {
+    justify-content: space-between; /* Logo z lewej, hamburger z prawej */
+    padding-inline: 30px;
+  }
+
+  /* Hamburger widoczny na małych ekranach */
+  .hamburger {
+    display: block; /* Pokaż hamburgera */
+    z-index: 1001;  /* Wyższy niż menu, aby zawsze był nad nim */
+    position: absolute; /* Ustawienie absolutne, aby nie był przykryty */
+    top: 20px;
+    right: 20px;
+  }
+
+  /* Ukryj standardowe menu na małych ekranach */
+  .nav {
+    display: none;
+  }
+
+  /* Wyśrodkuj logo i menu w mobilnym trybie po otwarciu menu */
+  .showMenu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+
+  /* Zmiana stylu logo na mobilnych - wyśrodkowane */
+  .showMenu .logo {
+    margin-bottom: 30px;
+  }
+
+  .showMenu a, 
+  .showMenu button {
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+}
+.iconContainer {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+}
+
+.iconWrapper {
+  width: 39px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.iconWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%; /* Punkt startowy na środku */
+  width: 0;
+  height: 2px; /* Wysokość linii podkreślenia */
+  background-color: #C3937C; /* Kolor podkreślenia */
+  transform: translateX(-50%); /* Ustawienie środka linii na środku elementu */
+  transition: width 0.3s ease; /* Animacja */
+}
+
+.iconWrapper:hover::after {
+  width: 100%; /* Rozszerzenie linii na pełną szerokość przy najechaniu */
+}
+
+
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 59px;
+  height: 59px;
+  background: #EAD9C9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #787878;
+  letter-spacing: 2px;
+  transition: background 0.3s ease;
+}
+.avatar:hover {
+  background: #dacabb;
+}

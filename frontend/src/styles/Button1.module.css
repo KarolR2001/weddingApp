@@ -1,0 +1,30 @@
+.container {
+    width: auto;
+    height: 51.93px;
+    padding-left: 47.5px;
+    padding-right: 47.5px;
+    justify-content: center; /* Wyśrodkowanie w poziomie */
+    align-items: center; /* Wyśrodkowanie w pionie */
+    display: flex;
+    position: relative;
+    flex-direction: row; /* Zmieniamy na "row" (bo jeden element) */
+    border: 1px solid #C3937C;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  
+.container:hover {
+    background-color: #EAD9C9;
+}
+
+  .label {
+    color: #C3937C;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    word-wrap: break-word;
+  }
+  

@@ -1,0 +1,28 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px); /* Wysokość strony na pełne okno przeglądarki */
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between; /* Rozciąga tabelę i przyciąga paginację do dołu */
+  overflow: hidden;
+}
+
+.paginationContainer {
+  flex-shrink: 0; /* Zapobiega skalowaniu paginacji */
+  margin-top: auto; /* Automatyczne przyciąganie do dolnej krawędzi */
+  padding: 10px 0; /* Opcjonalne odstępy */
+}

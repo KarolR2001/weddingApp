@@ -1,0 +1,30 @@
+.container {
+    width: auto;
+    height: 51.93px;
+    padding-left: 47.5px;
+    padding-right: 47.5px;
+    justify-content: center; /* Wyśrodkowanie w poziomie */
+    align-items: center; /* Wyśrodkowanie w pionie */
+    display: flex;
+    position: relative;
+    flex-direction: row; /* Zmieniamy na "row" (bo jeden element) */
+    border: 1px solid #363636;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    background-color: #EAD9C9;
+  }
+
+  
+.container:hover {
+    background-color: #d6bea8;
+}
+
+  .label {
+    color: #363636b6;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    word-wrap: break-word
+  }
+  

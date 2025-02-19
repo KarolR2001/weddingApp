@@ -1,0 +1,96 @@
+.dropdownContainer {
+    position: relative;
+    width: auto;
+    min-width: 183px;
+    align-items: center;
+  }
+  
+  .dropdownButton {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c3937c;
+    border-radius: 15px;
+    text-align: center; /* Pozostawiono na wypadek tekstu bez flexbox */
+    display: flex; /* Dodano flexbox */
+    justify-content: space-between; /* Wyśrodkowanie w poziomie */
+    align-items: center; /* Wyśrodkowanie w pionie */
+    color: #787878;
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    cursor: pointer;
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: auto;
+    background-color: #FBF8F1;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border: 1px solid #c3937c;
+    border-radius: 10px;
+    z-index: 10;
+    overflow: hidden;
+  }
+  
+  .dropdownRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(195, 147, 124, 0.46);
+    cursor: pointer;
+    background-color: #fbf8f1;
+    color: #3E3E3E;
+    font-size: 15px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    text-wrap: nowrap;
+    gap: 20px;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+  }
+  
+  .dropdownRow:hover {
+    background-color:#ead9c9;
+  }
+  
+  .addNewGroup {
+    color: #3E3E3E;
+    font-size: 15px;
+    font-family: Montserrat;
+    font-weight: 400;
+    line-height: 25px;
+    word-wrap: break-word;
+  }
+  
+.iconButton {
+    min-width: 24px;
+    min-height: 24px;
+    cursor: pointer;
+}
+  
+  .addGroupRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #ead9c9;
+    
+  }
+  
+  .addGroupRow input {
+    flex: 1;
+    margin-right: 10px;
+    
+  }
+  .caretIcon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .rotated {
+    transform: rotate(180deg);
+  }

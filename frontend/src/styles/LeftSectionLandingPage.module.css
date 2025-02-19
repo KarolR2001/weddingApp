@@ -1,0 +1,112 @@
+/* Kontener główny */
+.container {
+  width: 100%;
+  height: 100%;
+  padding-top: 139px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 22px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Sekcja tekstu */
+.textSection {
+  width: 100%;
+  max-width: 642px;
+  height: auto;
+  position: relative;
+}
+
+.subHeading {
+  color: #787878;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 25px;
+  letter-spacing: 5px;
+  word-wrap: break-word;
+}
+
+.heading {
+  color: #C3937C;
+  margin-top: 20px;
+  font-size: 45px;
+  font-family: Cormorant;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap; /* Zapobiega zawijaniu tekstu */
+  overflow: hidden; /* Zapewnia, że tekst nie będzie wychodził poza ramy */
+  text-overflow: ellipsis; /* Dodaje "..." jeśli tekst nie mieści się */
+  text-align: left; /* Domyślnie wyrównany do lewej */
+}
+
+.description {
+  position: relative;
+  margin-top: 20px;
+  color: #787878;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: left; /* Domyślnie wyrównany do lewej */
+}
+
+/* Grupa inputów */
+.inputGroup {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .inputGroup {
+    flex-direction: column; /* Komponenty jeden pod drugim */
+    gap: 12px;
+    align-items: flex-start; /* Wyrównanie komponentów do prawej strony */
+  }
+
+  .textSection {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .heading {
+    margin-top: 20px;
+    font-size: 32px; /* Zmniejsz rozmiar tekstu na mniejszych ekranach */
+    text-align: left; /* Wyrównanie tekstu do prawej strony */
+    white-space: normal; /* Pozwól tekstowi zawijać się na małych ekranach */
+  }
+
+  .subHeading {
+    text-align: left; /* Wyrównanie tekstu do prawej strony */
+    font-size: 14px;
+  }
+
+  .description {
+    text-align: left; /* Wyrównanie tekstu do prawej strony */
+    font-size: 14px;
+  }
+}
+
+/* Sekcja przycisku szukaj */
+.searchButtonWrapper {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .searchButtonWrapper {
+    justify-content: flex-start; /* Wyśrodkowanie przycisku na małych ekranach */
+  }
+}
+@media (max-width: 1291px) {
+  .container {
+    padding-top: 0px
+  }
+}

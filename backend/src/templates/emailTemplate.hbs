@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiadomość od {{name}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* Ogólne ustawienia */
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 10px auto; background: #FBF8F1; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+
+        /* Logo */
+        .logo {
+            max-width: 150px;
+            margin: 0 auto 0;
+            display: block;
+        }
+
+        /* Sekcja treści */
+        .content {
+            padding: 15px;
+            color: #787878;
+            line-height: 1.6;
+            font-size: 16px;
+            text-align: left;
+        }
+        
+        /* Tekst opisu */
+        .description {
+            font-size: 16px;
+            color: #787878;
+            margin-top: 20px;
+            line-height: 25px;
+        }
+
+        /* Tytuł wiadomości */
+        .heading {
+            margin: 5px;
+            padding-bottom: 20px;
+            color: #C3937C;
+            font-size: 24px;
+            font-family: 'Cormorant', serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        /* Kontener przycisku */
+        .button-container {
+            display: flex;
+            justify-content: center; /* Wyśrodkowanie przycisku */
+            margin-top: 80px;
+        }
+
+        /* Styl przycisku */
+        .button {
+            width: 254px;
+            height: 50px;
+            padding: 0;
+            background-color: #EAD9C9;
+            color: #363636;
+            text-decoration: none;
+            border: 0.5px solid #363636;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* Stopka */
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: center;
+            color: #888;
+        }
+        .footer a { color: #C3937C; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="cid:logo" alt="Logo" class="logo">
+        
+        <div class="content">
+            <h1 class="heading">Nowa wiadomość od {{name}}</h1>
+            
+            <p><strong>Data imprezy:</strong> {{eventDate}}</p>
+            <p><strong>Miejsce:</strong> {{location}}</p>
+            <p><strong>Telefon:</strong> {{phone}}</p>
+            <p><strong>Wiadomość:</strong> {{message}}</p>
+            
+            <!-- Kontener wyśrodkowujący przycisk -->
+            <div class="button-container">
+                <a href="mailto:{{email}}" class="button">Odpowiedz na wiadomość</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Znajdź nas na <a href="https://www.facebook.com">Facebooku</a> i <a href="https://www.instagram.com">Instagramie</a></p>
+            <p>&copy; 2023 Weselny Zakątek. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </div>
+</body>
+</html>

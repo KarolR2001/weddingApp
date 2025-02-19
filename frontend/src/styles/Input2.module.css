@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .label {
+    color: #363636;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 25px;
+  }
+  
+  .inputField {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif ;
+    font-weight: 400;
+    background-color: transparent;
+    color: #3E3E3E;
+    margin: 0px;
+  }
+
+  
+  /* Dodaj ten styl dla czerwonego placeholdera, gdy walidacja nie przechodzi */
+  .invalidPlaceholder::placeholder {
+    color: #c70000;
+  }
+  .inputLine {
+    align-self: stretch;
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
+    border-bottom: 1.5px solid #979797;
+  }
+  .invalid {
+    color: #d9534f; /* Czerwony kolor tekstu */
+  }
+  
+  .invalidLine {
+    border-bottom-color: #d9534f; /* Czerwony kolor linii */
+  }
+  
+  .errorText {
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: -11px;
+    margin-bottom: -16px;
+    font-family: 'Montserrat', sans-serif;
+  }

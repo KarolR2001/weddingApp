@@ -1,0 +1,22 @@
+.messageComponent {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    gap: 2px;
+    overflow: hidden;
+  }
+  
+  .conversationList {
+    flex: 1;
+    border: 1px solid #C3937C;
+    border-radius: 15px;
+  }
+  
+  .messageView {
+    flex: 2.5;
+    border: 1px solid #C3937C;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  

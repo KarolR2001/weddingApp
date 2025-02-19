@@ -1,0 +1,133 @@
+/* Główne ustawienia kontenera */
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background: #FBF8F1;
+  flex-direction: row;
+  overflow: hidden; /* Zapobiega przewijaniu w poziomie */
+}
+
+/* Lewa sekcja */
+.leftSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logoContainer {
+  height: 151px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 19px;
+}
+
+/* Formularz */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 550px; 
+  min-width: 500px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Nagłówek */
+.heading {
+  text-align: center;
+  color: #C3937C;
+  font-size: 36px;
+  font-family: 'Cormorant', serif;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Styl inputów */
+.inputWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Separator */
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  color: #232323ac;
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #232323;
+}
+
+/* Wrapper przycisków do logowania przez Google i rejestracji */
+.socialAndRegisterWrapper {
+  display: flex;
+  
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Prawa sekcja */
+.rightSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(4.5px);
+}
+
+/* Style responsywne dla mniejszych ekranów */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+  }
+
+  /* Ukrywanie prawej sekcji */
+  .rightSection {
+      display: none;
+  }
+
+  /* Ustawienia lewej sekcji, aby zajmowała całą szerokość i wysokość */
+  .leftSection {
+      flex: 1;
+      padding-top: 0px;
+      justify-content: center;
+  }
+
+  /* Form container */
+  .formContainer {
+      padding: 0 20px;
+      max-width: 100%; 
+      min-width: 400px;}
+
+  /* Nagłówek - mniejszy rozmiar tekstu */
+  .heading {
+      font-size: 28px;
+      margin-bottom: 0px;
+  }
+  .socialAndRegisterWrapper {
+    flex-wrap: wrap-reverse;
+  }
+}

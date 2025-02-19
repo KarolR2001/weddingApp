@@ -1,0 +1,97 @@
+.settingsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: 100%;
+    padding: 0px 30px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.header {
+    color: #C3937C;
+    font-family: 'Cormorant', serif;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.settingsInContainer {
+    flex: 1 1 calc(50% - 15px); /* Take 50% width minus the gap for desktops */
+    max-width: calc(50% - 15px); /* Restrict to 50% width */
+    border: 1px solid #c3937c;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.settingRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.settingLabel {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-right: 20px;
+    align-items: center;
+    justify-content: space-between;
+    color: #3e3e3e;
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    line-height: 25px;
+    text-wrap: nowrap;
+}
+
+.headerRow {
+    border-bottom: 0.5px solid #c3937c;
+    padding-bottom: 10px;
+}
+.inputContainer {
+    width: auto;
+    margin-left: auto; /* Wypycha Input2 na prawą stronę */
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1; /* Zapewnia, że input zajmuje wolne miejsce */
+  }
+  .buttonGroup {
+    display: flex;
+    gap: 10px;
+    padding-left: 20px;
+  }
+  
+  .buttonGroup .miniButton {
+    min-width: 70px;
+  }
+/* Media query for mobile devices */
+@media (max-width: 903px) {
+    .settingsInContainer {
+        flex: 1 1 100%; /* Take full width on mobile */
+        max-width: 100%; /* Ensure the width is 100% */
+    }
+}
+@media (max-width: 503px) {
+    .settingsContainer {
+     padding: 0px 0px;   
+    }
+}

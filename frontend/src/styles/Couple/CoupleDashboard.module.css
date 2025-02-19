@@ -1,0 +1,27 @@
+.dashboardContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; /* Cała wysokość ekranu */
+    width: 100%; /* Cała szerokość ekranu */
+}
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.topMenu {
+    width: 100%;
+    position: sticky;
+    border-bottom: 1px solid #EAD9C9;
+    top: 0; /* Przyciągnięcie do górnej krawędzi */
+    z-index: 10; /* Aby topMenu było nad zawartością */
+    box-sizing: border-box;
+}
+.content {
+    flex-grow: 1;
+    padding: 20px 0px;
+    background-color: #FFF; /* Kolor tła dla treści */
+    overflow-y: auto; 
+    background: #FBF8F1;
+    box-sizing: border-box;
+}

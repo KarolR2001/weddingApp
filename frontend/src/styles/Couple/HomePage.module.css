@@ -1,0 +1,130 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 120px);
+    width: 100%;
+  }
+  
+  .widget {
+    position: relative;
+    width: 90vw;
+    max-width: 800px;
+    aspect-ratio: 1;
+  }
+  
+  .widgetBackground {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .names,
+  .days {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #b2785a;
+    font-family: Cormorant;
+    text-transform: uppercase;
+  }
+  
+  .names {
+    top: 45%; /* Imiona bliżej środka */
+    font-size: clamp(2rem, 5vw, 3rem); /* Rozmiar dynamiczny */
+    font-family: Cormorant;
+    font-weight: 700;
+  }
+  
+  .names p {
+    margin: 5px;
+    line-height: 1.2; /* Zmniejszenie odstępów między wierszami */
+  }
+  
+ /* Dodaj styl dla datepickera i przycisku */
+.days {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 9rem;
+  font-weight: 400;
+  color: #b2785a;
+}
+
+.days p {
+  margin: 0;
+  font-size: 2rem;
+  color: #b2785a;
+  font-weight: 700;
+}
+
+/* Styl dla ikony kalendarza */
+.calendarIcon {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    stroke: #b2785a;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .calendarIcon:hover {
+    transform: scale(1.1);
+  }
+  
+
+  .datePickerContainer {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .react-datepicker {
+    font-family: Cormorant, serif;
+    color: #b2785a;
+  }
+  
+  .react-datepicker__header {
+    background-color: #f4ebe2;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .react-datepicker__day--selected {
+    background-color: #b2785a;
+    color: #fff;
+  }
+  
+  .react-datepicker__day:hover {
+    background-color: #d8bba8;
+  }
+  @media (max-width: 768px) {
+    .names {
+      font-size: 2rem;
+    }
+    .days {
+      font-size: 6rem;
+    }
+    .days p {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .names {
+      font-size: 1.5rem;
+    }
+    .days {
+      font-size: 4rem;
+    }
+    .days p {
+      font-size: 1rem;
+    }
+  }
+  

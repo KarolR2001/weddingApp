@@ -1,0 +1,80 @@
+.container {
+    width: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+  
+  .inputField {
+    width: 100%;
+    height: 50.93px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #C3937C;
+    outline: none;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #C3937C;
+    background-color: transparent;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .inputField::placeholder {
+    color: #C3937C;
+  }
+  
+  /* Dropdown menu */
+  .dropdown {
+    position: absolute;
+    top: 39px; /* Aby lista była poniżej przycisku */
+    left: 0;
+    background-color: #FBF8F1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid #C3937C;
+    border-right: 1px solid #C3937C;
+    border-bottom: 1px solid #C3937C;
+    width: calc(100% + 30px); /* Używamy 100% szerokości */
+    max-height: 150px; /* Maksymalna wysokość listy */
+    overflow-y: auto;
+    z-index: 1000;
+    list-style-type: none; /* Usuwa kropki */
+    padding: 0;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .dropdown::-webkit-scrollbar {
+    display: none; /* Ukrywa pasek przewijania w przeglądarkach WebKit (Chrome, Safari) */
+  }
+  
+  /* Elementy listy */
+  .dropdownItem {
+    padding: 12px;
+    color: #C3937C;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 1px solid #EAD9C9;
+    background-color: #FBF8F1;
+    text-align: left; /* Przyciąga tekst do lewej strony */
+  }
+  
+  .dropdownItem:hover {
+    background-color: #EAD9C9;
+  }
+  
+  /* Ostatni element listy bez dolnej linii */
+  .dropdownItem:last-child {
+    border-bottom: none;
+  }
+  
+  /* Styl kontenera dropdownu */
+  .dropdownContainer:hover {
+    background-color: #EAD9C9;
+  }
+  

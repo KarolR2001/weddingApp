@@ -1,0 +1,116 @@
+.calendarDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0px 20px;
+}
+
+.header {
+  color: #C3937C;
+  font-family: 'Cormorant', serif;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.calendarsContainer {
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 5px;
+  justify-content: center;
+  border-radius: 15px; 
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.headerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headerTitle {
+  color: #C3937C;
+  font-size: 36px;
+  font-family: 'Cormorant', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+.subHeader {
+  width: 770px;
+  padding: 0 11px;
+  color: #787878;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 25px;
+  word-wrap: break-word;
+}
+
+
+.legendContainer {
+  width: 252px;
+  padding: 40px;
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.212);
+  border-radius: 15px;
+  border: 1px solid #C3937C;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.legendItem {
+  align-self: stretch;
+  padding: 0 3px;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.bookedIndicator {
+  width: 24px;
+  height: 24px;
+  background: #C3937C;
+}
+
+.reservedIndicator {
+  width: 24px;
+  height: 24px;
+  background: #EAD9C9;
+}
+
+.freeIndicator {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #EAD9C9;
+}
+
+.legendText {
+  color: #787878;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 25px;
+  word-wrap: break-word;
+}

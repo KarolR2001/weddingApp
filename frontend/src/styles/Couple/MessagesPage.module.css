@@ -1,0 +1,21 @@
+.messagesPage {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+    padding: 0 30px;
+    height: 100%;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+  
+  .title {
+    color: #C3937C;
+    font-size: 36px;
+    font-family: Cormorant;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  

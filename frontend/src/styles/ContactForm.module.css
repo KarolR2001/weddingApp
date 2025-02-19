@@ -1,0 +1,58 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-bottom: 33px;
+    border-bottom: 0.5px solid #C3937C;
+    box-sizing: border-box;
+  }
+  
+  .title {
+    color: #C3937C;
+    margin: 0px;
+   
+    font-size: 32px;
+    font-family: 'Cormorant', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    
+  }
+  
+  .formGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 37px;
+    align-items: flex-start;
+  }
+  
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+.successMessage {
+    height: 453px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.errorText {
+    display: flex;
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: -19px;
+    font-family: 'Montserrat', sans-serif;
+  }

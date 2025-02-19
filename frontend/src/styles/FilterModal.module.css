@@ -1,0 +1,83 @@
+/* Styl dla nakładki (overlay) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);  /* Przyciemnienie tła */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;  /* Modal wyświetlany nad innymi elementami */
+}
+
+/* Styl dla modala */
+.modal {
+  background-color: #FBF8F1;
+  border-radius: 8px;
+  padding: 30px; /* Zwiększamy padding dla przestrzeni wewnątrz */
+  width: 100%;
+  max-width: 80vw;  /* Zwiększamy szerokość modala */
+  max-height: 90vh;  /* Ograniczamy maksymalną wysokość do 90% wysokości okna */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Ustawiamy pozycjonowanie względem kontenera */
+}
+
+@media (max-width: 768px) {
+  .filter {
+    flex: 1 1 calc(50% - 20px);  /* Na mniejszych ekranach elementy zajmą 50% szerokości */
+  }
+}
+
+/* Styl dla kontenera filtrów */
+.modalContent {
+  display: flex;
+  flex-wrap: wrap; /* Umożliwia zawijanie elementów */
+  gap: 30px;  /* Odstępy między elementami */
+  overflow-y: auto; /* Pozwala przewijać w pionie */
+  overflow-x: hidden; /* Ukrywa przewijanie w poziomie */
+  flex-grow: 1; /* Kontener filtrów zajmuje całą dostępną przestrzeń */
+  margin-bottom: 70px; /* Odstęp na przyciski na dole */
+  -ms-overflow-style: none;  /* Ukrywanie pasków przewijania w Internet Explorerze i Edge */
+  scrollbar-width: none;  /* Ukrywanie pasków przewijania w Firefox */
+}
+
+.modalContent::-webkit-scrollbar {
+  display: none;  /* Ukrywanie pasków przewijania w WebKit (Chrome, Safari) */
+}
+
+/* Styl dla pojedynczych filtrów */
+.filter {
+  flex: 1 1 calc(33.33% - 20px);  /* Elementy będą zajmować 1/3 szerokości z odstępami */
+  min-width: 250px;  /* Minimalna szerokość każdego filtra */
+  box-sizing: border-box;
+}
+
+/* Styl dla przycisków */
+.buttons {
+  position: absolute; /* Pozycjonowanie absolutne */
+  bottom: 0; /* Przyciąganie do dolnej krawędzi */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 15px 30px;  /* Dodanie odstępów wewnątrz sekcji z przyciskami */
+  background-color: #FBF8F1;  /* Tło dla sekcji z przyciskami */
+  border-top: 1px solid #ccc;  /* Delikatna linia oddzielająca od filtrów */
+}
+
+@media (max-width: 768px) {
+  .filter {
+    flex: 1 1 calc(50% - 20px);  /* Na mniejszych ekranach elementy zajmą 50% szerokości */
+  }
+}
+
+@media (max-width: 480px) {
+  .filter {
+    flex: 1 1 100%;  /* Na bardzo małych ekranach filtry zajmują całą szerokość */
+  }
+}

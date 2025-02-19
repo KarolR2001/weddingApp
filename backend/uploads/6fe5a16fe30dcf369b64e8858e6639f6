@@ -1,0 +1,4 @@
+guestName,guestStatus,groupId,notes
+John Doe,invited,1,Note about John
+Jane Smith,confirmed,2,Note about Jane
+Tom Hanks,declined,,No group for Tom

@@ -1,0 +1,55 @@
+.container {
+  position: relative;
+  width: 100%;
+  
+}
+.datePickerContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  border-bottom: 1.5px solid #979797;
+  cursor: pointer;
+}
+
+.inputField {
+  width: 100%;
+  background: none;
+  border: none;
+  padding-bottom: 11.5px;
+  font-size: 16px;
+  color: #3E3E3E;
+  font-family: Montserrat, sans-serif;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Czerwony placeholder i linia, gdy walidacja nie przechodzi */
+.invalidInput::placeholder {
+  color: #c70000;
+}
+.invalidContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 1px solid #c70000;
+}
+
+.icon {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.errorText {
+  color: #d9534f;
+  display: flex;
+  font-size: 12px;
+  margin-bottom: -14px;
+  font-family: 'Montserrat', sans-serif;
+}

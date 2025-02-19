@@ -1,0 +1,181 @@
+.rowContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ead9c9;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+  }
+  .rowContainer:hover {
+    background-color: #ead9c92a;
+  }
+  
+  .column {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .moreOptionsColumn {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .guestName {
+    font-size: 16px;
+    color: #787878;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+  }
+  
+  .statusDropdown {
+    width: auto;
+    padding: 8px;
+    border: none; /* Usuń ramkę */
+    border-radius: 15px;
+    color: #787878;
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .groupDropdown {
+    width: auto;
+    max-width: 200px;
+    padding: 8px;
+    border: 1px #EAD9C9 solid;
+    border-radius: 15px;
+    background: none; /* Usuń tło */
+    color: #787878;
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .moreOptionsButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .optionsMenu {
+    position: absolute;
+    background: #fbf8f1; /* Kolor tła */
+    box-shadow: -2px -2px 8px rgba(0, 0, 0, 0.25); /* Cień */
+    border-radius: 10px; /* Zaokrąglenia */
+    border: 1px solid #c3937c; /* Kolor obramowania */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 110px;
+    transition: transform 0.2s ease-in-out;
+}
+  
+.option {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    color: #3e3e3e; /* Kolor tekstu */
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(195, 147, 124, 0.46); /* Delikatna linia */
+    background: #ead9c9; /* Kolor tła dla opcji */
+    cursor: pointer;
+}
+
+.option:last-child {
+    border-bottom: none;
+}
+
+.option:hover {
+    background: #c3937c; /* Kolor hover */
+    color: #fff; /* Kolor tekstu na hover */
+}
+
+/* Zaokrąglenie pierwszej i ostatniej opcji */
+.option:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.option:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* Animacja i wygląd aktywnej opcji */
+.option.active {
+    background: #c3937c; /* Kolor aktywnej opcji */
+    color: #fff; /* Kolor tekstu aktywnej opcji */
+    font-weight: 600; /* Grubsza czcionka */
+}
+
+.caretIcon {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+    transition: transform 0.3s ease-in-out;
+    fill: #787878; /* Kolor ikony */
+}
+
+.rotated {
+    transform: rotate(180deg);
+}
+  .modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .modalContent {
+    background: #fbf8f1;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    color: #787878;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+  }
+  
+  .textarea {
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+    color: #787878;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    background-color: #fbf8f1;
+    border: 1px #ead9c9 solid;
+    padding: 5px;
+  }
+  .textarea:focus {
+    outline: none;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  

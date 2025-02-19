@@ -1,0 +1,88 @@
+.guestList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fbf8f1;
+    box-sizing: border-box;
+    margin: 0px;
+    margin-bottom: 27px;
+    padding: 0px;
+  }
+  .guestUl {
+    padding: 0;
+    margin: 0px 0px 15px 0px;
+  }
+  
+  .guestRow {
+    width: 100%;
+    height: 50px;
+    padding-inline: 10px;
+    border-bottom: 1px solid #ead9c9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .guestRow:hover {
+    background-color: #ead9c92a;
+  }
+  
+  .guestIcon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+  }
+  
+  .guestIcon img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .guestName {
+    flex: 1 1 0;
+    color: #787878;
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    word-wrap: break-word;
+  }
+  
+  .guestActions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+    padding-inline: 20px;
+    transition: transform 0.2s ease;
+  }
+  
+  .actionDot {
+    width: 8px;
+    height: 8px;
+    background: #c3937c;
+    border-radius: 50%;
+  }
+  
+  .actionDot:hover {
+    background: #a3775c;
+  }
+  .addGuest {
+    max-width: 30%;
+    background-color: #ead9c9;
+    border-radius: 5px 5px 0px 0px;
+    margin-left: 15px;
+    padding-top: 7px;
+  }
+  .minusIcon {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .guestActions:hover .minusIcon {
+    transform: scale(1.2); /* Powiększenie podczas najechania */
+  }

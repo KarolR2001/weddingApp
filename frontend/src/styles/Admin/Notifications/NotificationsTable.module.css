@@ -1,0 +1,41 @@
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.headerContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-bottom: 1px solid #ead9c9;
+  box-sizing: border-box;
+}
+
+.headerColumn {
+  flex: 1 1 0;
+  display: flex;
+  height: 51px;
+  align-items: center;
+  gap: 10px;
+  border-right: 1px solid #ead9c9;
+  color: #787878;
+  font-size: 16px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.headerColumn:hover {
+  background-color: #ead9c933;
+}
+
+.headerColumn span {
+  padding-left: 10px;
+  word-wrap: break-word;
+}
+
+.emptyColumn {
+  width: 112px;
+}

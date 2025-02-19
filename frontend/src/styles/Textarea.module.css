@@ -1,0 +1,67 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.textareaField {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    background-color: transparent;
+    color: #363636;
+    resize: none; /* Prevents resizing by dragging */
+    line-height: 1.5;
+    overflow: hidden; /* Hides scrollbar */
+}
+
+.textareaField::placeholder {
+    color: #353535;
+}
+
+.invalidPlaceholder::placeholder {
+    color: #c70000; /* Red color for invalid state */
+}
+
+.inputLine {
+    align-self: stretch;
+    height: 0;
+    border-bottom: 1.5px solid #979797;
+}
+
+.invalidLine {
+    border-bottom-color: #d9534f; /* Red color for invalid state */
+}
+
+.errorText {
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: -10px; 
+    margin-bottom: -16.5px;
+    font-family: 'Montserrat', sans-serif;
+}
+.container {
+    position: relative; /* Ustawienie kontekstu dla absolutnego pozycjonowania */
+  }
+  
+  .textareaField {
+    width: 100%;
+    padding-right: 40px; /* Zapewnia miejsce na licznik */
+    box-sizing: border-box;
+    resize: none; /* Opcjonalnie wyłączamy możliwość zmiany rozmiaru przez użytkownika */
+  }
+  
+  .charCount {
+    position: absolute;
+    bottom: 8px; /* Dostosuj odstęp od dołu */
+    right: 10px; /* Dostosuj odstęp od prawej */
+    font-size: 12px;
+    color: #888;
+  }
+  

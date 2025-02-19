@@ -1,0 +1,79 @@
+/* ListingDetailPage.module.css */
+
+.container {
+  background-color: #FBF8F1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow-x: hidden;
+  }
+  
+  .mainContent {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    gap: 24px;
+    width: 100%;
+    padding: 30px 70px;
+  }
+  
+  .leftSection {
+    flex-basis: 72%;
+    padding: 21px;
+    background: rgba(234, 217, 201, 0.01);
+    box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: 2px solid #EAD9C9;
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  
+  .rightSection {
+    min-width: 360px;
+    flex-basis: 28%;
+    padding: 21px;
+    background: rgba(234, 217, 201, 0.01);
+    box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: 2px solid #EAD9C9;
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  @media (max-width: 868px) {
+    .mainContent {
+flex-wrap: wrap-reverse;
+padding: 30px 5px;
+    }
+    .rightSection {
+      flex-basis: 95%;
+      
+    }
+    .leftSection {
+      flex-basis: 95%;
+    }
+  }
+  @media (max-width: 455px) {
+
+    .rightSection {
+      flex-basis: 100%;
+      
+    }
+    .leftSection {
+      flex-basis: 100%;
+    }
+  }
+  .spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  

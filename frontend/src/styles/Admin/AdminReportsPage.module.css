@@ -1,0 +1,336 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  padding: 0 30px;
+  height: 100%;
+  gap: 20px;
+  box-sizing: border-box;
+  
+}
+
+.title {
+  color: #C3937C;
+  font-size: 36px;
+  font-family: Cormorant;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+.row1 {
+  display: flex;
+  flex-direction: row;
+  gap: 22px;
+  width: 100%;
+}
+.statsContainer, .chartsContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 20px;
+  border: #C3937C 1px solid;
+  border-radius: 15px;
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+.reportsListContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 20px;
+  border: #C3937C 1px solid;
+  border-radius: 15px;
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+.controlsContainer {
+  display: flex;
+  gap: 10px;
+  width: 70%;
+  flex-wrap: wrap;
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  border: 1px solid #C3937C;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+.button {
+  width: 130px;
+  height: 136px;
+  background: rgba(234, 217, 201, 0.53);
+  border-radius: 15px;
+  border: 1px solid #EAD9C9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #787878;
+  font-size: 13px;
+  font-family: Montserrat;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 25px;
+  letter-spacing: 2px;
+  word-wrap: break-word;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.button:hover {
+  background: rgba(234, 217, 201, 0.767);
+}
+.icon {
+  width: 48px;
+  height: 48px;
+}
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  color: #C3937C;
+  font-size: 32px;
+  font-family: Cormorant;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-bottom: 1px #EAD9C9 solid;
+  padding: 10px 25px;
+  gap: 10px;
+  box-sizing: border-box;
+}
+.headerContainerListReports {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  color: #C3937C;
+  font-size: 32px;
+  font-family: Cormorant;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-bottom: 1px #EAD9C9 solid;
+  padding: 10px 25px;
+  gap: 10px;
+  box-sizing: border-box;
+}
+.titleHeaderReportsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px 25px;
+  gap: 10px;
+}
+.itemList {
+  color: #787878;
+  font-size: 13px;
+  font-family: Montserrat;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 25px;
+  letter-spacing: 4px;
+  word-wrap: break-word;
+}
+
+
+.contentChart {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 25px;
+  box-sizing: border-box;
+  gap: 100px;
+  align-items: stretch; /* Dopasowuje wysokość dzieci do najwyższego elementu */
+}
+
+.chartBar {
+  flex: 2; /* Wykres słupkowy zajmuje więcej miejsca */
+}
+
+.chartDonut {
+  flex: 1; /* Wykres donut zajmuje mniej miejsca */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Automatyczne dostosowanie wysokości */
+}
+
+.chartDonut canvas {
+  max-height: 100%; /* Wykres donut nie przekroczy dostępnej wysokości */
+}
+
+.searchBox {
+  background: #FBF8F1;
+  border: 1px solid #ead9c9;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  min-width: 223px;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: #787878;
+  width: 100%;
+}
+
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tableHeaderContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-bottom: 1px solid #ead9c9;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+.headerColumn {
+  flex: 1 1 0;
+  display: flex;
+  height: 41px;
+  align-items: center;
+  gap: 10px;
+  border-right: 1px solid #ead9c9;
+  color: #787878;
+  font-size: 16px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.headerColumn:hover {
+  background-color: #ead9c933;
+}
+
+.headerColumn span {
+  padding-left: 10px;
+  word-wrap: break-word;
+}
+
+.emptyColumn {
+  width: 112px;
+}
+
+.tableRow {
+  width: 100%;
+  height: 55px;
+  padding: 3px 0px 3px 10px;
+  border-bottom: 1px solid #ead9c9;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+.tableRow:hover {
+  background-color: #ead9c92a;
+}
+.tableColumn {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+.text {
+  color: #787878;
+  font-size: 16px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  word-wrap: break-word;
+}
+
+.actionsColumn {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionsButton {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #c3937c;
+  cursor: pointer;
+}
+.icon {
+  width: 88px;
+}
+.optionsMenu {
+  position: absolute;
+  top: 100%; /* Wyświetl menu bezpośrednio pod przyciskiem */
+  left: 0;
+  z-index: 1000; /* Wysoki indeks, aby menu było nad innymi elementami */
+  background: #fbf8f1; /* Kolor tła */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Cień */
+  border-radius: 10px; /* Zaokrąglenia */
+  border: 1px solid #c3937c; /* Kolor obramowania */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 110px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.actionsColumn {
+  position: relative; /* Ustaw relatywne pozycjonowanie dla przycisku */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionsButton {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #c3937c;
+  cursor: pointer;
+  position: relative;
+}
+
+.option {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  color: #3e3e3e;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(195, 147, 124, 0.46);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.option:hover {
+  background: #ead9c9;
+  color: #3e3e3e;
+}

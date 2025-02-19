@@ -1,0 +1,34 @@
+.containerReview {
+display: flex;
+flex-direction: column;
+padding: 10px 30px;
+box-sizing: border-box;
+}
+
+.headerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headerTitle {
+  color: #C3937C;
+  font-size: 36px;
+  font-family: 'Cormorant', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+.subHeader {
+  width: 770px;
+  padding: 0 11px;
+  color: #787878;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 25px;
+  word-wrap: break-word;
+}

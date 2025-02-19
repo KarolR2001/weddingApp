@@ -1,0 +1,18 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    
+  }
+  
+  .title {
+    color: #C3937C;
+    font-size: 32px;
+    font-family: 'Cormorant', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0px;
+  }
+  

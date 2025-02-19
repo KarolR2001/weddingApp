@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .dropdownWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 1.5px solid #979797;
+    padding: 0px 8px 8px 0;
+    box-sizing: border-box;
+    
+  }
+  
+  .input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #3E3E3E;
+    cursor: pointer;
+  }
+  
+  .caretIcon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+  
+  .rotated {
+    transform: rotate(180deg);
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #FBF8F1;
+    border: 1px solid #EAD9C9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .dropdownItem {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #3E3E3E;
+    border-bottom: 1px solid #EAD9C9;
+  }
+  
+  .dropdownItem:hover {
+    background: #EAD9C9;
+  }
+  .invalid {
+  border-color: #c70000;
+}
+
+.invalidInput {
+  color: #c70000;
+}
+
+.errorText {
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: 1px;
+  margin-bottom: -16px;
+  font-family: 'Montserrat', sans-serif;
+}

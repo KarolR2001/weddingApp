@@ -1,0 +1,108 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .modalContent {
+    background: #FBF8F1;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  @media (min-width: 1024px) {
+    .modalContent {
+      min-width: 729px;
+      max-width: 800px;
+    }
+  }
+  @media (max-width: 868px) {
+
+    .modalContent {
+      max-height: 90vh;
+    }
+  }
+  .starRatingInput {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+  
+  .reviewAddForm {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    width: 100%; /* Zapewnia pełną szerokość */
+    box-sizing: border-box; /* Uwzględnia padding i border w szerokości */
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* Możesz dostosować tę wartość */
+    width: 100%; /* Ustawia pełną szerokość formGroup */
+    box-sizing: border-box;
+  }
+  
+  .checkboxContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+  }
+  .errorText {
+    display: flex;
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: -19px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .readMore,
+.readLess {
+  width: 50px;
+  height: 20px;
+  background-color: #EAD9C9;
+  color: black;
+  border-radius: 3px;
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: background-color 0.2s ease-in-out;
+  margin-left: 5px;
+}
+
+.readMore:hover,
+.readLess:hover {
+  background-color: #cfbfaf;
+}
