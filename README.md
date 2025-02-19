@@ -4,7 +4,7 @@ Aplikacja do zarządzania usługodawcami w branży ślubnej.
 Pozwala na wyszukiwanie ofert, filtrowanie, kontakt i ocenianie usługodawców.  
 
 ## 📸 Zrzuty ekranu  
-![Strona główna](screenshots/homepage.png)  
+![Strona główna](screenshots/home.png)  
 ![Panel użytkownika](screenshots/user-panel.png)  
 
 ## 🔧 Technologie  
