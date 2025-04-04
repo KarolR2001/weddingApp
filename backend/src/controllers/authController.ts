@@ -10,7 +10,8 @@ import nodemailer from 'nodemailer';
 import { Device } from '../models/devices';
 import { NotificationService } from '../services/NotificationService';
 import useragent from 'user-agent';
-
+import passport from 'passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
 
 // Wysyła e-mail weryfikacyjny
@@ -83,6 +84,87 @@ const sendVerificationEmail = async (email: string, verificationUrl: string): Pr
   } catch (error) {
     console.error('Error sending verification email:', error);
   }
+};
+
+// Funkcja generująca token JWT i dane użytkownika
+const generateTokenAndUserData = async (user: User, req: Request): Promise<{ token: string; userData: any }> => {
+  console.log('Generating token and user data for user:', user.id);
+  const token = jwt.sign(
+    { userId: user.id, userType: user.userType },
+    process.env.JWT_SECRET_KEY!,
+    { expiresIn: '12h' }
+  );
+
+  const userAgent = useragent.parse(req.headers['user-agent'] || '');
+  const deviceName = userAgent.device?.toString() || 'Unknown Device';
+  const deviceType = userAgent.os?.toString() || 'Unknown OS';
+  const ipAddress = req.ip || 'Unknown IP';
+
+  const existingDevice = await Device.findOne({
+    where: { userId: user.id, deviceName, ipAddress },
+  });
+
+  if (!existingDevice) {
+    console.log('Creating new device for user:', user.id);
+    await Device.create({
+      userId: user.id,
+      deviceName,
+      deviceType,
+      ipAddress,
+      lastLoginAt: new Date(),
+    });
+
+    const notificationMessage = `
+      Właśnie zalogowano się na Twoje konto z nowego urządzenia.
+      Szczegóły:
+      - Nazwa urządzenia: ${deviceName}
+      - Typ urządzenia: ${deviceType}
+      - Adres IP: ${ipAddress}
+      
+      Jeśli to nie Ty, zmień swoje hasło natychmiast.
+    `;
+
+    await NotificationService.createAutomaticNotification({
+      userId: user.id,
+      message: 'Zalogowano z nowego urządzenia.',
+      eventType: 'new_device_login',
+      notificationType: 'app',
+    });
+
+    await NotificationService.createAutomaticNotification({
+      userId: user.id,
+      message: notificationMessage,
+      eventType: 'new_device_login',
+      notificationType: 'email',
+    });
+  }
+
+  await User.update({ lastLoginAt: new Date() }, { where: { id: user.id } });
+
+  const fullUser = await User.findOne({
+    where: { id: user.id },
+    include: [
+      { model: Vendor, as: 'vendorProfile' },
+      { model: Couple, as: 'coupleProfile' },
+    ],
+  });
+
+  if (!fullUser) {
+    throw new Error('User not found after update');
+  }
+
+  const userData = {
+    id: fullUser.id,
+    userType: fullUser.userType,
+    email: fullUser.email,
+    phoneNumber: fullUser.phoneNumber,
+    status: fullUser.status,
+    vendorProfile: fullUser.userType === 'vendor' ? fullUser.vendorProfile?.get() : null,
+    coupleProfile: fullUser.userType === 'couple' ? fullUser.coupleProfile?.get() : null,
+  };
+
+  console.log('Generated token:', token, 'User data:', userData);
+  return { token, userData };
 };
 
 // Rejestracja użytkownika
@@ -210,7 +292,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
     }
 
     // Sprawdzenie hasła
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    const isMatch = await bcrypt.compare(password, user.passwordHash || '');
     if (!isMatch) {
       res.status(401).json({ message: 'Nieprawidłowy e-mail lub hasło.' });
       return;
@@ -297,5 +379,142 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
   } catch (error) {
     console.error('Błąd logowania:', error);
     next(error);
+  }
+};
+// Konfiguracja strategii Google
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL!,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      console.log('Google Strategy - Profile:', profile);
+      try {
+        let user = await User.findOne({ where: { googleId: profile.id } });
+        if (user) {
+          console.log('Google Strategy - Existing user found:', user.id);
+          return done(null, user);
+        }
+        console.log('Google Strategy - New user, returning profile');
+        return done(null, { profile, accessToken, refreshToken });
+      } catch (error) {
+        console.error('Google Strategy - Error:', error);
+        return done(error);
+      }
+    }
+  )
+);
+
+// Callback Google
+export const googleCallback: RequestHandler = async (req: Request, res: Response): Promise<void> => {
+  console.log('Google Callback - Start, req.user:', req.user);
+  try {
+    let user: User | null = null;
+    let isNewUser = false;
+
+    if ((req.user as any).profile) {
+      // Nowy użytkownik
+      const googleUser = (req.user as any).profile;
+      console.log('Google Callback - New user, Google profile:', googleUser);
+      const existingUser = await User.findOne({ where: { googleId: googleUser.id } });
+
+      if (!existingUser) {
+        isNewUser = true;
+        // Tworzymy tymczasowy token JWT dla nowego użytkownika
+        const tempToken = jwt.sign(
+          { googleId: googleUser.id, email: googleUser.emails?.[0].value || '' },
+          process.env.JWT_SECRET_KEY!,
+          { expiresIn: '10m' } // Krótki czas ważności
+        );
+        console.log('Google Callback - New user, temp token:', tempToken);
+        const redirectUrl = `http://localhost:3000/auth/google/success?tempToken=${tempToken}&isNewUser=true`;
+        res.redirect(redirectUrl);
+        return;
+      } else {
+        user = existingUser;
+        console.log('Google Callback - Existing user found:', user.id);
+      }
+    } else {
+      // Istniejący użytkownik
+      user = req.user as User;
+      console.log('Google Callback - Existing user from Passport:', user.id);
+    }
+
+    const { token, userData } = await generateTokenAndUserData(user!, req);
+    const redirectUrl = `http://localhost:3000/auth/google/success?token=${token}&user=${encodeURIComponent(JSON.stringify(userData))}&isNewUser=false`;
+    console.log('Google Callback - Redirecting to:', redirectUrl);
+    res.redirect(redirectUrl);
+  } catch (error) {
+    console.error('Google Callback - Error:', error);
+    res.redirect('http://localhost:3000/login?error=auth_failed');
+  }
+};
+
+// Nowy endpoint do finalizacji rejestracji Google
+export const completeGoogleRegistration: RequestHandler = async (req: Request, res: Response): Promise<void> => {
+  console.log('Complete Google Registration - Start', req.body, req.headers.authorization);
+  try {
+    const { userType } = req.body;
+    const tempToken = req.headers.authorization?.split(' ')[1]; // Bearer token
+
+    if (!tempToken || !userType || !['vendor', 'couple'].includes(userType)) {
+      console.log('Complete Google Registration - Invalid input:', { tempToken, userType });
+      res.status(400).json({ message: 'Nieprawidłowy token lub typ konta.' });
+      return;
+    }
+
+    // Weryfikacja tymczasowego tokenu
+    let decoded;
+    try {
+      decoded = jwt.verify(tempToken, process.env.JWT_SECRET_KEY!) as { googleId: string; email: string };
+      console.log('Complete Google Registration - Decoded temp token:', decoded);
+    } catch (jwtError) {
+      console.error('Complete Google Registration - JWT verification failed:', jwtError);
+      res.status(401).json({ message: 'Nieprawidłowy lub wygasły token tymczasowy.' });
+      return;
+    }
+
+    const existingUser = await User.findOne({ where: { googleId: decoded.googleId } });
+    if (existingUser) {
+      console.log('Complete Google Registration - User already exists:', existingUser.id);
+      res.status(400).json({ message: 'Użytkownik już istnieje.' });
+      return;
+    }
+
+    // Tworzenie nowego użytkownika
+    const displayName = 'Unknown'; // Możesz pobrać z Google, jeśli przechowujesz w tempToken
+    const user = await User.create({
+      googleId: decoded.googleId,
+      email: decoded.email,
+      userType,
+      phoneNumber: undefined,
+      status: 'active',
+    });
+    console.log('Complete Google Registration - User created:', user.id);
+
+    if (userType === 'couple') {
+      await Couple.create({
+        coupleId: user.id,
+        partner1Name: displayName,
+        partner2Name: undefined,
+      });
+      console.log('Complete Google Registration - Couple profile created for user:', user.id);
+    } else if (userType === 'vendor') {
+      await Vendor.create({
+        vendorId: user.id,
+        companyName: displayName,
+        offersNationwideService: false,
+      });
+      console.log('Complete Google Registration - Vendor profile created for user:', user.id);
+    }
+
+    const { token, userData } = await generateTokenAndUserData(user, req);
+    console.log('Complete Google Registration - Success:', { token, userData });
+    res.status(200).json({ token, user: userData });
+  } catch (error) {
+    console.error('Complete Google Registration - Error:', error instanceof Error ? error.message : error);
+    res.status(500).json({ message: 'Błąd podczas finalizacji rejestracji.' });
   }
 };

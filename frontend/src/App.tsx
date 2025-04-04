@@ -21,26 +21,31 @@ interface PrivateRouteProps {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, allowedRoles }) => {
   const { user, token } = useSelector((state: RootState) => state.auth);
+  console.log('PrivateRoute - Checking auth:', { user, token, allowedRoles });
 
   if (!token) {
-    // Przekierowanie do logowania, jeśli użytkownik nie jest zalogowany
+    console.log('PrivateRoute - No token, redirecting to /login');
     return <Navigate to="/login" />;
   }
 
   if (!allowedRoles.includes(user?.userType)) {
-    // Przekierowanie na stronę główną, jeśli użytkownik nie ma odpowiedniej roli
+    console.log('PrivateRoute - User type not allowed, redirecting to /');
     return <Navigate to="/" />;
   }
 
+  console.log('PrivateRoute - Access granted');
   return children;
 };
 
 const App: React.FC = () => {
+  console.log('App - Rendering');
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.auth);
+  console.log('App - Redux state:', { user });
 
   useEffect(() => {
-    dispatch(loadUserFromLocalStorage()); // Załaduj użytkownika z `localStorage` przy starcie
+    console.log('App - useEffect triggered, loading user from localStorage');
+    dispatch(loadUserFromLocalStorage());
   }, [dispatch]);
 
   return (
@@ -48,40 +53,25 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route
-            path="/login"
-            element={user ? <Navigate to="/" /> : <LoginPage />} // Przekierowanie na stronę główną, jeśli użytkownik jest już zalogowany
-          />
+          <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />
           <Route path="/register-couple" element={<CoupleRegisterPage />} />
           <Route path="/register-company" element={<CompanyRegisterPage />} />
           <Route path="/list" element={<OfferListPage />} />
           <Route path="/listing/:id" element={<ListingDetailPage />} />
           <Route path="/verify" element={<VerifyAccount />} />
+          <Route path="/auth/google/success" element={<LoginPage />} /> {/* Zmieniono z Navigate na LoginPage */}
 
-          {/* Chronione trasy dla różnych ról */}
           <Route
             path="/admin/dashboard/*"
-            element={
-              <PrivateRoute allowedRoles={['admin']}>
-                <AdminDashboard />
-              </PrivateRoute>
-            }
+            element={<PrivateRoute allowedRoles={['admin']}><AdminDashboard /></PrivateRoute>}
           />
           <Route
             path="/vendor/dashboard"
-            element={
-              <PrivateRoute allowedRoles={['vendor']}>
-                <VendorDashboard />
-              </PrivateRoute>
-            }
+            element={<PrivateRoute allowedRoles={['vendor']}><VendorDashboard /></PrivateRoute>}
           />
           <Route
             path="/couple/dashboard/*"
-            element={
-              <PrivateRoute allowedRoles={['couple']}>
-                <CoupleDashboard />
-              </PrivateRoute>
-            }
+            element={<PrivateRoute allowedRoles={['couple']}><CoupleDashboard /></PrivateRoute>}
           />
         </Routes>
       </Router>

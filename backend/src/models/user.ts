@@ -8,8 +8,9 @@ export interface UserAttributes {
   id: number;
   userType: 'vendor' | 'couple' | 'admin';
   email: string;
-  passwordHash: string;
-  phoneNumber: string;
+  passwordHash?: string;
+  phoneNumber?: string;
+  googleId?: string;
   status: 'active' | 'blocked' | 'deactivated' | 'deleted';
   lastLoginAt?: Date; // Dodana kolumna
   created_at?: Date;
@@ -18,16 +19,17 @@ export interface UserAttributes {
   coupleProfile?: Couple;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'status' | 'created_at' | 'updatedAt' | 'lastLoginAt'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'status' | 'created_at' | 'updatedAt' | 'lastLoginAt' | 'googleId'> {}
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: number;
   public userType!: 'vendor' | 'couple' | 'admin';
   public email!: string;
-  public passwordHash!: string;
-  public phoneNumber!: string;
+  public passwordHash?: string;
+  public phoneNumber?: string;
+  public googleId?: string;
   public status!: 'active' | 'blocked' | 'deactivated' | 'deleted';
-  public lastLoginAt?: Date; // Dodana kolumna
+  public lastLoginAt?: Date; 
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -57,14 +59,20 @@ User.init(
     },
     passwordHash: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
       field: 'password_hash',
     },
     phoneNumber: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
       unique: true,
       field: 'phone_number',
+    },
+    googleId: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      unique: true,
+      field: 'google_id',
     },
     status: {
       type: DataTypes.ENUM('active', 'blocked', 'deactivated', 'deleted'),

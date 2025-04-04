@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { sequelize } from './config/database';
+import passport from 'passport';
 
 // Import modeli, aby zapewnić ich zarejestrowanie w Sequelize
 import './models/index';
@@ -39,6 +40,7 @@ app.use(corsMiddleware);
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(passport.initialize());
 
 // Trasy
 app.use('/api/users', userRoutes);

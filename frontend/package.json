@@ -6,6 +6,7 @@
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@react-google-maps/api": "^2.20.3",
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.17.0",

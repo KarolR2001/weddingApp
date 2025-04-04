@@ -165,7 +165,7 @@ const CoupleRegisterPage: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.leftSection}>
         {isLoading ? (
-          <div className={styles.successMessage}><Spinner /> <p>Oczekuję na weryfikację...</p></div>
+          <div className={styles.successMessage}><Spinner /> <p>Oczekuję na potwierdzenie konta...</p> <p>Wiadomość została wysłana na adres email.</p></div>
         ) : isSuccess ? (
           <div className={styles.successMessage}>
             <SuccessIcon style={{ width: 100, height: 100 }} />
