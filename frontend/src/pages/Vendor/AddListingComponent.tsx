@@ -25,6 +25,7 @@ import DropdownFilter from '../../components/DropdownFilter';
 import PriceFilter from '../../components/PriceFilter';
 import Spinner from '../../components/Spinner';
 import { ReactComponent as SuccessIcon } from '../../assets/Success.svg';
+import CalendarQuestionModal from '../../components/CalendarQuestionModal';
 
 interface FilterOption {
   filterOptionId: number;
@@ -43,6 +44,7 @@ const AddListing: React.FC = () => {
   const [longDescription, setLongDescription] = useState('');
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const [selectedCategoryName, setSelectedCategoryName] = useState<string>(''); // Dodano stan dla nazwy kategorii
   const [filters, setFilters] = useState<any[]>([]);
   const [localFilters, setLocalFilters] = useState<{ [key: string]: any }>({});
   const [priceMin, setPriceMin] = useState<string | null>(null);
@@ -59,7 +61,7 @@ const AddListing: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [city, setCity] = useState('');
-  const [isCheckedLocation, setIsCheckedLocation] = useState(false);
+  const [isCheckedLocation, setIsCheckedLocation] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -77,6 +79,9 @@ const AddListing: React.FC = () => {
 
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+  const [showCalendarModal, setShowCalendarModal] = useState(false);
+  const [newListingId, setNewListingId] = useState<number | null>(null);
 
   const dispatch = useDispatch();
 
@@ -104,6 +109,7 @@ const AddListing: React.FC = () => {
     const selectedCategory = categories.find(category => category.name === option);
     if (selectedCategory) {
       setSelectedCategoryId(selectedCategory.id);
+      setSelectedCategoryName(option); // Zapisz nazwę wybranej kategorii do stanu
       try {
         const response = await fetch(`http://localhost:5000/api/filters/${selectedCategory.id}`);
         const data = await response.json();
@@ -113,6 +119,7 @@ const AddListing: React.FC = () => {
       }
     }
   };
+
   const handleCheckboxChange = (filterCategoryId: number, optionId: number) => {
     setLocalFilters((prevFilters: any) => ({
       ...prevFilters,
@@ -160,7 +167,7 @@ const AddListing: React.FC = () => {
       }
 
       setImages((prevImages) => [...prevImages, ...validFiles]);
-      setErrorImage(null); // Clear error if successful
+      setErrorImage(null);
     }
   };
 
@@ -192,12 +199,12 @@ const AddListing: React.FC = () => {
     images.forEach((image) => {
       formData.append('images', image);
     });
-  
+
     try {
       const response = await axios.post('http://localhost:5000/api/listings/upload-images', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      return response.data.imagePaths; 
+      return response.data.imagePaths;
     } catch (error) {
       console.error('Błąd podczas przesyłania zdjęć:', error);
       return [];
@@ -207,15 +214,15 @@ const AddListing: React.FC = () => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
 
-    // Sprawdzenie czy wszystkie znaki są literami
-    const lettersOnly = /^[a-zA-Z\s]*$/;
-    if (!lettersOnly.test(input)) {
-      return; 
+    // Sprawdzenie, czy wszystkie znaki są dozwolone (litery, cyfry, polskie znaki, spacje)
+    const allowedChars = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s\-']*$/;
+    if (!allowedChars.test(input)) {
+      return; // Ignoruj niedozwolone znaki
     }
 
-    // Sprawdzenie minimalnej długości
+    // Walidacja długości tytułu
     if (input.length > 0 && input.length < 4) {
-      setTitleErrorMessage('Tytuł musi mieć więcej niż 4 znaki.');
+      setTitleErrorMessage('Tytuł musi mieć co najmniej 4 znaki.');
       setIsTitleValid(false);
     } else {
       setTitleErrorMessage('');
@@ -236,20 +243,23 @@ const AddListing: React.FC = () => {
   };
 
   const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let input = e.target.value;
+    const input = e.target.value;
 
-    // Sprawdzenie, czy wszystkie znaki są literami lub spacją
-    const lettersOnly = /^[a-zA-Z\s]*$/;
-    if (!lettersOnly.test(input)) {
-      return; // Nie dodawaj znaku, jeśli nie jest literą ani spacją
+    // Sprawdzenie, czy wszystkie znaki są dozwolone (litery, polskie znaki, spacje, myślniki)
+    const allowedChars = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\-']*$/;
+    if (!allowedChars.test(input)) {
+      return; // Ignoruj niedozwolone znaki
     }
 
-    // Ustawienie pierwszej litery na wielką, reszty na małe
-    input = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
-
     // Walidacja długości nazwy miasta
-    if (input.length > 0 && input.length < 3) {
-      setCityErrorMessage('Nazwa miasta musi mieć więcej niż 2 znaki.');
+    if (input.trim().length === 0) {
+      setCityErrorMessage('Nazwa miasta nie może być pusta.');
+      setIsCityValid(false);
+    } else if (input.trim().length < 3) {
+      setCityErrorMessage('Nazwa miasta musi mieć co najmniej 3 znaki.');
+      setIsCityValid(false);
+    } else if (input.length > 50) {
+      setCityErrorMessage('Nazwa miasta nie może przekraczać 50 znaków.');
       setIsCityValid(false);
     } else {
       setCityErrorMessage('');
@@ -279,27 +289,33 @@ const AddListing: React.FC = () => {
       return false;
     }
   };
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
+
+    // Sprawdzenie, czy wszystkie znaki to cyfry
     const numbersOnly = /^[0-9]*$/;
-  
-    // Sprawdzenie, czy wszystkie znaki to cyfry i ograniczenie długości
-    if (numbersOnly.test(input) && input.length <= 9) {
-      setPhone(input);
+    if (!numbersOnly.test(input)) {
+      return; // Ignoruj niedozwolone znaki
+    }
+
+    // Walidacja długości numeru telefonu
+    if (input.length !== 9) {
+      setPhoneErrorMessage('Numer telefonu musi mieć dokładnie 9 cyfr.');
+      setIsPhoneValid(false);
+    } else {
       setPhoneErrorMessage('');
       setIsPhoneValid(true);
-    } else {
-      setPhoneErrorMessage('Numer telefonu może zawierać tylko cyfry i musi mieć dokładnie 9 znaków.');
-      setIsPhoneValid(false);
     }
+
+    setPhone(input);
   };
-  
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
+
+    // Walidacja formatu adresu e-mail
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-    setEmail(input);
-  
     if (!emailPattern.test(input)) {
       setEmailErrorMessage('Wprowadź poprawny adres e-mail.');
       setIsEmailValid(false);
@@ -307,7 +323,10 @@ const AddListing: React.FC = () => {
       setEmailErrorMessage('');
       setIsEmailValid(true);
     }
+
+    setEmail(input);
   };
+
   const handleClick = async () => {
     let isFormValid = true;
 
@@ -401,7 +420,8 @@ const AddListing: React.FC = () => {
   
       const responseData = await response.json();
       console.log("Odpowiedź z serwera:", responseData);
-      setIsSuccess(true);
+      setNewListingId(responseData.listingId);
+      setShowCalendarModal(true);
     } catch (error) {
       console.error("Błąd podczas wysyłania danych:", error);
       alert("Wystąpił błąd podczas dodawania ogłoszenia.");
@@ -410,13 +430,14 @@ const AddListing: React.FC = () => {
     }
   };
   
-
   const handleVideoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVideoInput(e.target.value);
   };
+
   const handleAnulujChange = () => {
     dispatch(setActiveComponent({ component: 'offers' }));
   };
+
   const handleAddVideo = () => {
     // Maksymalna liczba linków do filmów
     if (videos.length >= 12) {
@@ -459,7 +480,6 @@ const AddListing: React.FC = () => {
     }
   }, [errorMessage]);
 
-
   const createListingData = (uploadedImagePaths: string[]) => {
     return {
       vendorId: Number(vendorId),
@@ -471,33 +491,27 @@ const AddListing: React.FC = () => {
       priceMax: Number(priceMax),
       rangeInKm: Number(maxDistance),
       offersNationwideService: isCheckedLocation,
-      city: city, 
-      
-   
+      city: city,
       media: [
-        ...uploadedImagePaths.map((imagePath) => ({
+        ...uploadedImagePaths.map((imagePath, index) => ({
           mediaType: 'image',
-          mediaUrl: imagePath 
+          mediaUrl: imagePath,
+          order: index,
         })),
-        ...videos.map((video) => ({
+        ...videos.map((video, index) => ({
           mediaType: 'video',
-          mediaUrl: video.fullUrl 
-        }))
+          mediaUrl: video.fullUrl,
+          order: uploadedImagePaths.length + index,
+        })),
       ],
-      
-      
       filterOptions: Object.entries(localFilters || {}).flatMap(([filterCategoryId, selectedOptions]) => {
-        
         if (typeof selectedOptions === 'object') {
           return Object.keys(selectedOptions)
             .filter((optionId) => selectedOptions[optionId])
             .map((optionId) => parseInt(optionId));
         }
-        
         return [parseInt(selectedOptions)];
       }),
-  
-      // Linki
       links: {
         websiteUrl: linkPageWWW,
         facebookUrl: linkFacebook,
@@ -508,8 +522,6 @@ const AddListing: React.FC = () => {
         soundcloudUrl: linkSoundCloud,
         pinterestUrl: linkPinterest,
       },
-    
-
       contactPhone: phone,
       email: email,
     };
@@ -524,6 +536,23 @@ const AddListing: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [isSuccess]);
+ 
+  const handleCalendarYes = () => {
+    if (newListingId) {
+      dispatch(setActiveComponent({ 
+        component: 'calendar', 
+        viewSidebar: 'details',
+        selectedListingId: newListingId 
+      }));
+    }
+    setShowCalendarModal(false);
+  };
+
+  const handleCalendarNo = () => {
+    dispatch(setActiveComponent({ component: 'offers' }));
+    setShowCalendarModal(false);
+  };
+ 
   if (isLoading) {
     return (
       <div className={styles.successMessage}>
@@ -549,6 +578,7 @@ const AddListing: React.FC = () => {
           placeholder='Wybierz kategorię'
           options={categories.map(category => category.name)}
           onSelect={handleCategorySelect}
+          value={selectedCategoryName} // Ustawiono wartość dropdownu na nazwę wybranej kategorii
         />
       </div>
       {selectedCategoryId && (
@@ -781,6 +811,12 @@ const AddListing: React.FC = () => {
       </div>
       </>
       )}
+      <CalendarQuestionModal
+        isOpen={showCalendarModal}
+        onClose={() => setShowCalendarModal(false)}
+        onYes={handleCalendarYes}
+        onNo={handleCalendarNo}
+      />
     </div>
   );
 };

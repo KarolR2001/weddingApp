@@ -38,7 +38,8 @@ interface City {
 
 // Wczytaj dane miast z pliku cities.json
 const cities: City[] = JSON.parse(fs.readFileSync(path.join(__dirname, './cities.json'), 'utf-8'));
-
+console.log('Liczba miast w cities:', cities.length);
+const NEARBY_RADIUS_KM = 25;
 
 export const getListingsByCategory: RequestHandler = async (req, res, next) => {
   const { categoryId } = req.params;
@@ -48,8 +49,8 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
     console.log('Category ID:', categoryId);
     console.log('Opcja dojazdu:', selectedTravelOption);
     console.log('Wybrane miasto:', selectedCity);
-    
-    let whereConditions: any = { categoryId, isSuspended: false  };
+
+    let whereConditions: any = { categoryId, isSuspended: false };
     let order: any[] = []; // Tutaj przechowujemy warunki sortowania
 
     // Domyślne sortowanie
@@ -67,19 +68,83 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
       order = [['priceMax', 'DESC']];
     }
 
-    // Obsługa opcji "Tylko najbliższa okolica"
-    const selectedCityData = cities.find(city => city.placeName === selectedCity);
+    // Sprawdzanie wybranego miasta
+    const selectedCityData = cities.find(city => city.placeName.toLowerCase().trim() === selectedCity.toLowerCase().trim());
     if (!selectedCityData) {
       res.status(400).json({ error: 'Miasto nie zostało znalezione.' });
       return;
     }
 
+    // Obsługa opcji "Tylko najbliższa okolica"
     if (selectedTravelOption === 'Tylko najbliższa okolica') {
-      whereConditions.city = selectedCity;
+      const listings = await VendorListing.findAll({
+        where: { categoryId, isSuspended: false },
+        attributes: ['listingId', 'city', 'rangeInKm', 'offersNationwideService'],
+      });
+
+      const nearbyListings = listings
+        .map(listing => {
+          if (!listing.city) {
+            console.log(`Oferta ${listing.listingId} nie ma miasta`);
+            return null;
+          }
+
+          const offerCityData = cities.find(city => city.placeName.toLowerCase().trim() === listing.city.toLowerCase().trim());
+          if (!offerCityData) {
+            console.log(`Nie znaleziono miasta dla oferty ${listing.listingId}: ${listing.city}`);
+            return null;
+          }
+
+          // Oblicz odległość dla wszystkich ofert (nawet lokalnych, dla sortowania)
+          const distanceInMeters = haversine(
+            { lat: selectedCityData.latitude, lon: selectedCityData.longitude },
+            { lat: offerCityData.latitude, lon: offerCityData.longitude }
+          );
+          const distanceInKm = distanceInMeters / 1000;
+
+          // Zawsze uwzględniamy oferty z wybranej miejscowości
+          if (listing.city.toLowerCase().trim() === selectedCity.toLowerCase().trim()) {
+            console.log(`Oferta ${listing.listingId} jest z wybranej miejscowości: ${selectedCity}, odległość=${distanceInKm.toFixed(2)} km`);
+            return { listingId: listing.listingId, distance: distanceInKm };
+          }
+
+          // Uwzględnij oferty w zasięgu NEARBY_RADIUS_KM, jeśli offersNationwideService jest true
+          if (listing.offersNationwideService && distanceInKm <= NEARBY_RADIUS_KM) {
+            console.log(`Oferta ${listing.listingId} (nationwide) w zasięgu ${NEARBY_RADIUS_KM} km: odległość=${distanceInKm.toFixed(2)} km`);
+            return { listingId: listing.listingId, distance: distanceInKm };
+          }
+
+          // Uwzględnij oferty w zasięgu rangeInKm, jeśli offersNationwideService jest false
+          if (!listing.offersNationwideService && typeof listing.rangeInKm === 'number' && distanceInKm <= listing.rangeInKm) {
+            console.log(`Oferta ${listing.listingId}: odległość=${distanceInKm.toFixed(2)} km, rangeInKm=${listing.rangeInKm}`);
+            return { listingId: listing.listingId, distance: distanceInKm };
+          }
+          return null;
+        })
+        .filter(listing => listing !== null);
+
+      if (nearbyListings.length === 0) {
+        res.status(200).json([]);
+        return;
+      }
+
+      // Sortowanie po odległości, jeśli wybrano "Najbliżej" lub "Najdalej"
+      if (sortOption === 'Najbliżej' || sortOption === 'Najdalej') {
+        nearbyListings.sort((a, b) => {
+          if (sortOption === 'Najbliżej') {
+            return a!.distance - b!.distance; // Rosnąco
+          } else {
+            return b!.distance - a!.distance; // Malejąco
+          }
+        });
+      }
+
+      const listingIds = nearbyListings.map(listing => listing!.listingId);
+      whereConditions.listingId = { [Op.in]: listingIds };
     }
 
-    // Obsługa opcji "Pokaż oferty z dojazdem" + sortowanie według odległości
-    if (selectedTravelOption === 'Pokaż oferty z dojazdem' && (sortOption === 'Najbliżej' || sortOption === 'Najdalej')) {
+    // Obsługa opcji "Pokaż oferty z dojazdem"
+    if (selectedTravelOption === 'Pokaż oferty z dojazdem') {
       const listings = await VendorListing.findAll({
         where: { categoryId, isSuspended: false },
         attributes: ['listingId', 'city', 'rangeInKm', 'offersNationwideService'],
@@ -87,32 +152,62 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
 
       const listingsWithTravel = listings
         .map(listing => {
-          const offerCityData = cities.find(city => city.placeName === listing.city);
-          if (offerCityData) {
-            const distance = haversine(
-              { lat: selectedCityData.latitude, lon: selectedCityData.longitude },
-              { lat: offerCityData.latitude, lon: offerCityData.longitude }
-            );
-            return { listingId: listing.listingId, distance };
+          if (!listing.city) {
+            console.log(`Oferta ${listing.listingId} nie ma miasta`);
+            return null;
+          }
+
+          const offerCityData = cities.find(city => city.placeName.toLowerCase().trim() === listing.city.toLowerCase().trim());
+          if (!offerCityData) {
+            console.log(`Nie znaleziono miasta dla oferty ${listing.listingId}: ${listing.city}`);
+            return null;
+          }
+
+          // Oblicz odległość dla wszystkich ofert (nawet lokalnych i nationwide, dla sortowania)
+          const distanceInMeters = haversine(
+            { lat: selectedCityData.latitude, lon: selectedCityData.longitude },
+            { lat: offerCityData.latitude, lon: offerCityData.longitude }
+          );
+          const distanceInKm = distanceInMeters / 1000;
+
+          // Zawsze uwzględniamy oferty z wybranej miejscowości
+          if (listing.city.toLowerCase().trim() === selectedCity.toLowerCase().trim()) {
+            console.log(`Oferta ${listing.listingId} jest z wybranej miejscowości: ${selectedCity}, odległość=${distanceInKm.toFixed(2)} km`);
+            return { listingId: listing.listingId, distance: distanceInKm };
+          }
+
+          // Oferty z dojazd w każde miejsce
+          if (listing.offersNationwideService) {
+            console.log(`Oferta ${listing.listingId} ma dojazd w każde miejsce, odległość=${distanceInKm.toFixed(2)} km`);
+            return { listingId: listing.listingId, distance: distanceInKm };
+          }
+
+          // Uwzględnij oferty w zasięgu rangeInKm
+          if (typeof listing.rangeInKm === 'number' && distanceInKm <= listing.rangeInKm) {
+            console.log(`Oferta ${listing.listingId}: odległość=${distanceInKm.toFixed(2)} km, rangeInKm=${listing.rangeInKm}`);
+            return { listingId: listing.listingId, distance: distanceInKm };
           }
           return null;
         })
         .filter(listing => listing !== null);
 
-      // Sortowanie po odległości
-      listingsWithTravel.sort((a, b) => {
-        if (sortOption === 'Najbliżej') {
-          return a!.distance - b!.distance; // Rosnąco
-        } else {
-          return b!.distance - a!.distance; // Malejąco
-        }
-      });
-
-      const listingIds = listingsWithTravel.map(listing => listing!.listingId);
-      if (listingIds.length === 0) {
-        res.status(200).json([]); // Brak ofert
+      if (listingsWithTravel.length === 0) {
+        res.status(200).json([]);
         return;
       }
+
+      // Sortowanie po odległości, jeśli wybrano "Najbliżej" lub "Najdalej"
+      if (sortOption === 'Najbliżej' || sortOption === 'Najdalej') {
+        listingsWithTravel.sort((a, b) => {
+          if (sortOption === 'Najbliżej') {
+            return a!.distance - b!.distance; // Rosnąco
+          } else {
+            return b!.distance - a!.distance; // Malejąco
+          }
+        });
+      }
+
+      const listingIds = listingsWithTravel.map(listing => listing!.listingId);
       whereConditions.listingId = { [Op.in]: listingIds };
     }
 
@@ -138,7 +233,7 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
             });
             const listingIds = listingFilters.map(filter => filter.listingId);
             if (listingIds.length === 0) {
-              res.status(200).json([]); // Brak wyników
+              res.status(200).json([]);
               return;
             }
             listingIdsArrays.push(listingIds);
@@ -154,7 +249,7 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
           });
           const listingIds = listingFilters.map(filter => filter.listingId);
           if (listingIds.length === 0) {
-            res.status(200).json([]); // Brak wyników
+            res.status(200).json([]);
             return;
           }
           listingIdsArrays.push(listingIds);
@@ -162,8 +257,8 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
 
         // Obsługa sliderów
         if (filterData.minValue !== undefined || filterData.maxValue !== undefined) {
-          const minValue = filterData.minValue === "" ? undefined : filterData.minValue;
-          const maxValue = filterData.maxValue === "" ? undefined : filterData.maxValue;
+          const minValue = filterData.minValue === '' ? undefined : filterData.minValue;
+          const maxValue = filterData.maxValue === '' ? undefined : filterData.maxValue;
           if (minValue !== undefined || maxValue !== undefined) {
             whereConditions = {
               ...whereConditions,
@@ -183,7 +278,7 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
           listingIdsSet = new Set([...listingIdsSet].filter(id => currentSet.has(id))); // Przecięcie wyników
         }
         if (listingIdsSet.size === 0) {
-          res.status(200).json([]); // Brak wyników po przecięciu
+          res.status(200).json([]);
           return;
         }
         whereConditions.listingId = { [Op.in]: Array.from(listingIdsSet) };
@@ -206,6 +301,7 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
       order, // Zastosowanie sortowania
     });
     console.log('Wszystkie ogłoszenia w kategorii:', listings.map(listing => listing.listingId));
+
     // Podzielenie wyników na strony po określonej liczbie ofert
     const totalListings = listings.length;
     const totalPages = Math.ceil(totalListings / limit);
@@ -217,11 +313,12 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
     }
 
     if (listings.length === 0) {
-      res.status(200).json([]); // Brak wyników
+      res.status(200).json([]);
       return;
     }
-  // Pobierz ID ogłoszeń widocznych na danej stronie
-  const paginatedListingIds = paginatedListings.map(listing => listing.listingId);
+
+    // Pobierz ID ogłoszeń widocznych na danej stronie
+    const paginatedListingIds = paginatedListings.map(listing => listing.listingId);
 
     // Pobierz istniejące wiersze statystyk
     const existingStats = await ListingStat.findAll({
@@ -230,9 +327,11 @@ export const getListingsByCategory: RequestHandler = async (req, res, next) => {
     });
     const existingStatIds = existingStats.map(stat => stat.listingId);
     console.log('Existing Stat IDs:', existingStatIds);
+
     // Identyfikacja brakujących wierszy
     const missingStatIds = paginatedListingIds.filter(id => !existingStatIds.includes(id));
     console.log('Missing Stat IDs (to create):', missingStatIds);
+
     // Dodaj nowe wiersze dla brakujących statystyk
     if (missingStatIds.length > 0) {
       const newStats = missingStatIds.map(id => ({
@@ -288,7 +387,7 @@ export const getListingById = async (req: Request, res: Response, next: NextFunc
         {
           model: Media,
           as: 'media',
-          attributes: ['mediaId', 'mediaType', 'mediaUrl'],
+          attributes: ['mediaId', 'mediaType', 'mediaUrl', 'order', 'isMain'], 
         },
         {
           model: ListingFilter,
@@ -311,24 +410,24 @@ export const getListingById = async (req: Request, res: Response, next: NextFunc
         {
           model: Calendar,
           as: 'calendarEntries',
-          attributes: ['calendarId', 'date', 'availabilityStatus']
+          attributes: ['calendarId', 'date', 'availabilityStatus'],
         },
         {
           model: Review,
           as: 'reviews',
           attributes: [
-            'reviewId', 
-            'ratingQuality', 
-            'ratingCommunication', 
-            'ratingCreativity', 
-            'ratingServiceAgreement', 
-            'ratingAesthetics', 
-            'reviewText', 
-            'weddingDate', 
+            'reviewId',
+            'ratingQuality',
+            'ratingCommunication',
+            'ratingCreativity',
+            'ratingServiceAgreement',
+            'ratingAesthetics',
+            'reviewText',
+            'weddingDate',
             'location',
-            'reviewerName', 
-            'reviewerPhone', 
-            'created_at'
+            'reviewerName',
+            'reviewerPhone',
+            'created_at',
           ],
           include: [
             {
@@ -341,29 +440,29 @@ export const getListingById = async (req: Request, res: Response, next: NextFunc
       ],
     });
 
-
     if (!listing) {
       res.status(404).json({ message: 'Oferta o podanym ID nie istnieje.' });
       return;
     }
-   // Aktualizacja kliknięć w statystykach
-   const [stat] = await ListingStat.findOrCreate({
-    where: { listingId, period: 'daily' }, // Zakładamy, że statystyki mają być codzienne
-    defaults: {
-      listingId,
-      viewsCount: 0,
-      clicksCount: 0,
-      inquiriesCount: 0,
-      avgBrowsingTime: 0,
-      period: 'daily',
-    },
-  });
 
-  // Zwiększenie liczby kliknięć
-  stat.clicksCount = (stat.clicksCount || 0) + 1;
-  await stat.save();
+    // Aktualizacja kliknięć w statystykach
+    const [stat] = await ListingStat.findOrCreate({
+      where: { listingId, period: 'daily' },
+      defaults: {
+        listingId,
+        viewsCount: 0,
+        clicksCount: 0,
+        inquiriesCount: 0,
+        avgBrowsingTime: 0,
+        period: 'daily',
+      },
+    });
 
-  console.log(`Zwiększono clicksCount dla ogłoszenia o ID ${listingId}:`, stat.clicksCount);
+    // Zwiększenie liczby kliknięć
+    stat.clicksCount = (stat.clicksCount || 0) + 1;
+    await stat.save();
+
+    console.log(`Zwiększono clicksCount dla ogłoszenia o ID ${listingId}:`, stat.clicksCount);
 
     res.status(200).json(listing);
   } catch (error) {
@@ -371,9 +470,6 @@ export const getListingById = async (req: Request, res: Response, next: NextFunc
     next(error);
   }
 };
-
-
-
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -423,76 +519,81 @@ export const deleteImages = async (req: Request, res: Response) => {
 
 
 export const addListing = async (req: Request, res: Response, next: NextFunction) => {
-  const { 
-    vendorId, 
-    categoryId, 
-    titleOffer, 
-    shortDescription, 
-    longDescription, 
-    priceMin, 
-    priceMax, 
-    rangeInKm, 
-    offersNationwideService, 
-    contactPhone, 
-    email, 
-    city, 
-    filterOptions, 
-    media, 
+  const {
+    vendorId,
+    categoryId,
+    titleOffer,
+    shortDescription,
+    longDescription,
+    priceMin,
+    priceMax,
+    rangeInKm,
+    offersNationwideService,
+    contactPhone,
+    email,
+    city,
+    filterOptions,
+    media,
     links,
-    isSuspended 
+    isSuspended,
   } = req.body;
 
   const transaction = await sequelize.transaction();
   try {
     // Tworzenie nowego ogłoszenia
-    const listing = await VendorListing.create({
-      vendorId,
-      categoryId,
-      title: titleOffer,
-      shortDescription,
-      longDescription,
-      priceMin: priceMin ? Number(priceMin) : undefined,
-      priceMax: priceMax ? Number(priceMax) : undefined,
-      rangeInKm,
-      offersNationwideService: Boolean(offersNationwideService),
-      contactPhone,
-      email,
-      city: city,
-      websiteUrl: links?.websiteUrl,
-      facebookUrl: links?.facebookUrl,
-      instagramUrl: links?.instagramUrl,
-      youtubeUrl: links?.youtubeUrl,
-      tiktokUrl: links?.tiktokUrl,
-      spotifyUrl: links?.spotifyUrl,
-      soundcloudUrl: links?.soundcloudUrl,
-      pinterestUrl: links?.pinterestUrl,
-      isSuspended: Boolean(isSuspended) || false,
-    }, { transaction });
+    const listing = await VendorListing.create(
+      {
+        vendorId,
+        categoryId,
+        title: titleOffer,
+        shortDescription,
+        longDescription,
+        priceMin: priceMin ? Number(priceMin) : undefined,
+        priceMax: priceMax ? Number(priceMax) : undefined,
+        rangeInKm,
+        offersNationwideService: Boolean(offersNationwideService),
+        contactPhone,
+        email,
+        city: city,
+        websiteUrl: links?.websiteUrl,
+        facebookUrl: links?.facebookUrl,
+        instagramUrl: links?.instagramUrl,
+        youtubeUrl: links?.youtubeUrl,
+        tiktokUrl: links?.tiktokUrl,
+        spotifyUrl: links?.spotifyUrl,
+        soundcloudUrl: links?.soundcloudUrl,
+        pinterestUrl: links?.pinterestUrl,
+        isSuspended: Boolean(isSuspended) || false,
+      },
+      { transaction }
+    );
 
-    // Dodanie mediów do nowego ogłoszenia
-    if (media && media.length > 0) {
-      const mediaEntries = media.map((mediaItem: { mediaType: 'image' | 'video'; mediaUrl: string }) => {
+    // Dodanie mediów do nowego ogłoszenia z kolejnością i isMain
+    if (Array.isArray(media) && media.length > 0) {
+      const mediaEntries = media.map((mediaItem: { mediaType: 'image' | 'video'; mediaUrl: string }, index: number) => {
         if (mediaItem.mediaType !== 'image' && mediaItem.mediaType !== 'video') {
           throw new Error("Invalid mediaType: must be 'image' or 'video'");
         }
 
         let mediaUrl = mediaItem.mediaUrl;
-        
-        // Przetwarzanie linków wideo: tylko końcówka linku
+
+        // Przetwarzanie linków wideo: zapisujemy tylko videoId
         if (mediaItem.mediaType === 'video') {
           const urlParts = mediaUrl.split('/');
-          mediaUrl = urlParts[urlParts.length - 1]; // Zapisz tylko końcówkę po ostatnim "/"
+          mediaUrl = urlParts[urlParts.length - 1]; // Zapisujemy tylko końcówkę (videoId)
         }
 
-        // Przetwarzanie zdjęć: dodanie pełnej ścieżki do nazwy pliku
+        // Przetwarzanie zdjęć: pełna ścieżka
         if (mediaItem.mediaType === 'image') {
-          mediaUrl = mediaItem.mediaUrl;
+          mediaUrl = mediaItem.mediaUrl; // Pełna ścieżka dla zdjęć
         }
 
         return {
           listingId: listing.listingId,
           mediaType: mediaItem.mediaType,
-          mediaUrl: mediaUrl
+          mediaUrl: mediaUrl,
+          order: index, // Ustawienie kolejności
+          isMain: index === 0 && mediaItem.mediaType === 'image', // Pierwsze zdjęcie jest główne
         };
       });
 
@@ -500,20 +601,19 @@ export const addListing = async (req: Request, res: Response, next: NextFunction
     }
 
     // Dodanie filtrów do ogłoszenia
-    if (filterOptions && filterOptions.length > 0) {
+    if (Array.isArray(filterOptions) && filterOptions.length > 0) {
       const filterEntries = filterOptions.map((optionId: number) => ({
         listingId: listing.listingId,
-        filterOptionId: optionId
+        filterOptionId: optionId,
       }));
       await ListingFilter.bulkCreate(filterEntries, { transaction });
     }
 
     // Zatwierdzenie transakcji
     await transaction.commit();
-    
+
     res.status(201).json({ message: 'Ogłoszenie zostało dodane.', listingId: listing.listingId });
   } catch (error) {
-    // W przypadku błędu cofnięcie transakcji
     await transaction.rollback();
     console.error('Błąd dodawania ogłoszenia:', error);
     next(error);
@@ -558,41 +658,38 @@ export const deleteListing = async (req: Request, res: Response, next: NextFunct
   }
 };
 
+export const getListingsByUserId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const userId = parseInt(req.params.userId, 10);
 
-  
+  if (isNaN(userId)) {
+    res.status(400).json({ message: 'Invalid user ID.' });
+    return;
+  }
 
+  try {
+    const listings = await VendorListing.findAll({
+      where: { vendorId: userId },
+      include: [
+        {
+          model: Media,
+          as: 'media',
+          attributes: ['mediaId', 'mediaType', 'mediaUrl', 'order', 'isMain'],
+        },
+      ],
+      order: [['created_at', 'DESC']], // Sortowanie od najnowszych
+    });
 
-  export const getListingsByUserId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const userId = parseInt(req.params.userId, 10);
-  
-    if (isNaN(userId)) {
-      res.status(400).json({ message: 'Invalid user ID.' });
+    if (listings.length === 0) {
+      res.status(404).json({ message: 'Nie znaleziono ogłoszeń dla podanego użytkownika.' });
       return;
     }
-  
-    try {
-      const listings = await VendorListing.findAll({
-        where: { vendorId: userId }, 
-        include: [
-          {
-            model: Media,
-            as: 'media',
-            attributes: ['mediaId', 'mediaType', 'mediaUrl'],
-          },
-        ],
-      });
-  
-      if (listings.length === 0) {
-        res.status(404).json({ message: 'Nie znaleziono ogłoszeń dla podanego użytkownika.' });
-        return;
-      }
-  
-      res.status(200).json(listings);
-    } catch (error) {
-      console.error('Błąd pobierania ogłoszeń:', error);
-      next(error);
-    }
-  };
+
+    res.status(200).json(listings);
+  } catch (error) {
+    console.error('Błąd pobierania ogłoszeń:', error);
+    next(error);
+  }
+};
 
 
   
@@ -614,52 +711,61 @@ export const deleteListing = async (req: Request, res: Response, next: NextFunct
       });
       console.log("Statystyki znalezione:", listingStats);
   
-      const firstImage = await Media.findOne({
-        where: { listingId, mediaType: 'image' },
+      const mainImage = await Media.findOne({
+        where: { listingId, mediaType: 'image', isMain: true },
         attributes: ['mediaId', 'mediaUrl'],
-        order: [['created_at', 'ASC']],
       });
-      console.log("Pierwsze zdjęcie znalezione:", firstImage);
-
-     // Pobranie ogłoszenia z dodatkowymi informacjami
-    const listing = await VendorListing.findOne({
-      where: { listingId },
-      attributes: ['title', 'city', 'isSuspended'],
-      include: [
-        {
-          model: ServiceCategory,
-          as: 'category',
-          attributes: ['categoryName'],
-        },
-      ],
-    });
-
-    if (!listing) {
-      res.status(404).json({ message: 'Listing not found.' });
-      return;
+  
+      const fallbackImage = !mainImage
+        ? await Media.findOne({
+            where: { listingId, mediaType: 'image' },
+            attributes: ['mediaId', 'mediaUrl'],
+            order: [['created_at', 'ASC']],
+          })
+        : null;
+  
+      const selectedImage = mainImage || fallbackImage;
+      console.log("Wybrane zdjęcie:", selectedImage);
+  
+      // Pobranie ogłoszenia z dodatkowymi informacjami
+      const listing = await VendorListing.findOne({
+        where: { listingId },
+        attributes: ['title', 'city', 'isSuspended'],
+        include: [
+          {
+            model: ServiceCategory,
+            as: 'category',
+            attributes: ['categoryName'],
+          },
+        ],
+      });
+  
+      if (!listing) {
+        res.status(404).json({ message: 'Listing not found.' });
+        return;
+      }
+  
+      const responseData: {
+        stats?: ListingStat[];
+        firstImage?: Media | null;
+        title?: string;
+        city?: string;
+        categoryName?: string;
+        isSuspended?: boolean;
+      } = {
+        stats: listingStats.length > 0 ? listingStats : undefined,
+        firstImage: selectedImage || undefined,
+        title: listing.title,
+        city: listing.city,
+        categoryName: listing.category?.categoryName || undefined,
+        isSuspended: listing.isSuspended,
+      };
+  
+      res.status(200).json(responseData);
+    } catch (error) {
+      next(error);
     }
-
-    const responseData: {
-      stats?: ListingStat[];
-      firstImage?: Media | null;
-      title?: string;
-      city?: string;
-      categoryName?: string;
-      isSuspended?: boolean;
-    } = {
-      stats: listingStats.length > 0 ? listingStats : undefined,
-      firstImage: firstImage || undefined,
-      title: listing.title,
-      city: listing.city,
-      categoryName: listing.category?.categoryName || undefined,
-      isSuspended: listing.isSuspended,
-    };
-
-    res.status(200).json(responseData);
-  } catch (error) {
-    next(error);
-  }
-};
+  };
   
 export const toggleSuspension = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const listingId = parseInt(req.params.listingId, 10);
@@ -701,102 +807,117 @@ export const toggleSuspension = async (req: Request, res: Response, next: NextFu
 };
 
 
-  export const updateListing = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const { listingId, newMedia, mediaToRemove, filters, ...listingData } = req.body;
-  
-    if (!listingId) {
-      res.status(400).json({ message: 'Listing ID is required.' });
+export const updateListing = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const { listingId, newMedia, mediaToRemove, existingMedia, filters, ...listingData } = req.body;
+
+  if (!listingId) {
+    res.status(400).json({ message: 'Listing ID is required.' });
+    return;
+  }
+
+  const transaction = await sequelize.transaction();
+
+  try {
+    const listing = await VendorListing.findByPk(listingId);
+    if (!listing) {
+      res.status(404).json({ message: 'Listing not found.' });
+      await transaction.rollback();
       return;
     }
-  
-    const transaction = await sequelize.transaction();
-  
-    try {
-      // Znajdź i zaktualizuj ofertę
-      const listing = await VendorListing.findByPk(listingId);
-      if (!listing) {
-        res.status(404).json({ message: 'Listing not found.' });
-        await transaction.rollback();
-        return;
-      }
-  
-      await listing.update(listingData, { transaction });
-  
-      // Usuwanie mediów
-      if (Array.isArray(mediaToRemove)) {
-        for (const mediaUrl of mediaToRemove) {
-          if (mediaUrl.includes('youtu.be')) {
-            // Usuń wideo na podstawie końcówki linku
-            const videoId = mediaUrl.split('/').pop(); // Pobierz końcówkę linku
-            await Media.destroy({
-              where: {
-                listingId,
-                mediaUrl: videoId, // Użyj końcówki do porównania
-                mediaType: 'video',
-              },
-              transaction,
-            });
-          } else {
-            // Usuń lokalne zdjęcia
-            const fullPath = path.join(__dirname, '../../uploads/images', path.basename(mediaUrl));
-            if (fs.existsSync(fullPath)) {
-              fs.unlinkSync(fullPath); // Usuń plik z serwera
-            }
-            await Media.destroy({
-              where: {
-                listingId,
-                mediaUrl,
-                mediaType: 'image',
-              },
-              transaction,
-            });
+
+    await listing.update(listingData, { transaction });
+
+    // Usuwanie mediów
+    if (Array.isArray(mediaToRemove)) {
+      for (const mediaUrl of mediaToRemove) {
+        if (mediaUrl.includes('youtu.be')) {
+          const videoId = mediaUrl.split('/').pop();
+          await Media.destroy({
+            where: { listingId, mediaUrl: videoId, mediaType: 'video' },
+            transaction,
+          });
+        } else {
+          const fullPath = path.join(__dirname, '../../uploads/images', path.basename(mediaUrl));
+          if (fs.existsSync(fullPath)) {
+            fs.unlinkSync(fullPath);
           }
+          await Media.destroy({
+            where: { listingId, mediaUrl, mediaType: 'image' },
+            transaction,
+          });
         }
       }
-  
-      // Dodawanie nowych mediów
-      if (Array.isArray(newMedia)) {
-        const newMediaEntries = newMedia.map((media) => {
+    }
+
+    // Dodawanie nowych mediów z unikaniem duplikatów
+    if (Array.isArray(newMedia)) {
+      const existingMediaRecords = await Media.findAll({
+        where: { listingId },
+        attributes: ['mediaUrl', 'mediaType'],
+        transaction,
+      });
+      const existingUrls = new Set(existingMediaRecords.map((m) => m.mediaUrl));
+
+      const newMediaEntries = newMedia
+        .map((media, index) => {
           let mediaUrl = media.mediaUrl;
-  
           if (media.mediaType === 'video' && mediaUrl.includes('youtu.be')) {
-            mediaUrl = mediaUrl.split('/').pop(); // Zapisz tylko końcówkę
+            mediaUrl = mediaUrl.split('/').pop(); // Zapisujemy tylko videoId
           }
-  
           return {
             ...media,
             mediaUrl,
             listingId,
+            order: index,
+            isMain: index === 0 && media.mediaType === 'image',
           };
-        });
-  
+        })
+        .filter((media) => !existingUrls.has(media.mediaUrl)); // Pomijamy duplikaty
+
+      if (newMediaEntries.length > 0) {
         await Media.bulkCreate(newMediaEntries, { transaction });
       }
-  
-      // Aktualizuj filtry
-      if (Array.isArray(filters)) {
-        await ListingFilter.destroy({ where: { listingId }, transaction });
-  
-        const newFilters = filters.map((filterOptionId) => ({
-          listingId,
-          filterOptionId,
-        }));
-        await ListingFilter.bulkCreate(newFilters, { transaction });
-      }
-  
-      await transaction.commit();
-      res.status(200).json({ message: 'Listing updated successfully.' });
-    } catch (error) {
-      await transaction.rollback();
-      console.error('Error updating listing:', error);
-  
-      if (error instanceof Error) {
-        res.status(500).json({ message: 'Internal server error', error: error.message });
-      } else {
-        res.status(500).json({ message: 'Internal server error', error: 'Unknown error' });
+    }
+
+    // Aktualizacja kolejności istniejących mediów (tylko zdjęcia)
+    if (Array.isArray(existingMedia)) {
+      await Media.update(
+        { isMain: false },
+        { where: { listingId, mediaType: 'image' }, transaction }
+      );
+
+      for (const [index, media] of existingMedia.entries()) {
+        await Media.update(
+          {
+            order: index,
+            isMain: index === 0 && media.mediaType === 'image',
+          },
+          {
+            where: { listingId, mediaUrl: media.mediaUrl, mediaType: 'image' },
+            transaction,
+          }
+        );
       }
     }
-  };
+
+    // Aktualizacja filtrów
+    if (Array.isArray(filters)) {
+      await ListingFilter.destroy({ where: { listingId }, transaction });
+      const newFilters = filters.map((filterOptionId) => ({
+        listingId,
+        filterOptionId,
+      }));
+      await ListingFilter.bulkCreate(newFilters, { transaction });
+    }
+
+    await transaction.commit();
+    res.status(200).json({ message: 'Listing updated successfully.' });
+  } catch (error) {
+    await transaction.rollback();
+    console.error('Error updating listing:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
   
   
   export const updateListingActivity = async (req: Request, res: Response): Promise<void> => {
@@ -1012,4 +1133,3 @@ export const toggleSuspension = async (req: Request, res: Response, next: NextFu
       res.status(500).json({ error: "Internal server error" });
     }
   };
-  

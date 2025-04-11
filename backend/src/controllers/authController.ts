@@ -92,7 +92,7 @@ const generateTokenAndUserData = async (user: User, req: Request): Promise<{ tok
   const token = jwt.sign(
     { userId: user.id, userType: user.userType },
     process.env.JWT_SECRET_KEY!,
-    { expiresIn: '12h' }
+    { expiresIn: '30d' }
   );
 
   const userAgent = useragent.parse(req.headers['user-agent'] || '');
@@ -190,7 +190,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     const verificationToken = jwt.sign(
       verificationTokenPayload,
       process.env.JWT_SECRET_KEY!,
-      { expiresIn: '24h' }
+      { expiresIn: '30d' }
     );
 
     // Tworzenie linku weryfikacyjnego
@@ -302,7 +302,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
     const token = jwt.sign(
       { userId: user.id, userType: user.userType },
       jwtSecret,
-      { expiresIn: '12h' }
+      { expiresIn: '30d' }
     );
 
     // Pobranie danych o urządzeniu

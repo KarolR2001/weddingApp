@@ -127,9 +127,8 @@ const EditListing: React.FC = () => {
 
   // Pobranie danych ogłoszenia i kategorii
   useEffect(() => {
-    
     const fetchListingData = async () => {
-        setIsLoading(true);
+      setIsLoading(true);
       try {
         console.log('Fetching listing data...');
   
@@ -148,13 +147,14 @@ const EditListing: React.FC = () => {
           );
           const listingData = listingResponse.data;
   
-          // Ustawienie istniejących zdjęć
+          // Ustawienie istniejących zdjęć posortowanych według pola order
           const existingMedia = listingData.media
             .filter((mediaItem: any) => mediaItem.mediaType === 'image')
+            .sort((a: any, b: any) => a.order - b.order) // Sortowanie według order
             .map((mediaItem: any) => `${SERVER_URL}${mediaItem.mediaUrl}`);
           setImages(existingMedia);
   
-          // Ustawienie wideo
+          // Ustawienie wideo (bez zmian)
           const existingVideos = listingData.media
             .filter((mediaItem: { mediaType: string }) => mediaItem.mediaType === 'video')
             .map((video: { mediaUrl: string }) => {
@@ -172,10 +172,10 @@ const EditListing: React.FC = () => {
                 return null;
               }
             })
-            .filter(Boolean); // Usuwa wartości null
+            .filter(Boolean);
           setVideos(existingVideos);
   
-          // Dopasowanie kategorii
+          // Reszta kodu bez zmian
           const matchingCategory = categoryData.find(
             (category: { id: string; name: string }) =>
               parseInt(category.id, 10) === listingData.categoryId
@@ -184,20 +184,18 @@ const EditListing: React.FC = () => {
             setSelectedCategoryName(matchingCategory.name);
             setSelectedCategoryId(matchingCategory.id);
   
-            // Pobranie filtrów dla wybranej kategorii
             const filtersResponse = await axios.get(
               `${SERVER_URL}/api/filters/${matchingCategory.id}`
             );
             const filtersData = filtersResponse.data;
             setFilters(filtersData);
   
-            // Ustawienie lokalnych filtrów
             const newFilters: { [key: string]: any } = {};
             listingData.listingFilters.forEach((listingFilter: any) => {
               const optionId = listingFilter.filterOption.filterOptionId.toString();
               const category = filtersData.find((filterCategory: any) =>
                 filterCategory.filterOptions.some(
-                  (option: FilterOption) => option.filterOptionId.toString() === optionId
+                  (option: any) => option.filterOptionId.toString() === optionId
                 )
               );
               if (category) {
@@ -208,48 +206,43 @@ const EditListing: React.FC = () => {
                   }
                   newFilters[filterCategoryId][optionId] = true;
                 } else if (category.displayType === 'dropdown') {
-                  newFilters[filterCategoryId] = optionId; // Ustaw tylko wartość dla dropdownu
+                  newFilters[filterCategoryId] = optionId;
                 }
               }
             });
-  
             setLocalFilters(newFilters);
           }
   
-          // Ustawienie wartości cen
           setPriceMin(listingData.priceMin || '');
           setPriceMax(listingData.priceMax || '');
-  
-          // Przypisanie reszty danych
+          console.log('rangeInKm:', listingData.rangeInKm);
           setTitleOffer(listingData.title || '');
           setShortDescription(listingData.shortDescription || '');
           setLongDescription(listingData.longDescription || '');
           setMaxDistance(listingData.rangeInKm || 0);
-            setLinkPageWWW(listingData.websiteUrl || '');
-            setLinkFacebook(listingData.facebookUrl || '');
-            setLinkYouTube(listingData.youtubeUrl || '');
-            setLinkInstagram(listingData.instagramUrl || '');
-            setLinkTikTok(listingData.tiktokUrl || '');
-            setLinkSpotify(listingData.spotifyUrl || '');
-            setLinkSoundCloud(listingData.soundcloudUrl || '');
-            setLinkPinterest(listingData.pinterestUrl || '');
-            setPhone(listingData.contactPhone || '');
-            setEmail(listingData.email || '');
-            setCity(listingData.city || '');
-            setIsCheckedLocation(listingData.offersNationwideService || false);
-          
+          setLinkPageWWW(listingData.websiteUrl || '');
+          setLinkFacebook(listingData.facebookUrl || '');
+          setLinkYouTube(listingData.youtubeUrl || '');
+          setLinkInstagram(listingData.instagramUrl || '');
+          setLinkTikTok(listingData.tiktokUrl || '');
+          setLinkSpotify(listingData.spotifyUrl || '');
+          setLinkSoundCloud(listingData.soundcloudUrl || '');
+          setLinkPinterest(listingData.pinterestUrl || '');
+          setPhone(listingData.contactPhone || '');
+          setEmail(listingData.email || '');
+          setCity(listingData.city || '');
+          setIsCheckedLocation(listingData.offersNationwideService || false);
         }
       } catch (error) {
         console.error('Error fetching listing data:', error);
       } finally {
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     };
   
     fetchListingData();
   }, [selectedListingId]);
   
-
   // Dodawanie nowych zdjęć
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -300,6 +293,7 @@ const EditListing: React.FC = () => {
       return updatedImages;
     });
   };
+
   const uploadImages = async (): Promise<string[]> => {
     const formData = new FormData();
     newFiles.forEach((file) => {
@@ -316,13 +310,14 @@ const EditListing: React.FC = () => {
       return [];
     }
   };
+
   // Zmiana kolejności zdjęć
   const handleDragStart = (index: number) => {
     setDraggedImageIndex(index);
     console.log(`Dragging image at index: ${index}`);
- };
+  };
 
- const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault();
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault();
 
   const handleDrop = (index: number) => {
     if (draggedImageIndex === null) return;
@@ -335,51 +330,51 @@ const EditListing: React.FC = () => {
     setDraggedImageIndex(null);
 
     console.log('Images after reordering:', reorderedImages);
- };
- const handleVideoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  };
+
+  const handleVideoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVideoInput(e.target.value);
-    };
+  };
 
-    const handleAddVideo = (videoUrl?: string) => {
-        if (videos.length >= 12) {
-          setErrorMessage('Możesz dodać maksymalnie 12 filmów.');
-          return;
-        }
-    
-        const urlToUse = videoUrl || videoInput;
-        const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/;
-        const match = urlToUse.match(youtubeRegex);
-    
-        if (match && match[1]) {
-          const videoId = match[1];
-          const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    
-          setVideos((prevVideos) => [
-            ...prevVideos,
-            { fullUrl: urlToUse, thumbnailUrl },
-          ]);
-    
-          if (!videoUrl) {
-            setVideoInput('');
-          }
-          setErrorMessage('');
-        } else {
-          setErrorMessage('Niepoprawny link. Upewnij się, że link pochodzi z YouTube.');
-        }
-      };
-      
+  const handleAddVideo = (videoUrl?: string) => {
+    if (videos.length >= 12) {
+      setErrorMessage('Możesz dodać maksymalnie 12 filmów.');
+      return;
+    }
+  
+    const urlToUse = videoUrl || videoInput;
+    const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^"&?/\s]{11})/;
+    const match = urlToUse.match(youtubeRegex);
+  
+    if (match && match[1]) {
+      const videoId = match[1];
+      const fullUrl = `https://youtu.be/${videoId}`;
+      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  
+      setVideos((prevVideos) => [
+        ...prevVideos,
+        { fullUrl, thumbnailUrl },
+      ]);
+  
+      if (!videoUrl) {
+        setVideoInput('');
+      }
+      setErrorMessage('');
+    } else {
+      setErrorMessage('Niepoprawny link. Upewnij się, że link pochodzi z YouTube.');
+    }
+  };
+  
+  const handleRemoveVideo = (index: number) => {
+    setVideos((prevVideos) => {
+      const removedVideo = prevVideos[index];
+      // Przesyłamy pełny URL do usunięcia, backend sam wyodrębni videoId
+      setVideosToRemove((prev) => [...prev, removedVideo.fullUrl]);
+      return prevVideos.filter((_, i) => i !== index);
+    });
+  };
 
-      const handleRemoveVideo = (index: number) => {
-        setVideos((prevVideos) => {
-          const removedVideo = prevVideos[index];
-          if (removedVideo.fullUrl.startsWith('https://youtu.be/')) {
-            setVideosToRemove((prev) => [...prev, removedVideo.fullUrl]);
-          }
-          return prevVideos.filter((_, i) => i !== index);
-        });
-      };
-
- const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     // Sprawdzenie minimalnej długości (4 znaki)
     if (input.length > 0 && input.length < 4) {
@@ -397,32 +392,17 @@ const EditListing: React.FC = () => {
     setTitleOffer(input);
   };
     
-    const handleShortDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleShortDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setShortDescription(e.target.value);
         setIsShortDescriptionValid(e.target.value.trim() !== ''); // Sprawdzenie, czy pole nie jest puste
-    };
+  };
     
-    const handleLongDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleLongDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setLongDescription(e.target.value);
         setIsLongDescriptionValid(e.target.value.trim() !== ''); // Sprawdzenie, czy pole nie jest puste
-    };
+  };
 
-     const handleCategorySelect = async (option: string) => {
-        const selectedCategory = categories.find((category) => category.name === option);
-        if (selectedCategory) {
-          setSelectedCategoryId(selectedCategory.id);
-          setSelectedCategoryName(option);
-          try {
-            const response = await fetch(`http://localhost:5000/api/filters/${selectedCategory.id}`);
-            const data = await response.json();
-            setFilters(data);
-          } catch (error) {
-            console.error('Error fetching filters:', error);
-          }
-        }
-      }; 
-
-      const handleCategoryChange = async (option: string) => {
+  const handleCategoryChange = async (option: string) => {
         const selectedCategory = categories.find((category) => category.name === option);
       
         if (selectedCategory) {
@@ -445,10 +425,9 @@ const EditListing: React.FC = () => {
             console.error("Error fetching filters for the selected category:", error);
           }
         }
-      };
+  };
       
-
-      const handleCheckboxChange = (filterCategoryId: number, optionId: number) => {
+  const handleCheckboxChange = (filterCategoryId: number, optionId: number) => {
         setLocalFilters((prevFilters: any) => ({
           ...prevFilters,
           [filterCategoryId]: {
@@ -456,54 +435,67 @@ const EditListing: React.FC = () => {
             [optionId]: !prevFilters[filterCategoryId]?.[optionId],
           },
         }));
-      };
+  };
     
-      const handleDropdownChange = (filterCategoryId: number, selectedOptionId: string) => {
+  const handleDropdownChange = (filterCategoryId: number, selectedOptionId: string) => {
         setLocalFilters((prevFilters: any) => ({
           ...prevFilters,
           [filterCategoryId]: selectedOptionId,
         }));
-      };
+  };
     
-      const handlePriceChange = (min: string, max: string) => {
+  const handlePriceChange = (min: string, max: string) => {
         setPriceMin(min);
         setPriceMax(max);
-      };
-      const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let input = e.target.value;
-    
-        // Sprawdzenie, czy wszystkie znaki są literami lub spacją
-        const lettersOnly = /^[a-zA-Z\s]*$/;
-        if (!lettersOnly.test(input)) {
-          return; // Nie dodawaj znaku, jeśli nie jest literą ani spacją
+  };
+
+  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const input = e.target.value;
+        
+        // Sprawdzenie, czy wszystkie znaki są dozwolone
+        const allowedChars = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\-']*$/;
+        if (!allowedChars.test(input)) {
+          return; // Nie akceptuj niedozwolonych znaków
         }
-    
-        // Ustawienie pierwszej litery na wielką, reszty na małe
-        input = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
-    
-        // Walidacja długości nazwy miasta
-        if (input.length > 0 && input.length < 3) {
-          setCityErrorMessage('Nazwa miasta musi mieć więcej niż 2 znaki.');
+        
+        // Aktualizacja wartości
+        setCity(input);
+        
+        // Walidacja tylko jeśli pole nie jest puste
+        if (input.trim().length === 0) {
+          setCityErrorMessage('');
+          setIsCityValid(false);
+        } else if (input.trim().length < 3) {
+          setCityErrorMessage('Nazwa miasta musi mieć co najmniej 3 znaki.');
+          setIsCityValid(false);
+        } else if (input.length > 50) {
+          setCityErrorMessage('Nazwa miasta nie może przekraczać 50 znaków.');
           setIsCityValid(false);
         } else {
           setCityErrorMessage('');
           setIsCityValid(true);
         }
-    
-        setCity(input);
-    };
+  };
 
-    const handleCheckboxLocationChange = () => {
+  const handleCheckboxLocationChange = () => {
         const newCheckedState = !isCheckedLocation;
         setIsCheckedLocation(newCheckedState);
-        validateDistance(newCheckedState, maxDistance); 
-    };
+        
+        // Jeśli checkbox jest zaznaczony, ustaw maxDistance na 0
+        if (newCheckedState) {
+          setMaxDistance(0);
+        }
+        
+        // Wywołaj walidację z nową wartością checkboxa i aktualną (lub nową) wartością maxDistance
+        validateDistance(newCheckedState, newCheckedState ? 0 : maxDistance);
+  };
 
-    const handleSliderChange = (value: number) => {
+  const handleSliderChange = (value: number) => {
         setMaxDistance(value);
         validateDistance(isCheckedLocation, value);
-    };
-    const validateDistance = (isChecked: boolean, distance: number): boolean => {
+  };
+
+  const validateDistance = (isChecked: boolean, distance: number): boolean => {
         if (isChecked || distance > 0) {
           setDistanceErrorMessage('');
           return true;
@@ -511,8 +503,9 @@ const EditListing: React.FC = () => {
           setDistanceErrorMessage('Wybierz "Cała Polska" lub ustaw odległość na suwaku.');
           return false;
         }
-    };
-    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value;
         const numbersOnly = /^[0-9]*$/;
       
@@ -525,9 +518,9 @@ const EditListing: React.FC = () => {
           setPhoneErrorMessage('Numer telefonu może zawierać tylko cyfry i musi mieć dokładnie 9 znaków.');
           setIsPhoneValid(false);
         }
-    };
+  };
       
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       
@@ -540,12 +533,13 @@ const EditListing: React.FC = () => {
           setEmailErrorMessage('');
           setIsEmailValid(true);
         }
-    };
-    const handleAnulujChange = () => {
-        dispatch(setActiveComponent({ component: 'offers' }));
-    };
+  };
 
-    const validateForm = () => {
+  const handleAnulujChange = () => {
+        dispatch(setActiveComponent({ component: 'offers' }));
+  };
+
+  const validateForm = () => {
         let isValid = true;
       
         // Walidacja zdjęć
@@ -618,7 +612,8 @@ const EditListing: React.FC = () => {
         }
       
         return isValid;
-      };
+  };
+
   // Zapisanie zmian na serwerze
   const handleSaveChanges = async () => {
     const isFormValid = validateForm();
@@ -627,8 +622,9 @@ const EditListing: React.FC = () => {
       console.error('Formularz zawiera błędy. Popraw je przed zapisem.');
       return;
     }
-    setIsLoading(true); // Rozpoczęcie procesu zapisu
-    setIsSuccess(false); // Resetowanie statusu sukcesu   
+    setIsLoading(true);
+    setIsSuccess(false);
+  
     try {
       // Prześlij nowe zdjęcia do serwera
       const uploadedImagePaths = await uploadImages();
@@ -638,14 +634,11 @@ const EditListing: React.FC = () => {
         ...gatherFormData(),
         newMedia: [
           ...uploadedImagePaths.map((path) => ({ mediaType: 'image', mediaUrl: path })),
-          ...videos
-            .filter((video) => !video.fullUrl.startsWith('https://youtu.be/'))
-            .map((video) => ({ mediaType: 'video', mediaUrl: video.fullUrl })),
+          ...gatherFormData().newMedia,
         ],
-        mediaToRemove: [...imagesToRemove, ...videosToRemove],
       };
   
-      console.log('Dane do wysłania:', JSON.stringify(formData, null, 2));
+      //console.log('Dane do wysłania:', JSON.stringify(formData, null, 2));
   
       if (!token) {
         alert('Brak tokena autoryzacyjnego. Użytkownik musi być zalogowany.');
@@ -663,8 +656,8 @@ const EditListing: React.FC = () => {
   
       if (response.status === 200) {
         setIsSuccess(true);
-       
-        
+        setImagesToRemove([]); // Wyczyść listę usuniętych zdjęć
+        setNewFiles([]); // Wyczyść listę nowych plików
       } else {
         console.error('Nieoczekiwany status odpowiedzi:', response.status);
         alert('Wystąpił problem podczas zapisywania danych.');
@@ -672,13 +665,21 @@ const EditListing: React.FC = () => {
     } catch (error) {
       console.error('Błąd podczas zapisu danych:', error);
       alert('Wystąpił błąd podczas zapisywania danych.');
-    }finally {
-        setIsLoading(false); // Zakończenie procesu zapisu
-      }
+    } finally {
+      setIsLoading(false);
+    }
   };
   
   // Funkcja do zbierania danych
   const gatherFormData = () => {
+    // Oddziel istniejące zdjęcia od nowych
+    const existingImages = images
+      .filter((image) => image.startsWith(SERVER_URL)) // Zdjęcia z serwera
+      .map((image) => ({
+        mediaType: 'image',
+        mediaUrl: image.replace(SERVER_URL, ''),
+      }));
+  
     return {
       listingId: selectedListingId,
       categoryId: selectedCategoryId,
@@ -700,11 +701,14 @@ const EditListing: React.FC = () => {
       spotifyUrl: linkSpotify,
       soundcloudUrl: linkSoundCloud,
       pinterestUrl: linkPinterest,
-      media: [
-        ...images.map((image) => ({ mediaType: 'image', mediaUrl: image.replace(SERVER_URL, '') })),
-        ...videos.map((video) => ({ mediaType: 'video', mediaUrl: video.fullUrl })), // Wszystkie filmy
+      existingMedia: existingImages, 
+      newMedia: [
+        ...videos.map((video) => ({
+          mediaType: 'video',
+          mediaUrl: video.fullUrl,
+        })),
       ],
-      // Filtry pozostają bez zmian
+      mediaToRemove: [...imagesToRemove, ...videosToRemove],
       filters: Object.keys(localFilters).flatMap((categoryId) => {
         const filter = localFilters[categoryId];
         if (typeof filter === 'string') {
@@ -715,6 +719,7 @@ const EditListing: React.FC = () => {
       }),
     };
   };
+
   useEffect(() => {
     if (isSuccess) {
       const timer = setTimeout(() => {
@@ -725,6 +730,7 @@ const EditListing: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [isSuccess, dispatch]);
+
   if (isLoading) {
     return (
       <div className={styles.successMessage}>
@@ -960,7 +966,7 @@ const EditListing: React.FC = () => {
             <div className={styles.sliderContener}>
               <p className={styles.uploadLabel}>Wybierz maksymalny obszar wykonywanych usług</p>
               <Checkbox label='Cała Polska' checked={isCheckedLocation} onChange={handleCheckboxLocationChange}/>
-              <Slider min={0} max={400} initialValue={0} onChange={handleSliderChange} disabled={isCheckedLocation}/>
+              <Slider min={0} max={400} initialValue={maxDistance} onChange={handleSliderChange} disabled={isCheckedLocation}/>
               {!isDistanceValid && (
                 <span className={styles.errorMessage}>{distanceErrorMessage}</span>
               )}

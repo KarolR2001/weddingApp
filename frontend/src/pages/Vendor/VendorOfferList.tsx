@@ -22,7 +22,7 @@ const VendorOfferList: React.FC = () => {
             Authorization: `Bearer ${token}`, // Add token for protected routes if needed
           },
         });
-        setOffers(response.data);
+        setOffers(response.data); 
       }
     } catch (error) {
       console.error('Błąd podczas pobierania ofert:', error);
@@ -44,19 +44,22 @@ const VendorOfferList: React.FC = () => {
         {loading ? (
           <Spinner />
         ) : Array.isArray(offers) && offers.length > 0 ? (
-          offers.map((offer) => (
-            <VendorOfferCard
-              key={offer.listingId}
-              listingId={offer.listingId}
-              title={offer.title}
-              location={offer.city}
-              description={offer.shortDescription}
-              imageUrl={offer.media[0]?.mediaUrl ? `${SERVER_URL}${offer.media[0].mediaUrl}` : 'https://via.placeholder.com/416x185'}
-              priceMin={offer.priceMin}
-              priceMax={offer.priceMax}
-              onClick={() => alert(`Wybrano ofertę: ${offer.title}`)}
-            />
-          ))
+          offers.map((offer) => {
+            const mainImage = offer.media.find((mediaItem: any) => mediaItem.isMain) || offer.media[0];
+            return (
+              <VendorOfferCard
+                key={offer.listingId}
+                listingId={offer.listingId}
+                title={offer.title}
+                location={offer.city}
+                description={offer.shortDescription}
+                imageUrl={mainImage?.mediaUrl ? `${SERVER_URL}${mainImage.mediaUrl}` : 'https://via.placeholder.com/416x185'}
+                priceMin={offer.priceMin}
+                priceMax={offer.priceMax}
+                onClick={() => alert(`Wybrano ofertę: ${offer.title}`)}
+              />
+            );
+          })
         ) : (
           <p>Nie masz jeszcze ogłoszeń</p>
         )}

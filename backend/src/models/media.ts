@@ -7,6 +7,8 @@ export interface MediaAttributes {
   listingId: number;
   mediaType: 'image' | 'video';
   mediaUrl: string;
+  order: number; 
+  isMain: boolean; 
   createdAt?: Date;
 }
 
@@ -17,6 +19,8 @@ export class Media extends Model<MediaAttributes, MediaCreationAttributes> imple
   public listingId!: number;
   public mediaType!: 'image' | 'video';
   public mediaUrl!: string;
+  public order!: number; 
+  public isMain!: boolean; 
 
   public readonly createdAt!: Date;
 }
@@ -47,6 +51,18 @@ Media.init(
       type: DataTypes.STRING(255),
       allowNull: false,
       field: 'media_url',
+    },
+    order: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0, 
+      field: 'order',
+    },
+    isMain: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false, 
+      field: 'is_main',
     },
   },
   {

@@ -9,15 +9,11 @@ import editIcon from '../../assets/edit.svg';
 import deleteIcon from '../../assets/x-square.svg';
 import stopIcon from '../../assets/stop.svg';
 import playIcon from '../../assets/play.svg';
-import awardIcon from '../../assets/award.svg';
-import bugIcon from '../../assets/bug.svg';
-import saveIcon from '../../assets/save.svg';
 import StatIcon from '../../assets/chart-mixed.svg';
 import ChartIcon from '../../assets/chart.svg';
 import Spinner from '../../components/Spinner';
 import PieChart from '../../components/AmazingPieChart';
 import { ReactComponent as SuccessIcon } from '../../assets/Success.svg';
-import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 
 
@@ -198,7 +194,9 @@ const VendorOfferDetails: React.FC = () => {
               <div className={styles.imageContainer}>
                 <img
                   className={styles.image}
-                  src={`${SERVER_URL}${offerData.firstImage?.mediaUrl || '/placeholder.png'}`}
+                  src={`${SERVER_URL}${
+                    offerData.firstImage?.mediaUrl || '/placeholder.png'
+                  }`}
                   alt="Zdjęcie ogłoszenia"
                 />
               </div>

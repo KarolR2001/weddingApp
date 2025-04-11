@@ -4,7 +4,7 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-  "email": "karolrembiasz@couple.pl",
+  "email": "karolrembiasz@vendor.pl",
   "password": "Brzezna85#"
 }
 
@@ -23,15 +23,14 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-  "email": "karolrembiasz@o2.pl",
+  "email": "konradwaligorski@o2.pl",
   "password": "password123",
-  "phoneNumber": "999999999",
-  "userType": "couple",
-  "partner1Name": "Anna",
-  "partner2Name": "Jan"
+  "phoneNumber": "999199999",
+  "userType": "vendor",
+  "companyName": "waligora"
 }
-
-
+### Weryfikacja konta:
+GET http://localhost:5000/auth/verify?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtvbnJhZHdhbGlnb3Jza2lAbzIucGwiLCJwYXNzd29yZEhhc2giOiIkMmIkMTAkZlNzcmNBYXdNbHoxRWxVT2pJaFBYT1IuTmMyNEZkREZNVmM1NWpRVm5qL3NTbVU0TXhGRUciLCJwaG9uZU51bWJlciI6Ijk5OTE5OTk5OSIsInVzZXJUeXBlIjoidmVuZG9yIiwiY29tcGFueU5hbWUiOiJ3YWxpZ29yYSIsImlhdCI6MTc0Mzc1ODc5MCwiZXhwIjoxNzQzODQ1MTkwfQ.LVnKXEFF2HHNZjNsMc2u-b2ES_VG-hSAN3TzGO1Mx4I
 
 
 ### Żądanie chronione, które wymaga tokenu
@@ -97,7 +96,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:5000/api/listings/listing/47
+GET http://localhost:5000/api/listings/listing/70
 Content-Type: application/json
 
 
@@ -143,7 +142,7 @@ Content-Type: application/json
 }
 
 ### Usuwanie Oferty
-DELETE http://localhost:5000/api/listings/12
+DELETE http://localhost:5000/api/listings/545
 
 
 ### Wyśweirlanie statystyk ogłoszenia oraz zdjęcie

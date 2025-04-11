@@ -1,0 +1,1813 @@
+{
+    "categories": [
+      {
+        "service_category_id": 9,
+        "category_name": "Zespoły muzyczne",
+        "filters": [
+          {
+            "filter_category_id": 1,
+            "name": "Rodzaj muzyki",
+            "options": [
+              {"id": 1, "value": "Pop"},
+              {"id": 2, "value": "Rock"},
+              {"id": 3, "value": "Jazz"},
+              {"id": 4, "value": "Klasyczna"},
+              {"id": 5, "value": "Disco Polo"},
+              {"id": 6, "value": "Funk"},
+              {"id": 7, "value": "Blues"},
+              {"id": 8, "value": "Soul"},
+              {"id": 9, "value": "Reggae"},
+              {"id": 10, "value": "Inne"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 2,
+            "name": "Liczba członków zespołu",
+            "options": [
+              {"id": 11, "value": "Solo"},
+              {"id": 12, "value": "Duo"},
+              {"id": 13, "value": "Trio"},
+              {"id": 14, "value": "Kwartet"},
+              {"id": 15, "value": "Więcej niż 4"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 3,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 16, "value": "Prowadzenie zabaw weselnych"},
+              {"id": 17, "value": "Prowadzenie ceremonii ślubnej"},
+              {"id": 18, "value": "Oświetlenie sceniczne"},
+              {"id": 19, "value": "Nagłośnienie sali"},
+              {"id": 20, "value": "Obsługa techniczna"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 4,
+            "name": "Styl muzyczny",
+            "options": [
+              {"id": 21, "value": "Akustyczny"},
+              {"id": 22, "value": "Elektroniczny"},
+              {"id": 23, "value": "Orkiestralny"},
+              {"id": 24, "value": "Folkowy"},
+              {"id": 25, "value": "Cover Band"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 5,
+            "name": "Rodzaj wokalu",
+            "options": [
+              {"id": 26, "value": "Męski"},
+              {"id": 27, "value": "Damski"},
+              {"id": 28, "value": "Damsko-męski"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 6,
+            "name": "Instrumenty muzyczne",
+            "options": [
+              {"id": 29, "value": "Instrumenty klawiszowe"},
+              {"id": 30, "value": "Perkusja"},
+              {"id": 31, "value": "Gitara"},
+              {"id": 32, "value": "Saksofon"},
+              {"id": 33, "value": "Akordeon"},
+              {"id": 34, "value": "Gitara basowa"},
+              {"id": 35, "value": "Skrzypce"},
+              {"id": 36, "value": "Trąbka"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 10,
+        "category_name": "Dj-e & wodzireje",
+        "filters": [
+          {
+            "filter_category_id": 7,
+            "name": "Rodzaj muzyki",
+            "options": [
+              {"id": 37, "value": "Pop"},
+              {"id": 38, "value": "Rock"},
+              {"id": 39, "value": "Jazz"},
+              {"id": 40, "value": "Klasyczna"},
+              {"id": 41, "value": "Disco Polo"},
+              {"id": 42, "value": "House"},
+              {"id": 43, "value": "Techno"},
+              {"id": 44, "value": "Funk"},
+              {"id": 45, "value": "Reggae"},
+              {"id": 46, "value": "Soul"},
+              {"id": 47, "value": "Hip-Hop"},
+              {"id": 48, "value": "Inne"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 8,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 49, "value": "Prowadzenie zabaw weselnych"},
+              {"id": 50, "value": "Prowadzenie ceremonii ślubnej"},
+              {"id": 51, "value": "Oświetlenie sceniczne"},
+              {"id": 52, "value": "Nagłośnienie sali"},
+              {"id": 53, "value": "Obsługa techniczna"},
+              {"id": 54, "value": "Pirotechnika"},
+              {"id": 55, "value": "Dekoracje świetlne (LED, neony)"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 9,
+            "name": "Styl muzyczny",
+            "options": [
+              {"id": 56, "value": "Akustyczny"},
+              {"id": 57, "value": "Elektroniczny"},
+              {"id": 58, "value": "Orkiestralny"},
+              {"id": 59, "value": "Dance"},
+              {"id": 60, "value": "Chillout"},
+              {"id": 61, "value": "Cover Band"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 10,
+            "name": "Rodzaj prowadzenia",
+            "options": [
+              {"id": 62, "value": "Wodzirej"},
+              {"id": 63, "value": "DJ"},
+              {"id": 64, "value": "DJ + Wodzirej"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 11,
+            "name": "Sprzęt DJ-ski",
+            "options": [
+              {"id": 65, "value": "Konsola DJ"},
+              {"id": 66, "value": "Oświetlenie LED"},
+              {"id": 67, "value": "Mikrofon bezprzewodowy"},
+              {"id": 68, "value": "Głośniki estradowe"},
+              {"id": 69, "value": "Ekrany LED"},
+              {"id": 70, "value": "Wytwornica dymu"},
+              {"id": 71, "value": "Efekty specjalne (np. lasery)"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 12,
+            "name": "Rodzaj wokalu",
+            "options": [
+              {"id": 72, "value": "Brak wokalu"},
+              {"id": 73, "value": "Wokal damski"},
+              {"id": 74, "value": "Wokal męski"},
+              {"id": 75, "value": "Wokal damsko-męski"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 13,
+            "name": "Liczba osób",
+            "options": [
+              {"id": 76, "value": "DJ solo"},
+              {"id": 77, "value": "DJ + wokalista"},
+              {"id": 78, "value": "DJ + wodzirej"},
+              {"id": 79, "value": "DJ + wodzirej + wokalista"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 14,
+            "name": "Dodatkowy instrument",
+            "options": [
+              {"id": 80, "value": "Akordeon"},
+              {"id": 81, "value": "Saksofon"},
+              {"id": 82, "value": "Gitara"},
+              {"id": 83, "value": "Skrzypce"},
+              {"id": 84, "value": "Trąbka"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 11,
+        "category_name": "Oprawa ślubu",
+        "filters": [
+          {
+            "filter_category_id": 16,
+            "name": "Rodzaj oprawy",
+            "options": [
+              {"id": 85, "value": "Muzyczna"},
+              {"id": 86, "value": "Wokalna"},
+              {"id": 87, "value": "Instrumentalna"},
+              {"id": 88, "value": "Zespół"},
+              {"id": 89, "value": "Solista"},
+              {"id": 90, "value": "Orkiestra"},
+              {"id": 91, "value": "Chór"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 17,
+            "name": "Instrumenty",
+            "options": [
+              {"id": 92, "value": "Skrzypce"},
+              {"id": 93, "value": "Pianino"},
+              {"id": 94, "value": "Gitara akustyczna"},
+              {"id": 95, "value": "Harfa"},
+              {"id": 96, "value": "Saksofon"},
+              {"id": 97, "value": "Trąbka"},
+              {"id": 98, "value": "Wiolonczela"},
+              {"id": 99, "value": "Flet"},
+              {"id": 100, "value": "Organy kościelne"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 18,
+            "name": "Rodzaj wokalu",
+            "options": [
+              {"id": 101, "value": "Wokal damski"},
+              {"id": 102, "value": "Wokal męski"},
+              {"id": 103, "value": "Damsko-męski duet"},
+              {"id": 104, "value": "Chór"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 19,
+            "name": "Styl muzyczny",
+            "options": [
+              {"id": 105, "value": "Klasyczny"},
+              {"id": 106, "value": "Religijny"},
+              {"id": 107, "value": "Jazzowy"},
+              {"id": 108, "value": "Folkowy"},
+              {"id": 109, "value": "Nowoczesny"},
+              {"id": 110, "value": "Akustyczny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 20,
+            "name": "Dodatkowe elementy oprawy",
+            "options": [
+              {"id": 111, "value": "Śpiew podczas ceremonii"},
+              {"id": 112, "value": "Odtwarzanie muzyki (z nagrań)"},
+              {"id": 113, "value": "Dekoracje świetlne"},
+              {"id": 114, "value": "Nagłośnienie"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 21,
+            "name": "Liczba muzyków",
+            "options": [
+              {"id": 115, "value": "Solista"},
+              {"id": 116, "value": "Duo"},
+              {"id": 117, "value": "Trio"},
+              {"id": 118, "value": "Kwartet"},
+              {"id": 119, "value": "Więcej niż 4"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 22,
+            "name": "Możliwość wykonania utworów na życzenie",
+            "options": [
+              {"id": 120, "value": "Tak"},
+              {"id": 121, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          }
+        ]
+      },
+      {
+        "service_category_id": 12,
+        "category_name": "Sale weselne",
+        "filters": [
+          {
+            "filter_category_id": 24,
+            "name": "Rodzaj sali",
+            "options": [
+              {"id": 122, "value": "Sala bankietowa"},
+              {"id": 123, "value": "Sala balowa"},
+              {"id": 124, "value": "Sala restauracyjna"},
+              {"id": 125, "value": "Sala w pałacu"},
+              {"id": 126, "value": "Sala w hotelu"},
+              {"id": 127, "value": "Sala w plenerze"},
+              {"id": 128, "value": "Sala w stylu rustykalnym"},
+              {"id": 129, "value": "Sala w stylu nowoczesnym"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 25,
+            "name": "Liczba gości",
+            "options": [
+              {"id": 130, "value": "do 50"},
+              {"id": 131, "value": "do 100"},
+              {"id": 132, "value": "do 150"},
+              {"id": 133, "value": "do 200"},
+              {"id": 134, "value": "do 250"},
+              {"id": 135, "value": "do 300"},
+              {"id": 136, "value": "więcej"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 27,
+            "name": "Dostępność noclegów",
+            "options": [
+              {"id": 137, "value": "Tak"},
+              {"id": 138, "value": "Nie"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 28,
+            "name": "Opcje cateringowe",
+            "options": [
+              {"id": 139, "value": "Pełny catering"},
+              {"id": 140, "value": "Menu wegetariańskie"},
+              {"id": 141, "value": "Menu wegańskie"},
+              {"id": 142, "value": "Menu bezglutenowe"},
+              {"id": 143, "value": "Menu międzynarodowe"},
+              {"id": 144, "value": "Bufet deserowy"},
+              {"id": 145, "value": "Tort weselny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 29,
+            "name": "Styl wnętrza",
+            "options": [
+              {"id": 146, "value": "Rustykalny"},
+              {"id": 147, "value": "Glamour"},
+              {"id": 148, "value": "Boho"},
+              {"id": 149, "value": "Elegancki"},
+              {"id": 150, "value": "Nowoczesny"},
+              {"id": 151, "value": "Industrialny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 30,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 152, "value": "Dekoracja kwiatowa"},
+              {"id": 153, "value": "Dekoracja światłem"},
+              {"id": 154, "value": "Obsługa barmańska"},
+              {"id": 155, "value": "Strefa relaksu"},
+              {"id": 156, "value": "Taras/balkon"},
+              {"id": 157, "value": "Strefa dla dzieci"},
+              {"id": 158, "value": "Scena dla zespołu/DJ-a"},
+              {"id": 159, "value": "Klimatyzacja"},
+              {"id": 160, "value": "Parking"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 31,
+            "name": "Możliwość organizacji ceremonii na miejscu",
+            "options": [
+              {"id": 161, "value": "Tak"},
+              {"id": 162, "value": "Nie"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 32,
+            "name": "Okolica",
+            "options": [
+              {"id": 163, "value": "Blisko natury (jezioro, las)"},
+              {"id": 164, "value": "W centrum miasta"},
+              {"id": 165, "value": "Na obrzeżach miasta"},
+              {"id": 166, "value": "W górach"},
+              {"id": 167, "value": "Nad morzem"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 33,
+            "name": "Sezonowość",
+            "options": [
+              {"id": 168, "value": "Cały rok"},
+              {"id": 169, "value": "Sezon letni"},
+              {"id": 170, "value": "Sezon zimowy"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 1,
+        "category_name": "Fotografia",
+        "filters": [
+          {
+            "filter_category_id": 34,
+            "name": "Styl fotografii",
+            "options": [
+              {"id": 171, "value": "Reportażowy"},
+              {"id": 172, "value": "Artystyczny"},
+              {"id": 173, "value": "Klasyczny"},
+              {"id": 174, "value": "Glamour"},
+              {"id": 175, "value": "Boho"},
+              {"id": 176, "value": "Rustykalny"},
+              {"id": 177, "value": "Nowoczesny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 35,
+            "name": "Zakres usług",
+            "options": [
+              {"id": 178, "value": "Ceremonia ślubna"},
+              {"id": 179, "value": "Przygotowania do ślubu"},
+              {"id": 180, "value": "Sesja narzeczeńska"},
+              {"id": 181, "value": "Plener ślubny"},
+              {"id": 182, "value": "Reportaż z wesela"},
+              {"id": 183, "value": "Sesja poślubna"},
+              {"id": 184, "value": "Zdjęcia dronem"},
+              {"id": 185, "value": "Fotoalbum"},
+              {"id": 186, "value": "Zdjęcia w formie cyfrowej"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 36,
+            "name": "Liczba fotografów",
+            "options": [
+              {"id": 187, "value": "Jeden fotograf"},
+              {"id": 188, "value": "Dwóch fotografów"},
+              {"id": 189, "value": "Zespół fotografów"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 37,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 190, "value": "Filmowanie wideo"},
+              {"id": 191, "value": "Sesja w plenerze"},
+              {"id": 192, "value": "Sesja zagraniczna"},
+              {"id": 193, "value": "Fotobudka"},
+              {"id": 194, "value": "Zdjęcia w fotoksiążce"},
+              {"id": 195, "value": "Druk zdjęć na miejscu"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 38,
+            "name": "Czas oczekiwania na gotowe zdjęcia",
+            "options": [
+              {"id": 196, "value": "Do 1 miesiąca"},
+              {"id": 197, "value": "Do 3 miesięcy"},
+              {"id": 198, "value": "Do 6 miesięcy"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 39,
+            "name": "Możliwość rezerwacji pleneru",
+            "options": [
+              {"id": 199, "value": "Tak"},
+              {"id": 200, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 40,
+            "name": "Doświadczenie fotografa",
+            "options": [
+              {"id": 201, "value": "Poniżej 1 roku"},
+              {"id": 202, "value": "1-3 lata"},
+              {"id": 203, "value": "3-5 lat"},
+              {"id": 204, "value": "Powyżej 5 lat"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 42,
+            "name": "Dostępność drona",
+            "options": [
+              {"id": 205, "value": "Tak"},
+              {"id": 206, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 43,
+            "name": "Styl obróbki zdjęć",
+            "options": [
+              {"id": 207, "value": "Naturalny"},
+              {"id": 208, "value": "Artystyczny"},
+              {"id": 209, "value": "HDR"},
+              {"id": 210, "value": "Czarno-biały"},
+              {"id": 211, "value": "Vintage"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 13,
+        "category_name": "Wideofilmowanie",
+        "filters": [
+          {
+            "filter_category_id": 44,
+            "name": "Styl filmu",
+            "options": [
+              {"id": 212, "value": "Reportażowy"},
+              {"id": 213, "value": "Artystyczny"},
+              {"id": 214, "value": "Film dokumentalny"},
+              {"id": 215, "value": "Klasyczny"},
+              {"id": 216, "value": "Nowoczesny"},
+              {"id": 217, "value": "Glamour"},
+              {"id": 218, "value": "Boho"},
+              {"id": 219, "value": "Kinowy"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 45,
+            "name": "Zakres usług",
+            "options": [
+              {"id": 220, "value": "Film z ceremonii ślubnej"},
+              {"id": 221, "value": "Film z przygotowań"},
+              {"id": 222, "value": "Teledysk ślubny"},
+              {"id": 223, "value": "Reportaż z wesela"},
+              {"id": 224, "value": "Film z podziękowaniami dla rodziców"},
+              {"id": 225, "value": "Filmowanie pleneru"},
+              {"id": 226, "value": "Film dronem"},
+              {"id": 227, "value": "Montaż filmu"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 46,
+            "name": "Liczba operatorów",
+            "options": [
+              {"id": 228, "value": "Jeden operator"},
+              {"id": 229, "value": "Dwóch operatorów"},
+              {"id": 230, "value": "Zespół filmowy"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 47,
+            "name": "Długość filmu",
+            "options": [
+              {"id": 231, "value": "Do 30 minut"},
+              {"id": 232, "value": "Do 1 godziny"},
+              {"id": 233, "value": "Do 2 godzin"},
+              {"id": 234, "value": "Powyżej 2 godzin"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 48,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 235, "value": "Filmowanie dronem"},
+              {"id": 236, "value": "Sesja plenerowa"},
+              {"id": 237, "value": "Filmowanie w 4K"},
+              {"id": 238, "value": "Filmowanie w slow motion"},
+              {"id": 239, "value": "Materiały w formie cyfrowej"},
+              {"id": 240, "value": "Pendrive z nagraniem"},
+              {"id": 241, "value": "Wersja na DVD/Blu-ray"},
+              {"id": 242, "value": "Projekcja filmu na weselu"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 49,
+            "name": "Czas oczekiwania na gotowy film",
+            "options": [
+              {"id": 243, "value": "Do 1 miesiąca"},
+              {"id": 244, "value": "Do 3 miesięcy"},
+              {"id": 245, "value": "Do 6 miesięcy"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 50,
+            "name": "Doświadczenie filmowca",
+            "options": [
+              {"id": 246, "value": "Poniżej 1 roku"},
+              {"id": 247, "value": "1-3 lata"},
+              {"id": 248, "value": "3-5 lat"},
+              {"id": 249, "value": "Powyżej 5 lat"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 52,
+            "name": "Dostępność drona",
+            "options": [
+              {"id": 250, "value": "Tak"},
+              {"id": 251, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 53,
+            "name": "Format nagrania",
+            "options": [
+              {"id": 252, "value": "Full HD"},
+              {"id": 253, "value": "4K"},
+              {"id": 254, "value": "Blu-ray"},
+              {"id": 255, "value": "DVD"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 5,
+        "category_name": "Dekoracje",
+        "filters": [
+          {
+            "filter_category_id": 54,
+            "name": "Rodzaj dekoracji",
+            "options": [
+              {"id": 256, "value": "Dekoracja sali weselnej"},
+              {"id": 257, "value": "Dekoracja kościoła"},
+              {"id": 258, "value": "Dekoracja pleneru"},
+              {"id": 259, "value": "Dekoracja samochodu"},
+              {"id": 260, "value": "Dekoracja stołów"},
+              {"id": 261, "value": "Dekoracja wejścia"},
+              {"id": 262, "value": "Dekoracja krzeseł"},
+              {"id": 263, "value": "Dekoracja sufitu"},
+              {"id": 264, "value": "Dekoracja ścian"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 55,
+            "name": "Styl dekoracji",
+            "options": [
+              {"id": 265, "value": "Rustykalny"},
+              {"id": 266, "value": "Glamour"},
+              {"id": 267, "value": "Boho"},
+              {"id": 268, "value": "Klasyczny"},
+              {"id": 269, "value": "Nowoczesny"},
+              {"id": 270, "value": "Vintage"},
+              {"id": 271, "value": "Elegancki"},
+              {"id": 272, "value": "Minimalistyczny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 56,
+            "name": "Kolor przewodni",
+            "options": [
+              {"id": 273, "value": "Biały"},
+              {"id": 274, "value": "Złoty"},
+              {"id": 275, "value": "Srebrny"},
+              {"id": 276, "value": "Różowy"},
+              {"id": 277, "value": "Bordowy"},
+              {"id": 278, "value": "Granatowy"},
+              {"id": 279, "value": "Pastelowy"},
+              {"id": 280, "value": "Zielony"},
+              {"id": 281, "value": "Fioletowy"},
+              {"id": 282, "value": "Inny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 57,
+            "name": "Elementy dekoracyjne stołów",
+            "options": [
+              {"id": 283, "value": "Obrusy"},
+              {"id": 284, "value": "Podtalerze"},
+              {"id": 285, "value": "Serwetki"},
+              {"id": 286, "value": "Świeczniki"},
+              {"id": 287, "value": "Wazonāda"},
+              {"id": 288, "value": "Numery stołów"},
+              {"id": 289, "value": "Dekoracje kwiatowe"},
+              {"id": 290, "value": "Sztućce dekoracyjne"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 58,
+            "name": "Elementy dekoracyjne sali/pleneru",
+            "options": [
+              {"id": 291, "value": "Kwiaty żywe"},
+              {"id": 292, "value": "Kwiaty sztuczne"},
+              {"id": 293, "value": "Girlandy kwiatowe"},
+              {"id": 294, "value": "Świece"},
+              {"id": 295, "value": "Lampiony"},
+              {"id": 296, "value": "Balony"},
+              {"id": 297, "value": "Kurtyny świetlne"},
+              {"id": 298, "value": "Tablice powitalne"},
+              {"id": 299, "value": "Ścianki kwiatowe"},
+              {"id": 300, "value": "Ścianki fotograficzne"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 59,
+            "name": "Oświetlenie",
+            "options": [
+              {"id": 301, "value": "Oświetlenie LED"},
+              {"id": 302, "value": "Kurtyny świetlne"},
+              {"id": 303, "value": "Lampki dekoracyjne"},
+              {"id": 304, "value": "Neony"},
+              {"id": 305, "value": "Reflektory sceniczne"},
+              {"id": 306, "value": "Projektory świetlne"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 60,
+            "name": "Dodatkowe usługi dekoracyjne",
+            "options": [
+              {"id": 307, "value": "Wynajem wazonów"},
+              {"id": 308, "value": "Wynajem świeczników"},
+              {"id": 309, "value": "Personalizowane elementy"},
+              {"id": 310, "value": "Dekoracje świetlne"},
+              {"id": 311, "value": "Projektowanie graficzne dekoracji"},
+              {"id": 312, "value": "Dekoracja 3D"},
+              {"id": 313, "value": "Dekoracje w stylu eko"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 61,
+            "name": "Rodzaj materiałów dekoracyjnych",
+            "options": [
+              {"id": 314, "value": "Tkaniny (tiul, welon)"},
+              {"id": 315, "value": "Drewno"},
+              {"id": 316, "value": "Metal"},
+              {"id": 317, "value": "Szkło"},
+              {"id": 318, "value": "Papier"},
+              {"id": 319, "value": "Balony lateksowe"},
+              {"id": 320, "value": "Kwiaty papierowe"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 63,
+            "name": "Sezonowość dekoracji",
+            "options": [
+              {"id": 321, "value": "Całoroczne"},
+              {"id": 322, "value": "Wiosenne"},
+              {"id": 323, "value": "Letnie"},
+              {"id": 324, "value": "Jesienne"},
+              {"id": 325, "value": "Zimowe"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 64,
+            "name": "Dekoracja miejsca ceremonii",
+            "options": [
+              {"id": 326, "value": "Tak"},
+              {"id": 327, "value": "Nie"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 14,
+        "category_name": "Florystka",
+        "filters": [
+          {
+            "filter_category_id": 65,
+            "name": "Rodzaj kompozycji kwiatowej",
+            "options": [
+              {"id": 328, "value": "Bukiet ślubny"},
+              {"id": 329, "value": "Dekoracja stołów"},
+              {"id": 330, "value": "Dekoracja kościoła"},
+              {"id": 331, "value": "Dekoracja pleneru"},
+              {"id": 332, "value": "Dekoracja samochodu"},
+              {"id": 333, "value": "Wianki na głowę"},
+              {"id": 334, "value": "Butonierki"},
+              {"id": 335, "value": "Girlandy kwiatowe"},
+              {"id": 336, "value": "Kwiatowe bransoletki"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 66,
+            "name": "Styl kompozycji kwiatowej",
+            "options": [
+              {"id": 337, "value": "Rustykalny"},
+              {"id": 338, "value": "Glamour"},
+              {"id": 339, "value": "Boho"},
+              {"id": 340, "value": "Klasyczny"},
+              {"id": 341, "value": "Nowoczesny"},
+              {"id": 342, "value": "Vintage"},
+              {"id": 343, "value": "Elegancki"},
+              {"id": 344, "value": "Minimalistyczny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 67,
+            "name": "Rodzaj kwiatów",
+            "options": [
+              {"id": 345, "value": "Róże"},
+              {"id": 346, "value": "Tulipany"},
+              {"id": 347, "value": "Hortensje"},
+              {"id": 348, "value": "Lilie"},
+              {"id": 349, "value": "Goździki"},
+              {"id": 350, "value": "Orchidee"},
+              {"id": 351, "value": "Eustoma"},
+              {"id": 352, "value": "Peonie"},
+              {"id": 353, "value": "Frezje"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 68,
+            "name": "Kolorystyka kompozycji",
+            "options": [
+              {"id": 354, "value": "Biały"},
+              {"id": 355, "value": "Różowy"},
+              {"id": 356, "value": "Czerwony"},
+              {"id": 357, "value": "Żółty"},
+              {"id": 358, "value": "Niebieski"},
+              {"id": 359, "value": "Pastelowy"},
+              {"id": 360, "value": "Bordowy"},
+              {"id": 361, "value": "Zielony"},
+              {"id": 362, "value": "Inny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 69,
+            "name": "Dodatkowe usługi florystyczne",
+            "options": [
+              {"id": 363, "value": "Wynajem wazonów"},
+              {"id": 364, "value": "Wynajem donic"},
+              {"id": 365, "value": "Dekoracja świetlna"},
+              {"id": 366, "value": "Personalizowane kwiatowe dekoracje"},
+              {"id": 367, "value": "Kwiaty na prezent dla gości"},
+              {"id": 368, "value": "Pakowanie prezentów kwiatowych"},
+              {"id": 369, "value": "Kwiaty na tort weselny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 70,
+            "name": "Sezonowe kompozycje kwiatowe",
+            "options": [
+              {"id": 370, "value": "Wiosenne"},
+              {"id": 371, "value": "Letnie"},
+              {"id": 372, "value": "Jesienne"},
+              {"id": 373, "value": "Zimowe"},
+              {"id": 374, "value": "Całoroczne"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 71,
+            "name": "Rodzaj oprawy bukietu",
+            "options": [
+              {"id": 375, "value": "Tradycyjna"},
+              {"id": 376, "value": "Papierowa"},
+              {"id": 377, "value": "Tiulowa"},
+              {"id": 378, "value": "Satynowa wstążka"},
+              {"id": 379, "value": "Naturalna (np. juta)"},
+              {"id": 380, "value": "Bez opakowania"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 73,
+            "name": "Możliwość personalizacji",
+            "options": [
+              {"id": 381, "value": "Tak"},
+              {"id": 382, "value": "Nie"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 74,
+            "name": "Dostawa i ustawienie kwiatów na miejscu",
+            "options": [
+              {"id": 383, "value": "Tak"},
+              {"id": 384, "value": "Nie"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 15,
+        "category_name": "Atrakcje weselne",
+        "filters": [
+          {
+            "filter_category_id": 75,
+            "name": "Rodzaj atrakcji",
+            "options": [
+              {"id": 385, "value": "Fotobudka"},
+              {"id": 386, "value": "Magiczne lustro"},
+              {"id": 387, "value": "Pokaz sztucznych ogni"},
+              {"id": 388, "value": "Pokaz iluzjonistyczny"},
+              {"id": 389, "value": "Pokaz tańca"},
+              {"id": 390, "value": "Barman show"},
+              {"id": 391, "value": "Pokaz laserowy"},
+              {"id": 392, "value": "Pokaz fireshow"},
+              {"id": 393, "value": "Napis LOVE/MIŁOŚĆ"},
+              {"id": 394, "value": "Fajerwerki"},
+              {"id": 395, "value": "Wypuszczanie gołębi"},
+              {"id": 396, "value": "Wypuszczanie motyli"},
+              {"id": 397, "value": "Strefa chillout"},
+              {"id": 398, "value": "Kącik dla dzieci"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 76,
+            "name": "Styl atrakcji",
+            "options": [
+              {"id": 399, "value": "Nowoczesny"},
+              {"id": 400, "value": "Rustykalny"},
+              {"id": 401, "value": "Glamour"},
+              {"id": 402, "value": "Boho"},
+              {"id": 403, "value": "Klasyczny"},
+              {"id": 404, "value": "Vintage"},
+              {"id": 405, "value": "Elegancki"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 77,
+            "name": "Interaktywność atrakcji",
+            "options": [
+              {"id": 406, "value": "Tak"},
+              {"id": 407, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 78,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 408, "value": "Wynajem dekoracji tematycznych"},
+              {"id": 409, "value": "Wynajem personelu do obsługi"},
+              {"id": 410, "value": "Personalizacja atrakcji (np. personalizowane napisy)"},
+              {"id": 411, "value": "Oprawa muzyczna"},
+              {"id": 412, "value": "Usługi fotograficzne/wideo"},
+              {"id": 413, "value": "Organizacja zabaw"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 79,
+            "name": "Czas trwania atrakcji",
+            "options": [
+              {"id": 414, "value": "Do 1 godziny"},
+              {"id": 415, "value": "1-2 godziny"},
+              {"id": 416, "value": "Powyżej 2 godzin"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 80,
+            "name": "Czy atrakcja odbywa się na zewnątrz?",
+            "options": [
+              {"id": 417, "value": "Tak"},
+              {"id": 418, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 82,
+            "name": "Możliwość personalizacji atrakcji",
+            "options": [
+              {"id": 419, "value": "Tak"},
+              {"id": 420, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 83,
+            "name": "Sezonowość atrakcji",
+            "options": [
+              {"id": 421, "value": "Całoroczne"},
+              {"id": 422, "value": "Sezon letni"},
+              {"id": 423, "value": "Sezon zimowy"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 84,
+            "name": "Obsługa dzieci",
+            "options": [
+              {"id": 424, "value": "Tak"},
+              {"id": 425, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          }
+        ]
+      },
+      {
+        "service_category_id": 7,
+        "category_name": "Suknie ślubne",
+        "filters": [
+          {
+            "filter_category_id": 85,
+            "name": "Fason sukni",
+            "options": [
+              {"id": 426, "value": "Księżniczka (balowa)"},
+              {"id": 427, "value": "Syrenka"},
+              {"id": 428, "value": "Litera A"},
+              {"id": 429, "value": "Empire"},
+              {"id": 430, "value": "Boho"},
+              {"id": 431, "value": "Prosta"},
+              {"id": 432, "value": "Krótka"},
+              {"id": 433, "value": "Midi"},
+              {"id": 434, "value": "Asymetryczna"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 86,
+            "name": "Kolor sukni",
+            "options": [
+              {"id": 435, "value": "Biały"},
+              {"id": 436, "value": "Ecru"},
+              {"id": 437, "value": "Ivory"},
+              {"id": 438, "value": "Beżowy"},
+              {"id": 439, "value": "Pudrowy róż"},
+              {"id": 440, "value": "Szampański"},
+              {"id": 441, "value": "Inny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 87,
+            "name": "Materiał sukni",
+            "options": [
+              {"id": 442, "value": "Koronka"},
+              {"id": 443, "value": "Tiul"},
+              {"id": 444, "value": "Satyna"},
+              {"id": 445, "value": "Jedwab"},
+              {"id": 446, "value": "Szyfon"},
+              {"id": 447, "value": "Organza"},
+              {"irls": 448, "value": "Aksamit"},
+              {"id": 449, "value": "Mikado"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 88,
+            "name": "Długość rękawa",
+            "options": [
+              {"id": 450, "value": "Bez rękawów"},
+              {"id": 451, "value": "Krótki rękaw"},
+              {"id": 452, "value": "Rękaw 3/4"},
+              {"id": 453, "value": "Długi rękaw"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 89,
+            "name": "Rodzaj dekoltu",
+            "options": [
+              {"id": 454, "value": "Dekolt V"},
+              {"id": 455, "value": "Dekolt w serce"},
+              {"id": 456, "value": "Dekolt prosty"},
+              {"id": 457, "value": "Dekolt karo"},
+              {"id": 458, "value": "Halter"},
+              {"id": 459, "value": "Dekolt łódka"},
+              {"id": 460, "value": "Dekolt hiszpański (off-shoulder)"},
+              {"id": 461, "value": "Zabudowany dekolt"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 90,
+            "name": "Styl sukni",
+            "options": [
+              {"id": 462, "value": "Glamour"},
+              {"id": 463, "value": "Boho"},
+              {"id": 464, "value": "Nowoczesny"},
+              {"id": 465, "value": "Klasyczny"},
+              {"id": 466, "value": "Rustykalny"},
+              {"id": 467, "value": "Vintage"},
+              {"id": 468, "value": "Elegancki"},
+              {"id": 469, "value": "Minimalistyczny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 91,
+            "name": "Długość trenu",
+            "options": [
+              {"id": 470, "value": "Bez trenu"},
+              {"id": 471, "value": "Krótki tren"},
+              {"id": 472, "value": "Średni tren"},
+              {"id": 473, "value": "Długi tren"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 92,
+            "name": "Typ zapięcia",
+            "options": [
+              {"id": 474, "value": "Zamek błyskawiczny"},
+              {"id": 475, "value": "Guziki"},
+              {"id": 476, "value": "Wiązanie gorsetowe"},
+              {"id": 477, "value": "Suwak i guziki"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 94,
+            "name": "Możliwość personalizacji",
+            "options": [
+              {"id": 478, "value": "Tak"},
+              {"id": 479, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 95,
+            "name": "Sezonowość sukni",
+            "options": [
+              {"id": 480, "value": "Całoroczna"},
+              {"id": 481, "value": "Letnia"},
+              {"id": 482, "value": "Zimowa"},
+              {"id": 483, "value": "Wiosenna"},
+              {"id": 484, "value": "Jesienna"}
+            ],
+            "selection_type": "single"
+          }
+        ]
+      },
+      {
+        "service_category_id": 16,
+        "category_name": "Garnitury i dodatki",
+        "filters": [
+          {
+            "filter_category_id": 96,
+            "name": "Rodzaj garnituru",
+            "options": [
+              {"id": 485, "value": "Garnitur klasyczny"},
+              {"id": 486, "value": "Smoking"},
+              {"id": 487, "value": "Frak"},
+              {"id": 488, "value": "Garnitur trzyczęściowy"},
+              {"id": 489, "value": "Marynarka i spodnie"},
+              {"id": 490, "value": "Garnitur ślubny"},
+              {"id": 491, "value": "Garnitur wieczorowy"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 97,
+            "name": "Kolor garnituru",
+            "options": [
+              {"id": 492, "value": "Czarny"},
+              {"id": 493, "value": "Granatowy"},
+              {"id": 494, "value": "Szary"},
+              {"id": 495, "value": "Beżowy"},
+              {"id": 496, "value": "Biały"},
+              {"id": 497, "value": "Bordowy"},
+              {"id": 498, "value": "Zielony"},
+              {"id": 499, "value": "Brązowy"},
+              {"id": 500, "value": "Inny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 98,
+            "name": "Materiał garnituru",
+            "options": [
+              {"id": 501, "value": "Wełna"},
+              {"id": 502, "value": "Bawełna"},
+              {"id": 503, "value": "Len"},
+              {"id": 504, "value": "Kaszmir"},
+              {"id": 505, "value": "Poliester"},
+              {"id": 506, "value": "Jedwab"},
+              {"id": 507, "value": "Mikrofibra"},
+              {"id": 508, "value": "Tweed"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 99,
+            "name": "Fason garnituru",
+            "options": [
+              {"id": 509, "value": "Slim fit"},
+              {"id": 510, "value": "Regular fit"},
+              {"id": 511, "value": "Classic fit"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 100,
+            "name": "Rodzaj klap marynarki",
+            "options": [
+              {"id": 512, "value": "Klapy w szpic"},
+              {"id": 513, "value": "Klapy klasyczne (notch lapel)"},
+              {"id": 514, "value": "Klapy szalowe (shawl lapel)"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 101,
+            "name": "Liczba guzików",
+            "options": [
+              {"id": 515, "value": "Jeden guzik"},
+              {"id": 516, "value": "Dwa guziki"},
+              {"id": 517, "value": "Trzy guziki"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 102,
+            "name": "Rodzaj dodatków",
+            "options": [
+              {"id": 518, "value": "Krawat"},
+              {"id": 519, "value": "Muszka"},
+              {"id": 520, "value": "Poszetka"},
+              {"id": 521, "value": "Spinki do mankietów"},
+              {"id": 522, "value": "Kamizelka"},
+              {"id": 523, "value": "Szelki"},
+              {"id": 524, "value": "Pasek"},
+              {"id": 525, "value": "Buty"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 103,
+            "name": "Kolor dodatków",
+            "options": [
+              {"id": 526, "value": "Czarny"},
+              {"id": 527, "value": "Granatowy"},
+              {"id": 528, "value": "Biały"},
+              {"id": 529, "value": "Srebrny"},
+              {"id": 530, "value": "Złoty"},
+              {"id": 531, "value": "Bordowy"},
+              {"id": 532, "value": "Czerwony"},
+              {"id": 533, "value": "Zielony"},
+              {"id": 534, "value": "Beżowy"},
+              {"id": 535, "value": "Inny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 104,
+            "name": "Styl garnituru",
+            "options": [
+              {"id": 536, "value": "Nowoczesny"},
+              {"id": 537, "value": "Klasyczny"},
+              {"id": 538, "value": "Glamour"},
+              {"id": 539, "value": "Boho"},
+              {"id": 540, "value": "Rustykalny"},
+              {"id": 541, "value": "Vintage"},
+              {"id": 542, "value": "Elegancki"},
+              {"id": 543, "value": "Minimalistyczny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 106,
+            "name": "Możliwość personalizacji garnituru",
+            "options": [
+              {"id": 544, "value": "Tak"},
+              {"id": 545, "value": "Nie"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 107,
+            "name": "Sezonowość garnituru",
+            "options": [
+              {"id": 546, "value": "Całoroczny"},
+              {"id": 547, "value": "Letni"},
+              {"id": 548, "value": "Zimowy"},
+              {"id": 549, "value": "Wiosenny"},
+              {"id": 550, "value": "Jesienny"}
+            ],
+            "selection_type": "single"
+          }
+        ]
+      },
+      {
+        "service_category_id": 17,
+        "category_name": "Fryzjerzy i kosmetyczki",
+        "filters": [
+          {
+            "filter_category_id": 108,
+            "name": "Rodzaj usługi fryzjerskiej",
+            "options": [
+              {"id": 551, "value": "Fryzura ślubna"},
+              {"id": 552, "value": "Fryzura próbna"},
+              {"id": 553, "value": "Stylizacja włosów"},
+              {"id": 554, "value": "Upięcie włosów"},
+              {"id": 555, "value": "Modelowanie"},
+              {"id": 556, "value": "Cięcie"},
+              {"id": 557, "value": "Koloryzacja"},
+              {"id": 558, "value": "Przedłużanie włosów"},
+              {"id": 559, "value": "Stylizacja męska"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 109,
+            "name": "Rodzaj usługi kosmetycznej",
+            "options": [
+              {"id": 560, "value": "Makijaż ślubny"},
+              {"id": 561, "value": "Makijaż próbny"},
+              {"id": 562, "value": "Makijaż wieczorowy"},
+              {"id": 563, "value": "Makijaż dzienny"},
+              {"id": 564, "value": "Makijaż airbrush"},
+              {"id": 565, "value": "Zabiegi na twarz"},
+              {"id": 566, "value": "Zabiegi na ciało"},
+              {"id": 567, "value": "Henna brwi"},
+              {"id": 568, "value": "Henna rzęs"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 110,
+            "name": "Styl fryzury",
+            "options": [
+              {"id": 569, "value": "Klasyczny"},
+              {"id": 570, "value": "Nowoczesny"},
+              {"id": 571, "value": "Boho"},
+              {"id": 572, "value": "Glamour"},
+              {"id": 573, "value": "Warkocze"},
+              {"id": 574, "value": "Upięcie luźne"},
+              {"id": 575, "value": "Upięcie wysokie"},
+              {"id": 576, "value": "Upięcie niskie"},
+              {"id": 577, "value": "Fale i loki"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 111,
+            "name": "Styl makijażu",
+            "options": [
+              {"id": 578, "value": "Naturalny"},
+              {"id": 579, "value": "Glamour"},
+              {"id": 580, "value": "Wieczorowy"},
+              {"id": 581, "value": "Boho"},
+              {"id": 582, "value": "Subtelny"},
+              {"id": 583, "value": "Nowoczesny"},
+              {"id": 584, "value": "Retro"},
+              {"id": 585, "value": "Artystyczny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 112,
+            "name": "Rodzaj kosmetyków",
+            "options": [
+              {"id": 586, "value": "Kosmetyki wegańskie"},
+              {"id": 587, "value": "Kosmetyki hipoalergiczne"},
+              {"id": 588, "value": "Kosmetyki wodoodporne"},
+              {"id": 589, "value": "Kosmetyki naturalne"},
+              {"id": 590, "value": "Kosmetyki bez parabenów"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 113,
+            "name": "Dodatkowe usługi fryzjerskie",
+            "options": [
+              {"id": 591, "value": "Przedłużanie włosów"},
+              {"id": 592, "value": "Pielęgnacja włosów (zabiegi regeneracyjne)"},
+              {"id": 593, "value": "Kuracje wzmacniające włosy"},
+              {"id": 594, "value": "Fryzura na poprawiny"},
+              {"id": 595, "value": "Fryzura dla druhen"},
+              {"id": 596, "value": "Fryzura dla dzieci"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 114,
+            "name": "Dodatkowe usługi kosmetyczne",
+            "options": [
+              {"id": 597, "value": "Manicure"},
+              {"id": 598, "value": "Pedicure"},
+              {"id": 599, "value": "Przedłużanie rzęs"},
+              {"id": 600, "value": "Lifting rzęs"},
+              {"id": 601, "value": "Depilacja woskiem"},
+              {"id": 602, "value": "Zabiegi spa"},
+              {"id": 603, "value": "Makijaż dla druhen"},
+              {"id": 604, "value": "Makijaż dla gości"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 115,
+            "name": "Lokalizacja usługi",
+            "options": [
+              {"id": 605, "value": "W salonie"},
+              {"id": 606, "value": "Dojazd do klienta"}
+            ],
+            "selection_type": "single"
+          }
+        ]
+      },
+      {
+        "service_category_id": 6,
+        "category_name": "Transport",
+        "filters": [
+          {
+            "filter_category_id": 117,
+            "name": "Rodzaj pojazdu",
+            "options": [
+              {"id": 607, "value": "Limuzyna"},
+              {"id": 608, "value": "Samochód zabytkowy"},
+              {"id": 609, "value": "Samochód sportowy"},
+              {"id": 610, "value": "Samochód luksusowy"},
+              {"id": 611, "value": "Kabriolet"},
+              {"id": 612, "value": "Van"},
+              {"id": 613, "value": "Bus"},
+              {"id": 614, "value": "Motocykl"},
+              {"id": 615, "value": "Kareta"},
+              {"id": 616, "value": "Bryczka"},
+              {"id": 617, "value": "Party bus"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 118,
+            "name": "Marka pojazdu",
+            "options": [
+              {"id": 618, "value": "Mercedes"},
+              {"id": 619, "value": "BMW"},
+              {"id": 620, "value": "Audi"},
+              {"id": 621, "value": "Rolls-Royce"},
+              {"id": 622, "value": "Jaguar"},
+              {"id": 623, "value": "Porsche"},
+              {"id": 624, "value": "Bentley"},
+              {"id": 625, "value": "Tesla"},
+              {"id": 626, "value": "Ford"},
+              {"id": 627, "value": "Volkswagen"},
+              {"id": 628, "value": "Inna"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 119,
+            "name": "Kolor pojazdu",
+            "options": [
+              {"id": 629, "value": "Biały"},
+              {"id": 630, "value": "Czarny"},
+              {"id": 631, "value": "Srebrny"},
+              {"id": 632, "value": "Czerwony"},
+              {"id": 633, "value": "Niebieski"},
+              {"id": 634, "value": "Złoty"},
+              {"id": 635, "value": "Zielony"},
+              {"id": 636, "value": "Beżowy"},
+              {"id": 637, "value": "Inny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 120,
+            "name": "Rodzaj usługi transportowej",
+            "options": [
+              {"id": 638, "value": "Transport pary młodej"},
+              {"id": 639, "value": "Transport gości weselnych"},
+              {"id": 640, "value": "Transport na poprawiny"},
+              {"id": 641, "value": "Transfer z lotniska"},
+              {"id": 642, "value": "Przewóz wieloma pojazdami"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 121,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 643, "value": "Kierowca"},
+              {"id": 644, "value": "Dekoracja pojazdu"},
+              {"id": 645, "value": "Napoje i przekąski"},
+              {"id": 646, "value": "Czerwony dywan"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 3,
+        "category_name": "Catering",
+        "filters": [
+          {
+            "filter_category_id": 123,
+            "name": "Rodzaj kuchni",
+            "options": [
+              {"id": 650, "value": "Polska"},
+              {"id": 651, "value": "Włoska"},
+              {"id": 652, "value": "Francuska"},
+              {"id": 653, "value": "Azjatycka"},
+              {"id": 654, "value": "Fusion"},
+              {"id": 655, "value": "Amerykańska"},
+              {"id": 656, "value": "Śródziemnomorska"},
+              {"id": 657, "value": "Wege"},
+              {"id": 658, "value": "Wegańska"},
+              {"id": 659, "value": "Bezglutenowa"},
+              {"id": 660, "value": "Bezlaktozowa"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 124,
+            "name": "Rodzaj menu",
+            "options": [
+              {"id": 661, "value": "Menu tradycyjne"},
+              {"id": 662, "value": "Menu wegetariańskie"},
+              {"id": 663, "value": "Menu wegańskie"},
+              {"id": 664, "value": "Menu bezglutenowe"},
+              {"id": 665, "value": "Menu bezlaktozowe"},
+              {"id": 666, "value": "Menu międzynarodowe"},
+              {"id": 667, "value": "Menu tematyczne"},
+              {"id": 668, "value": "Menu degustacyjne"},
+              {"id": 669, "value": "Menu koktajlowe"},
+              {"id": 670, "value": "Stół wiejski"},
+              {"id": 671, "value": "Stół szwedzki"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 125,
+            "name": "Dostępne posiłki",
+            "options": [
+              {"id": 672, "value": "Przystawki"},
+              {"id": 673, "value": "Dania główne"},
+              {"id": 674, "value": "Desery"},
+              {"id": 675, "value": "Napoje"},
+              {"id": 676, "value": "Przekąski"},
+              {"id": 677, "value": "Zupy"},
+              {"id": 678, "value": "Tort weselny"},
+              {"id": 679, "value": "Bufet deserowy"},
+              {"id": 680, "value": "Finger food"},
+              {"id": 681, "value": "Live cooking (gotowanie na żywo)"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 126,
+            "name": "Liczba dań głównych",
+            "options": [
+              {"id": 682, "value": "1 danie główne"},
+              {"id": 683, "value": "2 dania główne"},
+              {"id": 684, "value": "3 dania główne"},
+              {"id": 685, "value": "Więcej niż 3"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 127,
+            "name": "Styl serwowania",
+            "options": [
+              {"id": 686, "value": "Serwis kelnerski"},
+              {"id": 687, "value": "Bufet"},
+              {"id": 688, "value": "Catering samoobsługowy"},
+              {"id": 689, "value": "Food truck"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 128,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 690, "value": "Kelnerzy"},
+              {"id": 691, "value": "Barman"},
+              {"id": 692, "value": "Dekoracje stołów"},
+              {"id": 693, "value": "Naczynia i sztućce"},
+              {"id": 694, "value": "Mobilny bar"},
+              {"id": 695, "value": "Ekspres do kawy"},
+              {"id": 696, "value": "Obsługa gastronomiczna podczas poprawin"},
+              {"id": 697, "value": "Opcje bezalkoholowe"},
+              {"id": 698, "value": "Stacja z napojami"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 129,
+            "name": "Specjalne wymagania dietetyczne",
+            "options": [
+              {"id": 699, "value": "Dania bezglutenowe"},
+              {"id": 700, "value": "Dania bezlaktozowe"},
+              {"id": 701, "value": "Dania wegańskie"},
+              {"id": 702, "value": "Dania wegetariańskie"},
+              {"id": 703, "value": "Dania niskokaloryczne"},
+              {"id": 704, "value": "Dania bezcukrowe"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 18,
+        "category_name": "Cukiernie",
+        "filters": [
+          {
+            "filter_category_id": 131,
+            "name": "Rodzaj wypieków",
+            "options": [
+              {"id": 705, "value": "Tort weselny"},
+              {"id": 706, "value": "Ciasta"},
+              {"id": 707, "value": "Babeczki"},
+              {"id": 708, "value": "Makaroniki"},
+              {"id": 709, "value": "Ciasta bezglutenowe"},
+              {"id": 710, "value": "Ciasta wegańskie"},
+              {"id": 711, "value": "Ciasta wegetariańskie"},
+              {"id": 712, "value": "Ciasteczka personalizowane"},
+              {"id": 713, "value": "Bezy"},
+              {"id": 714, "value": "Desery w słoiczkach"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 132,
+            "name": "Styl tortu weselnego",
+            "options": [
+              {"id": 715, "value": "Klasyczny"},
+              {"id": 716, "value": "Nowoczesny"},
+              {"id": 717, "value": "Naked cake (tort bez masy)"},
+              {"id": 718, "value": "Rustykalny"},
+              {"id": 719, "value": "Glamour"},
+              {"id": 720, "value": "Boho"},
+              {"id": 721, "value": "Artystyczny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 133,
+            "name": "Rodzaj dekoracji tortu",
+            "options": [
+              {"id": 722, "value": "Kwiaty żywe"},
+              {"id": 723, "value": "Kwiaty cukrowe"},
+              {"id": 724, "value": "Figurki"},
+              {"id": 725, "value": "Personalizowane napisy"},
+              {"id": 726, "value": "Jadalne złoto/srebro"},
+              {"id": 727, "value": "Owoce"},
+              {"id": 728, "value": "Czekolada"},
+              {"id": 729, "value": "Bezy"},
+              {"id": 730, "value": "Pralinki"},
+              {"id": 731, "value": "Topper na tort"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 134,
+            "name": "Rodzaj nadzienia tortu",
+            "options": [
+              {"id": 732, "value": "Krem śmietankowy"},
+              {"id": 733, "value": "Krem czekoladowy"},
+              {"id": 734, "value": "Krem owocowy"},
+              {"id": 735, "value": "Mus owocowy"},
+              {"id": 736, "value": "Krem maślany"},
+              {"id": 737, "value": "Krem z mascarpone"},
+              {"id": 738, "value": "Bita śmietana"},
+              {"id": 739, "value": "Ganache"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 135,
+            "name": "Liczba pięter tortu",
+            "options": [
+              {"id": 740, "value": "1 piętro"},
+              {"id": 741, "value": "2 piętra"},
+              {"id": 742, "value": "3 piętra"},
+              {"id": 743, "value": "Więcej niż 3 piętra"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 136,
+            "name": "Rodzaj ciast i deserów",
+            "options": [
+              {"id": 744, "value": "Sernik"},
+              {"id": 745, "value": "Szarlotka"},
+              {"id": 746, "value": "Brownie"},
+              {"id": 747, "value": "Tarta"},
+              {"id": 748, "value": "Eklerki"},
+              {"id": 749, "value": "Deser bezowy (Pavlova)"},
+              {"id": 750, "value": "Tort bezowy"},
+              {"id": 751, "value": "Muffinki"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 137,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 752, "value": "Personalizacja wypieków"},
+              {"id": 753, "value": "Transport tortu"},
+              {"id": 754, "value": "Dekoracja stołu słodkiego"},
+              {"id": 755, "value": "Degustacja przed zamówieniem"},
+              {"id": 756, "value": "Opcje bezglutenowe"},
+              {"id": 757, "value": "Opcje bezcukrowe"},
+              {"id": 758, "value": "Opcje wegańskie"},
+              {"id": 759, "value": "Słodki stół (candy bar)"},
+              {"id": 760, "value": "Fontanna czekoladowa"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      },
+      {
+        "service_category_id": 19,
+        "category_name": "Szkoły tańca",
+        "filters": [
+          {
+            "filter_category_id": 140,
+            "name": "Rodzaj tańca",
+            "options": [
+              {"id": 761, "value": "Walc angielski"},
+              {"id": 762, "value": "Walc wiedeński"},
+              {"id": 763, "value": "Tango"},
+              {"id": 764, "value": "Salsa"},
+              {"id": 765, "value": "Rumba"},
+              {"id": 766, "value": "Cha-cha"},
+              {"id": 767, "value": "Foxtrot"},
+              {"id": 768, "value": "Jive"},
+              {"id": 769, "value": "Bachata"},
+              {"id": 770, "value": "Rock'n'roll"},
+              {"id": 771, "value": "Taniec nowoczesny"},
+              {"id": 772, "value": "Taniec towarzyski"},
+              {"id": 773, "value": "Discofox"},
+              {"id": 774, "value": "Inny"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 141,
+            "name": "Rodzaj zajęć",
+            "options": [
+              {"id": 775, "value": "Indywidualne lekcje"},
+              {"id": 776, "value": "Lekcje w parach"},
+              {"id": 777, "value": "Zajęcia grupowe"},
+              {"id": 778, "value": "Intensywny kurs przed ślubem"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 142,
+            "name": "Poziom zaawansowania",
+            "options": [
+              {"id": 779, "value": "Początkujący"},
+              {"id": 780, "value": "Średniozaawansowany"},
+              {"id": 781, "value": "Zaawansowany"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 143,
+            "name": "Dodatkowe usługi",
+            "options": [
+              {"id": 782, "value": "Przygotowanie pierwszego tańca"},
+              {"id": 783, "value": "Choreografia na zamówienie"},
+              {"id": 784, "value": "Konsultacje online"},
+              {"id": 785, "value": "Wideonagrane lekcje"},
+              {"id": 786, "value": "Wypożyczenie strojów do tańca"},
+              {"id": 787, "value": "Organizacja pokazów tanecznych na weselu"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 144,
+            "name": "Styl choreografii",
+            "options": [
+              {"id": 788, "value": "Klasyczny"},
+              {"id": 789, "value": "Nowoczesny"},
+              {"id": 790, "value": "Artystyczny"},
+              {"id": 791, "value": "Zabawna choreografia"},
+              {"id": 792, "value": "Spektakularna"}
+            ],
+            "selection_type": "multiple"
+          },
+          {
+            "filter_category_id": 145,
+            "name": "Czas trwania lekcji",
+            "options": [
+              {"id": 793, "value": "30 minut"},
+              {"id": 794, "value": "45 minut"},
+              {"id": 795, "value": "60 minut"},
+              {"id": 796, "value": "Powyżej 60 minut"}
+            ],
+            "selection_type": "single"
+          },
+          {
+            "filter_category_id": 147,
+            "name": "Lokalizacja zajęć",
+            "options": [
+              {"id": 797, "value": "W szkole tańca"},
+              {"id": 798, "value": "Dojazd do klienta"},
+              {"id": 799, "value": "Online"}
+            ],
+            "selection_type": "multiple"
+          }
+        ]
+      }
+    ]
+  }
