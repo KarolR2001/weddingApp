@@ -1,0 +1,10 @@
+  chore/ai-etap-0-setup                [m 7fa4a17 [[34morigin/chore/ai-etap-0-setup[m] chore(ai): Etap 0 — utworzenie ai-service i .env (lokalnie)
+* [32mfeat/ai-etap-1-compose               [m 9eaa68f [[34morigin/feat/ai-etap-1-compose[m] feat(ai): Etap 1 — compose, Dockerfile, requirements, dockerignore
+  feat/ai-integration                  [m 8ac5e14 [[34morigin/feat/ai-integration[m] Merge remote-tracking branch 'origin/feat/ai-etap-1-compose' into feat/ai-integration
+  main                                 [m 9730560 [[34morigin/main[m] Poprawa funkcjonalności
+  wip/frontend-i-dokumenty             [m 8ac5e14 Merge remote-tracking branch 'origin/feat/ai-etap-1-compose' into feat/ai-integration
+  [31mremotes/origin/HEAD                  [m -> origin/main
+  [31mremotes/origin/chore/ai-etap-0-setup [m 7fa4a17 chore(ai): Etap 0 — utworzenie ai-service i .env (lokalnie)
+  [31mremotes/origin/feat/ai-etap-1-compose[m 9eaa68f feat(ai): Etap 1 — compose, Dockerfile, requirements, dockerignore
+  [31mremotes/origin/feat/ai-integration   [m 8ac5e14 Merge remote-tracking branch 'origin/feat/ai-etap-1-compose' into feat/ai-integration
+  [31mremotes/origin/main                  [m 9730560 Poprawa funkcjonalności
