@@ -16,12 +16,18 @@ services:
       - ./ai-service/.env
     environment:
       - QDRANT_URL=http://qdrant:6333
+      - CUDA_VISIBLE_DEVICES=-1
     volumes:
       - ./ai-service:/app
     depends_on:
       - qdrant
     ports:
       - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 volumes:
   qdrant_data:
