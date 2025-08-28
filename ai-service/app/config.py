@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     OPENAI_MAX_TOKENS: int = Field(default=600)
     OPENAI_TEMPERATURE: float = Field(default=0.2)
 
+    # Etap 6 – kontekst i dopytywanie
+    CTX_KEEP_LAST: int = Field(default=4)
+    CTX_SUMMARIZE_AFTER: int = Field(default=8)
+    ASK_FOR_BUDGET: bool = Field(default=True)
+    LANG: str = Field(default="pl")
+
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 

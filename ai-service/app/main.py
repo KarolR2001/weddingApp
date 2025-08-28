@@ -18,6 +18,9 @@ from typing import Optional, List, Dict
 import re
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue
 from openai import OpenAI
+from app.session import store, ChatMessage, Slots
+from app.slots import extract_slots_from_text, missing_critical, build_clarifying_question
+from app.query_parse import parse_budget, parse_city, parse_category
 
 
 app = FastAPI(title="WeddingApp AI Service", version="0.1.0")
@@ -364,8 +367,41 @@ def _search_offers_for_message(message: str, limit: int) -> tuple[List[OfferLite
 
 @app.post("/assistant/query", response_model=AssistantQueryResponse, dependencies=[Depends(verify_internal_token)])
 def assistant_query(req: AssistantQueryRequest):
-    # 1) reuse Etap 4 search
-    offers, dbg = _search_offers_for_message(req.message, req.limit)
+    # Pamięć sesji
+    session_id = req.sessionId or "default"
+    sess = store.get_or_create(session_id)
+    sess.messages.append(ChatMessage(role="user", content=req.message))
+
+    # Slot-filling
+    incoming = extract_slots_from_text(req.message)
+    # scal ze sticky slotami (uzupełniaj brakujące)
+    merged = Slots(
+        category=incoming.category or sess.slots.category,
+        city=incoming.city or sess.slots.city,
+        budget_min=incoming.budget_min if incoming.budget_min is not None else sess.slots.budget_min,
+        budget_max=incoming.budget_max if incoming.budget_max is not None else sess.slots.budget_max,
+    )
+    sess.slots = merged
+    need = missing_critical(merged, settings.ASK_FOR_BUDGET)
+    if need:
+        q = build_clarifying_question(need)
+        sess.messages.append(ChatMessage(role="assistant", content=q))
+        return AssistantQueryResponse(reply=q, offers=[], debug={"followUp": {"needed": True}, "slots": merged.__dict__})
+
+    # 1) reuse Etap 4 search (z gotowych slotów)
+    message = req.message
+    limit = req.limit
+    # zbuduj „syntetyczne” zapytanie zawierające sloty (pomaga embeddingowi)
+    if merged.city or merged.category or merged.budget_min or merged.budget_max:
+        parts = [message]
+        if merged.category:
+            parts.append(str(merged.category))
+        if merged.city:
+            parts.append(str(merged.city))
+        if merged.budget_min or merged.budget_max:
+            parts.append(f"budżet {merged.budget_min or ''}-{merged.budget_max or ''}")
+        message = " ".join(parts)
+    offers, dbg = _search_offers_for_message(message, limit)
 
     # 2) build prompt with available offers
     lines = []
@@ -391,4 +427,5 @@ def assistant_query(req: AssistantQueryRequest):
     )
     reply = completion.choices[0].message.content if completion.choices else ""
 
-    return AssistantQueryResponse(reply=reply or "", offers=offers, debug={"model": settings.OPENAI_CHAT_MODEL, **dbg})
+    sess.messages.append(ChatMessage(role="assistant", content=reply or ""))
+    return AssistantQueryResponse(reply=reply or "", offers=offers, debug={"model": settings.OPENAI_CHAT_MODEL, **dbg, "followUp": {"needed": False}, "sessionId": session_id, "slots": merged.__dict__})
