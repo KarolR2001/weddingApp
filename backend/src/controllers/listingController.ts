@@ -17,6 +17,7 @@ import fs from 'fs';
 import path from 'path';
 import haversine from 'haversine-distance'; 
 import multer from 'multer';
+import aiService from '../services/aiService';
 
 
 
@@ -611,6 +612,8 @@ export const addListing = async (req: Request, res: Response, next: NextFunction
 
     // Zatwierdzenie transakcji
     await transaction.commit();
+    // Wyzwól aktualizację embeddingu (nie blokuje odpowiedzi)
+    aiService.post('/recommendation/updateEmbedding', { listingId: listing.listingId }).catch(() => {});
 
     res.status(201).json({ message: 'Ogłoszenie zostało dodane.', listingId: listing.listingId });
   } catch (error) {
@@ -648,6 +651,8 @@ export const deleteListing = async (req: Request, res: Response, next: NextFunct
 
     // Zatwierdzenie transakcji
     await transaction.commit();
+    // Usuń embedding po usunięciu
+    aiService.delete(`/recommendation/removeEmbedding/${listingId}`).catch(() => {});
 
     res.status(200).json({ message: 'Ogłoszenie oraz wszystkie powiązane dane zostały usunięte.' });
   } catch (error) {
@@ -911,6 +916,8 @@ export const updateListing = async (req: Request, res: Response, next: NextFunct
     }
 
     await transaction.commit();
+    // Zaktualizuj embedding po edycji
+    aiService.post('/recommendation/updateEmbedding', { listingId }).catch(() => {});
     res.status(200).json({ message: 'Listing updated successfully.' });
   } catch (error) {
     await transaction.rollback();

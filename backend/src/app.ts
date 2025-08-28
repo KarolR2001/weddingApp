@@ -22,6 +22,7 @@ import notificationRoutes from './routes/notificationRoutes';
 import admiNnotificationRoutes from './routes/adminNotificationRoutes';
 import statsRoutes from './routes/statsRoutes';
 import reportsRoutes from './routes/reportRoutes';
+import assistantRoutes from './routes/assistantRoutes';
 
 
 dotenv.config();
@@ -59,6 +60,7 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin', admiNnotificationRoutes);
 app.use('/api/system-stats', statsRoutes);
 app.use('/api/reports', reportsRoutes);
+app.use('/api/assistant', assistantRoutes);
 
 // Synchronizacja modeli z bazą danych
 sequelize.sync({ alter: false })
